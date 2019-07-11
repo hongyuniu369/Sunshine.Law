@@ -1,0 +1,130 @@
+﻿@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0}
+a{ text-decoration:none; color:#323232}
+a:hover{ color:#dd4647}
+body{ background:#ffffff; background:url(../images/bg1.jpg) repeat; font-family:microsoft yahei; color:#555; font-size:13px}
+.w1100{ width:1100px;margin:0 auto;}
+.main{ width:1000px;margin:0 auto; }
+.indexWrap{ background:#fff; width:1200px; margin:0 auto;}
+.head1{width:100%;height:94px; margin:0px auto; padding-top:33px; position:relative}
+.head1 .logo{width:499px;height:94px; background:url(../images/logo.png) no-repeat left center; float:left}
+.head1 .sch{width:244px; height:94px; float:right; margin-top:28px}
+.head1 .sch .top{ text-align:center; height:25px;}
+.head1 .sch .top a{ margin-right:10px}
+.head1 .sch .schx{ width:240px; height:33px; background:url(../images/yd_06.png) no-repeat}
+.head1 .sch .schx .txt{width:187px; border:0; float:left; height:28px; margin-top:2px; margin-left:8px; background:none}
+.head1 .sch .schx .btn{ width:32px; float:right; border:0; margin-top:5px; background:none; cursor:pointer}
+
+.nav{width:100%;height:60px; background:#A50023; clear:both }
+.nav .navcon{ margin:0 auto; overflow:hidden;background:#810720}
+.nav .navcon ul li{ width:98px; height:60px; line-height:60px;  float:left; text-align:center; cursor:pointer }
+.nav .navcon ul li:hover{ background:#A50A27}
+.nav .navcon ul li.last{ background:#810720}
+.nav .navcon ul li a{ color:#ffffff; font-family:"微软雅黑"; font-size:16px}
+.nav .navcon ul li a:hover{ color:#fff}
+.news{ clear:both}
+.news .newscon{ width:1100px; margin:0 auto; padding-top:0px; overflow:hidden; }
+.news .left{width:694px; height:322px; float:left; display:inline;}
+/* 本例子css */
+.focusBox { position: relative; width:694px; height:322px; overflow: hidden; font: 12px/1.5 Verdana, Geneva, sans-serif; text-align: left; }
+.focusBox .pic img { width:694px; height:322px; display: block; }
+.focusBox .txt-bg { position: absolute; bottom: 0; z-index: 1; height: 36px; width:694px; overflow: hidden;background:#000000;  }
+.focusBox .txt { position: absolute; bottom: 0; z-index: 2; height: 36px; width:694px; overflow: hidden;  }
+.focusBox .txt li{ height:36px; line-height:36px; position:absolute; bottom:-36px;}
+.focusBox .txt li a{ display: block; color: white; padding: 0 0 0 10px; font-size: 14px; font-weight: bold; text-decoration: none; color:#ffffff }
+.focusBox .num { position: absolute; z-index: 3; bottom: 8px; right: 8px; }
+.focusBox .num li{ float: left; position: relative; width: 15px; height: 15px; line-height: 15px; overflow: hidden; text-align: center; cursor: pointer; border:1px solid #8aa376; margin-right:8px; }
+.focusBox .num li a,.focusBox .num li span { position: absolute; z-index: 2; display: block; color: white; width: 100%; height: 100%; top: 0; left: 0; text-decoration: none;color:#ecf1e8; font-weight:bold }
+.focusBox .num li span { z-index: 1; background:#10549d  }
+.focusBox .num li.on a,.focusBox .num a:hover{ background:#ffffff; color:#304323;font-weight:bold}
+.newslist{width:392px; height:320px; float: right;  }
+ .tt{ height:40px; background:url(../images/tt1.png) top left no-repeat; border-bottom:1px dashed #D5D5D5}
+ .tt-border{ border-top:4px solid #AD153C; background:none}
+ .tt a.gg{ font-weight:bold; display:block;width:90px;  padding-left:30px; color:#AC1735; height:40px; font-size:17px; font-family:"微软雅黑"; line-height:40px;display:inline; }
+  .tt .icon4{ background:url(../images/icon4.png) left center no-repeat}
+    .tt .icon3{ background:url(../images/icon3.png) left center no-repeat}
+	  .tt .icon2{ background:url(../images/icon2.png) left center no-repeat}
+	    .tt .icon1{ background:url(../images/icon1.png) left center no-repeat}
+ .tt a.more{ display:block; float:right; margin-right:10px; width:40px; height:11px;  margin-top:14px; color:#989898}
+.newslist ul{ padding-top:0px}
+.newslist ul li{ height:25px; line-height:25px;border-bottom:1px dashed #D5D5D5; padding-top:5px}
+.newslist ul li.last{ background:none}
+.newslist ul li a{ display:block; float:left;  display:inline}
+.newslist ul li span{ display:block; float:left; margin-right:10px; background:#B5B5B5; color:#fff; padding-left:8px; padding-right:8px; height:22px; line-height:22px; margin-top:3px}
+.newslist ul li.first a{color:#c41508}
+.newslist ul li.first span{color:#c41508}
+.newslist .newspic{ margin-top:8px;}
+.newslist .newspic img{ width:100%; height:118px}
+
+
+.content,.content1{clear:both; padding-top:20px}
+.content{height:333px; margin-top:15px }
+.content .left{ width:340px;float:left; margin-right:42px;display:inline; height:324px; }
+.newslist1{width:100%; height:320px; float: left;   }
+.newslist1 ul li{ width:300px; height:33px; line-height:33px; margin-left:10px; border-bottom:none}
+.newslist1 ul li.last{ background:none}
+.newslist1 ul li a{ display:block; width:263px; float:left;  display:inline}
+.newslist1 ul li span{ display:block; width:14px; float:left; margin-right:10px; font-family:Arial, Helvetica, sans-serif; font-style:italic; font-size:14px; background:#B3B3B3; color:#fff; height:14px; padding:5px; line-height:14px; text-align:center; margin-top:4px}
+.newslist1 ul li span.red{ color:#fff; background:#B11638}
+.newslist1 ul li.first a{color:#c41508}
+.newslist1 ul li.first span{color:#c41508}
+
+.content .center{ width:340px;float:left; margin-right:15px;display:inline; height:324px; }
+
+.newslist2{width:100%; height:320px;   }
+.newslist2 ul { padding-top:5px}
+.newslist2 ul li{  height:33px; line-height:33px; background:url(../images/dot1.png) left center no-repeat; padding-left:10px}
+.newslist2 ul li.last{ background:none}
+.newslist2 ul li a.cc{ display:block;   display:inline}
+.newslist2 ul li span{ display:block; width:14px; float:left; margin-right:10px; color:#202020;width:66px}
+.newslist2 ul li span a{color:#336aa5; font-weight:bold; margin:0 2px}
+.newslist2 ul li.first a{color:#c41508}
+.newslist2 ul li.first span{color:#c41508}
+.content .right{width:340px; height:324px; float:right  }
+.newslist3{width:100%; height:320px;    }
+.newslist3 ul { padding-top:5px}
+.newslist3 ul li{  height:33px; line-height:33px; background:url(../images/icon5.png) left center no-repeat;margin-left:10px; padding-left:30px;}
+.newslist3 ul li a{ display:block; float:left;  display:inline}
+
+.content1{width:1100px;height:115px; margin:20px auto;background:#FAFAFA}
+.content1 div{ float:left}
+.content1 div.down{width:223px; height:64px; margin:25px 50px 0 0; display:inline}
+.content1 div.wx{width:89px; height:115px; margin:0px 20px 0 0; display:inline; text-align:center}
+.content1 div.wx p{height:25px; line-height:25px; text-align:center}
+.content1 div.leftbt{width:30px; height:40px; background:url(../images/yd_47.png); margin:35px 37px 0 15px; display:inline}
+.content1 div.btn1{ margin-right:29px; margin-top:15px;display:inline; width:64px; height:119px; }
+.content1 div.btn1 p{ text-align:center; height:25px; line-height:25px; width:64px;}
+.content1 div.rightbt{width:30px; height:40px; background:url(../images/yd_50.png); margin:35px 0px 0 0; display:inline}
+
+
+.content2{ width:100%; background:#EEEEEE; margin:15px 0  0 0;}
+#tags { WIDTH:968px; HEIGHT:39px; background:url(../images/tagbg.png) repeat-x 0 bottom; padding-left:30px;}
+#tags LI {BACKGROUND:none;FLOAT:left;HEIGHT:34px;width:109px; position:relative; line-height:34px; margin-top:5px; text-align:center}
+#tags LI A {width:109px; height:34px; display:block; font-weight:bold; font-size:14px ; color:#6e6e6e}
+#tags LI.emptyTag {	BACKGROUND: none transparent scroll repeat 0% 0%; WIDTH: 157px
+}
+#tags LI.selectTag {/*BACKGROUND:url(../images/yd_65.jpg) no-repeat 0 1px;*/ border-bottom:2px solid #AF1634; color:#B11638; HEIGHT: 34px}
+#tags LI.selectTag A { color:#B11638; font-weight:bold }
+#tagContent { margin-top:12px}
+.tagContent { padding:15px;width:968px;DISPLAY: none; line-height:26px;}
+.tagContent a{ margin-right:15px;}
+#tagContent DIV.selectTag {
+	DISPLAY: block
+}
+
+.top_nav{ position:absolute; width:240px; height:30px; top:20px; right:20px}
+
+.footer{ height:100px; background-color:#AD1637; text-align:center}
+.footer .footercon{width:1000px; margin:0 auto;height:100px;}
+.footer .txt{ color:#FFFFFF; font-size:14px; line-height:25px; padding-top:20px;}
+
+.position {font-size:14px}
+.position span{ height:40px; line-height:40px;color:#014287; font-family:"微软雅黑"; font-size:14px}
+.position a{font-family:"宋体";font-size:14px; margin-right:3px; margin-left:3px }
+
+
+
+
+
+

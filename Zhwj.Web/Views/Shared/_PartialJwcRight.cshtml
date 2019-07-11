@@ -1,0 +1,25 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        var onClickViewModel = {
+            items: ko.observableArray()
+        };
+        $.ajax({
+            type: 'GET',
+            url: '/api/home/GetNewsByOnClick/',
+            async: true,
+            success: function (d) {
+                onClickViewModel.items(ko.mapping.fromJS(d)());
+            }
+        });
+        ko.applyBindings(onClickViewModel, document.getElementById('onclick'));
+    });
+</script>
+<div class="newslist" id="onclick">
+    <div class="tt ">
+        <a href="#" class="gg icon1">热门点击</a>
+    </div>
+    <ul data-bind="foreach: items">
+        <li><a href="#" target="_blank" data-bind="attr: {'href':'/show-' + NewsCode(),'title':Title },html:Title().length>21?Title().substring(0,21)+'...':Title()"></a></li>
+    </ul>
+</div>
+

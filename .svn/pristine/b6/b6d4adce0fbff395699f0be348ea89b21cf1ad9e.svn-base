@@ -1,0 +1,45 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0}
+a{ text-decoration:none; color:#323232}
+a:hover{ color:#dd4647}
+
+
+
+
+.position {font-size:14px}
+.position span{ height:40px; line-height:40px;color:#014287; font-family:"微软雅黑"; font-size:14px}
+.position a{font-family:"宋体";font-size:14px; margin-right:3px; margin-left:3px }
+.left{width:650px; border:1px solid #dbdbdb; margin-right:20px; float:left; min-height:470px; padding-bottom:30px}
+.right{width:321px; float:left}
+
+
+.newslist{width:319px; height:320px; float: left; border:1px solid #dbdbdb;  }
+ .tt{ height:41px; background:url(../images/yd_15.png)}
+ .tt a.gg{ background:url(../images/yd_18.png) no-repeat left center; padding-left:18px; color:#004fa5; height:40px; font-size:16px; font-family:"微软雅黑"; line-height:40px; margin-left:10px;  }
+ .tt a.more{ display:block; float:right; margin-right:10px; width:40px; height:11px; background:url(../images/yd_21.png); margin-top:14px}
+.newslist ul{ padding-top:5px}
+.newslist ul li{ width:300px; height:33px; line-height:33px; background:url(../images/libg.png) 0 bottom no-repeat;}
+.newslist ul li.last{ background:none}
+.newslist ul li a{ display:block; width:296px; float:left;  display:inline;margin-left:10px;}
+.newslist ul li.first a{color:#c41508}
+
+.newslist1{ height:160px; margin-top:15px}
+.newslist1 .txt{width:155px; border:0;  height:34px; margin:15px 30px; background:url(../images/listsch.png); padding-left:30px;}
+.newslist1 .btn{ display:block; width:58px; height:31px; border:0; margin-top:5px; background:url(../images/sx.png); cursor:pointer; margin-right:130px; float:right}
+
+.content{width:620px; margin:15px}
+.content .title{ height:70px; line-height:70px; text-align:center; font-size:22px; font-family:"微软雅黑"}
+.content div.ft{ text-align:center; color:#7c7c7c; height:40px; border-bottom:1px dashed #C6C6C6}
+.content div.ft span{ margin-right:15px}
+.content .cont{ margin-top:15px; line-height:24px; font-size:14px}
+.content .cont{ text-indent:2em;}
+.content .cont img{ display:block; margin:30px auto}
+.content .cont a{ text-decoration:none; color:blue;}
+.content .cont a:hover{ color:#dd4647}
+
+
+
+
+
+

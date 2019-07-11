@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "阳光问法-修改密码";
+    Layout = "~/Views/Shared/_ChildlayoutPerson.cshtml";
+}
+@section scripts{
+    <script src="/Content/law/js/viewModel/personPwd.js"></script>
+<script type="text/javascript">
+    var easyLoaded = function(){
+        //设置联动Address
+        using('jquery.easyui.validator.extend.js');
+    };
+
+    using(['validatebox','combobox'], easyLoaded);
+
+    var viewModel = function(data){ 
+        var self = this;
+        com.viewModel.edit.apply(self,arguments);
+    } 
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    viewModel=new viewModel(data)
+    ko.bindingViewModel(viewModel);
+
+ 
+        $(document).ready(function () {
+            $(".content1 .left ul li:not(.current)").hover(function () {
+                $(this).addClass("current");
+            }, function () {
+                $(this).removeClass("current");
+            })
+
+        })
+</script>
+}
+<link href="~/Content/law/css/personpwd.css" rel="stylesheet" type="text/css" />
+<div class="line"></div>
+<div class="left">
+<div class="tt">个人中心</div>
+<ul>
+<li><a href="/law/person">个人资料</a></li>
+<li ><a href="/law/personzx">我的咨询</a></li>
+<li ><a href="/law/personwt">我的委托</a></li>
+<li class="current"><a href="/law/personpwd">修改密码</a></li>
+</ul>
+</div>
+<div class="right">
+<div class="tt">修改密码</div>
+<div class="grid_1 lbl">原密码：</div>
+<div class="grid_3 val"><input type="password" class="z-txt easyui-validatebox" data-bind="value:pageData.form.Password"  required="true"/></div>
+<div class="clear"></div>
+<div class="grid_1 lbl">新密码：</div>
+<div class="grid_3 val"><input type="password" class="z-txt easyui-validatebox" id="password" required="true" data-bind="value:pageData.form.NewPassword"/></div>
+<div class="clear"></div>
+<div class="grid_1 lbl">确认密码：</div>
+<div class="grid_3 val"><input type="password" class="z-txt easyui-validatebox" validType="equalTo['#password']" invalidMessage="两次输入密码不匹配" required="true"/></div>
+<div class="clear"></div>
+<a  class="easyui-linkbutton login" plain="true" text="" data-bind="click:readonly()?null:saveClick,enable:!readonly()"></a>
+</div>
+

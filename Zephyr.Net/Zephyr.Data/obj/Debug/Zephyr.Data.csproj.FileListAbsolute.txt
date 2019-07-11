@@ -1,0 +1,4 @@
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Data\bin\Debug\Zephyr.Data.dll
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Data\bin\Debug\Zephyr.Data.pdb
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Data\obj\Debug\Zephyr.Data.dll
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Data\obj\Debug\Zephyr.Data.pdb

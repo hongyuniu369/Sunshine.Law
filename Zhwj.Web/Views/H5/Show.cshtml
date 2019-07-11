@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutH5.cshtml";
+    ViewBag.Title = "咨询详情-阳光问法-河北新闻网";
+    ViewBag.EasyuiVersion = "1.3.2";
+    ViewBag.locale = "zh_CN";
+    ViewBag.theme = "gray";
+    ViewBag.Keywords = "阳光问法,河北法律,河北法律平台";
+}
+
+<div class="am-g am-g-fixed" runat="server" id="divMsg">
+    <span id="ctl00_ContentPlaceHolder1_atitle"></span>
+    <div style='margin: auto; margin-top: 20px;' class='am-g am-g-fixed'>
+        <div class="am-u-md-12">
+            <div class="am-article-hd ">
+                <h3 class="am-article-title">[@Model.msgStatus]
+                    @Model.form.MsgTitle
+                </h3>
+                <div class="am-article-meta">
+                    编号:@Model.form.AdvisoryCode&nbsp;&nbsp;
+                    <i class="pl5"></i><span>@(string.IsNullOrEmpty(Model.user.UserCode) ? "阳光问法网友" : Model.user.UserCode)
+                        <span class="pl5">浏览:@Model.form.HitCount</span>
+                </div>
+                <div id='Acontent47916' class='Question mt10'>
+                    @Html.Raw(Model.form.MsgContent)
+                    <div class="am-article-meta tar mt10">
+                        <i class="am-icon-clock-o pl5"></i>
+                        @Model.form.MsgInDate.ToString("yyyy-MM-dd")
+                    </div>
+                    <span class="am-btn am-btn-warning am-btn-xs" style='display: none; margin-bottom: 5px;'><a href="/h5/h5Replay.aspx?qid=47916">回复</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="am-comments-list">
+    @for (var i = 0; i < Model.answers.Count; i++)
+    {
+        <li class="am-comment">
+            <a href="/h5/lawyerdetail/@Model.answers[i].LawyerCode">
+                <img width="48" height="48" class="am-comment-avatar" alt="" src="@Model.answers[i].LawyerPic">
+            </a>
+            <div class="am-comment-main">
+                <header class="am-comment-hd">
+                    <div class="am-comment-meta"><a class="am-comment-author" href="/h5/lawyerdetail/@Model.answers[i].LawyerCode">@Model.answers[i].LawyerName</a> 回复于 <time title="@Model.answers[i].AnswerDate.ToString("yyyy-MM-dd HH-mm")" datetime="@Model.answers[i].AnswerDate.ToString("yyyy-MM-dd HH-mm")">@Model.answers[i].AnswerDate.ToString("yyyy-MM-dd HH-mm")</time></div>
+                    <div class="am-comment-actions"><a href="/h5/wyzx/@Model.answers[i].LawyerCode" title=@("我也要咨询" + Model.answers[i].LawyerName + "律师")><i class="am-icon-commenting"></i></a></div>
+                </header>
+                <div class="am-comment-bd">
+                    @Html.Raw(Model.answers[i].AnswerContent)
+                </div>
+                <footer class="am-comment-footer">
+                    <div class="am-comment-actions"><a href="/h5/wyzx/@Model.answers[i].LawyerCode" title=@("我也要咨询" + Model.answers[i].LawyerName + "律师")><i class="am-icon-commenting"></i></a></div>
+                </footer>
+            </div>
+        </li>
+    }
+</ul>

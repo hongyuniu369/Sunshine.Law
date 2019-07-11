@@ -1,0 +1,157 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body,
+button, input, select, textarea /* for ie */ {
+    font: 12px/1.6 /*字号与行高*/
+	Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /*字体*/
+}
+a{ text-decoration:none; color:#535353}
+a:hover{ color:#d90000}
+/*------------------------------------------------------------------*/
+body{ }
+.top{ padding-top:20px; padding-bottom:5px}
+.top .logo{width:458px; height:60px; float:left}
+.top .rtbtn{width:226px; float:right; margin-right:20px}
+.top .rtbtn ul li{width:50px; float:left; margin-right:20px; display:inline}
+.top .rtbtn ul li a img{ display:block; margin:0 auto}
+.clear{ clear:both}
+.wrap{ width:980px; margin:0 auto }
+.main{ width:980px; background:#ffffff}
+.nav{ height:40px; background:url(../images/listnavbg.jpg); line-height:40px; padding-left:25px; border:1px solid #6392d7; border-top-width:2px; clear:both }
+.nav ul li{ float:left; color:#FFFFFF;}
+.nav ul li.sep{width:5px; background:url(../images/zixun_17.jpg) no-repeat center; margin:0 30px; height:40px;}
+.nav ul li.first{background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.nav ul li a{color:#ffffff;font-size:16px; font-family:"微软雅黑"; display:block; width:80px; text-align:center}
+.nav ul li a:hover{ color:#CC3300; background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.pos{ height:50px;line-height:50px; font-size:16px;font-family:"微软雅黑"; color:#1162c9 }
+.pos span{ margin-right:4px; color:#6c6c6c; font-size:12px; font-family:"宋体"; margin-left:4px }
+.pos span a{ font-size:12px; font-family:"宋体"}
+.content1{ width:980px;margin-top:3px; margin-bottom:10px; }
+.content1 .left{ width:668px;float:left; padding-bottom:50px; display:inline; border:1px solid #e0e0e0 }
+.content1 .left .quest{ margin:15px 0 0 13px }
+.content1 .left .quest .questcon{width:614px; border:1px solid #e0e0e0; border-top:0; padding-top:10px; padding-left:25px; padding-bottom:20px}
+.content1 .left .quest .title{width:592px;height:35px;line-height:35px;background:#f7faff url(../images/wtdetailed_03.jpg) no-repeat 10px center;border:1px solid #e0e0e0; font-size:16px; font-family:"微软雅黑";padding-left:47px;}
+.content1 .left .wlhd .title{background:#f7faff url(../images/zxdetail_19.jpg) no-repeat 10px center;}
+
+.content1 .left .quest .questcon p span{ font-weight:normal}
+.content1 .left .quest .questcon p.name{width:281px; float:left}
+.content1 .left .quest .questcon .qcon{ clear:both;width:572px; font-weight:bold; padding-left:10px; padding-top:10px}
+.content1 .left .quest .questcon .qcon div{ font-weight:normal; margin-top:5px; line-height:22px;}
+
+.content1 .left .answer{ margin:15px 0 0 13px }
+.content1 .left .answer .questcon{width:614px; border:1px solid #e0e0e0; border-top:0; padding-top:10px; padding-left:25px; padding-bottom:20px}
+.content1 .left .answer .title{width:592px;height:35px;line-height:35px;background:#f4fff1 url(../images/zxdetail_19.jpg) no-repeat 10px center;border:1px solid #e0e0e0; font-size:16px; font-family:"微软雅黑";padding-left:47px;}
+.content1 .left .quest .questcon p.tt{ height:38px; line-height:38px; border-bottom:1px dashed #d2d2d2; width:572px; font-weight:bold; padding-left:10px;  border-bottom:1px dashed #d2d2d2; width:572px; font-weight:bold; padding-left:10px;}
+.content1 .left .quest .questcon p span{ font-weight:normal}
+.content1 .left .quest .questcon p.name{width:281px; float:left; height:38px; line-height:38px; border-bottom:1px dashed #d2d2d2;font-weight:bold; padding-left:10px;}
+.content1 .left .quest .questcon p.area{width:562px; }
+.content1 .left .quest .questcon .qcon{ clear:both;width:572px; font-weight:bold; padding-left:10px; padding-top:10px;border-bottom:1px dashed #d2d2d2; padding-bottom:10px}
+    .content1 .left .quest .questcon .qcon p
+    {
+        border:none;font-weight:normal !important;
+    } 
+.content1 .left .quest .questcon .qcon div{ font-weight:normal; margin-top:5px; line-height:22px;}
+.content1 .left .quest .questcon .answer
+{
+    margin:10px 0 0 10px;
+}
+    .content1 .left .quest .questcon .answer span
+    {
+        font-weight:bold;
+    }
+.wtbtn{width:240px; height:68px; background:url(../images/wtdetail_07.jpg); display:block; border:0; margin:20px auto 0; cursor:pointer}
+.content1 .left .quest .questcon p.login{ width:230px; color:#999999; font-weight:normal; margin:5px auto; border-bottom:0; height:20px; line-height:20px; padding-left:10px}
+.content1 .left .quest .questcon p a{ color:#3366CC}
+
+.answer ul{ border:1px solid #e0e0e0; border-top:0;width:639px; padding-bottom:20px}
+.answer ul li{ border-bottom:1px dashed #999999;width:616px; padding:15px 0 0 0;margin:0 auto;}
+.answer ul li div.pic{ width:94px;float:left; display:inline; }
+.answer ul li div.ans p.ls{ height:36px; line-height:36px; text-align:center; float:left; font-weight:bold; margin-right:20px}
+.answer ul li div.ans p a{ color:#07519a}
+.answer ul li div.ans div.phone{ background:url(../images/phone.jpg) no-repeat 5px center; float:left;height:36px; line-height:36px;padding-left:20px;color:#07519a; font-size:12px;width:74px  }
+.answer ul li div.ans{ width:498px; float:left; margin-left:20px; display:inline}
+.answer ul li div.ans .con{ margin-bottom:20px; line-height:22px; clear:both}
+.answer ul li div.ans .time{ height:26px; line-height:26px; background:url(../images/time.jpg) no-repeat 0 center; padding-left:18px; color:#b0b2b3;width:134px; float:right; margin-bottom:10px}
+.answer ul li div.ans .time span{color:#b0b2b3}
+.answer ul li div.ans .yzx{ background:url(../images/zxd_07.jpg); width:104px; height:28px; text-align:center; line-height:28px; float:right; margin-right:43px; margin-bottom:10px}
+.answer ul li div.ans .yzx a{color:#07519a;}
+
+.content1 .left .jdans .title{width:592px;height:35px;line-height:35px;background:#ededed url(../images/zxdetailed_03.jpg) no-repeat 10px center;border:1px solid #e0e0e0; font-size:16px; font-family:"微软雅黑";padding-left:47px;}
+.content1 .left .jdans .jdlist{width:639px; padding-bottom:15px; border:1px solid #e0e0e0; border-top:0}
+.content1 .left .jdans .jdlist .bt{width:530px; float:left; font-size:12px; color:#0066CC; text-align:center; height:30px; line-height:30px; margin-top:8px; font-weight:bold}
+.content1 .left .jdans .jdlist .lb{width:66px; float:left; font-size:12px; color:#0066CC; text-align:center;height:30px; line-height:30px;margin-top:8px;font-weight:bold; margin-left:23px; display:inline}
+.content1 .left .jdans .jdlist ul{ }
+.content1 .left .jdans .jdlist ul li{ width:600px; background:url(../images/dot.jpg) no-repeat 0 center; padding-left:10px;height:32px;line-height:32px; margin-left:15px}
+.content1 .left .jdans .jdlist ul li a{ display:block; width:530px; float:left; font-size:14px}
+.content1 .left .jdans .jdlist ul li span{ display:block; width:66px; float:right}
+.content1 .left .wlhd .jdlist{width:639px; padding-bottom:15px; border:1px solid #e0e0e0; border-top:0}
+.tar{ display:block; margin:10px auto; width:480px; height:125px}
+.tar1{width:600px}
+.btn{display:block; margin:10px auto; width:91px; height:23px; background:url(../images/zxdetail_23.jpg); border:0; cursor:pointer}
+.content1 .left .wlhd .jdlist p{ height:40px; line-height:40px; color:red; font-weight:bold; padding-left:15px; font-size:14px;}
+.content1 .left .wlhd .jdlist div{ padding-left:15px; width:604px; line-height:22px; margin:5px 0}
+
+
+.zxlist{width:629px; border:1px solid #e0e0e0; margin-left:18px; padding-bottom:20px}
+.zxlist .tt { background:#ededed; height:30px; line-height:30px; width:722px; }
+.zxlist span{ display:block; float:left; height:30px; margin-left:6px; margin-right:6px; display:inline }
+.zxlist .tt span{ text-align:center; color:#242424}
+.zxlist span.num{width:76px;}
+.zxlist span.cls{width:60px;}
+.zxlist span.cap{width:310px;}
+.zxlist span.time{width:67px;}
+.zxlist span.sta{width:50px;}
+.zxlist ul{padding-top:15px; }
+.zxlist  ul li{ height:32px; line-height:32px; width:722px;margin:0px }
+.zxlist ul li.last{ border-bottom:0}
+.zxlist ul li span{ text-align:center; font-size:14px; color:#535353; font-size:12px}
+.zxlist ul li span.cap{ text-align:left}
+.zxlist ul li span.cap a{ font-size:14px; }
+.zxlist ul li span.cls a{ font-size:12px; color:#1666af  }
+.zxlist ul li span.cls a:hover{color:#dc3900}
+.zxlist ul li span.time{ color:#1666af }
+.zxlist ul li span.comt{ background:url(../images/comt.jpg) no-repeat center; cursor:pointer}
+#pages{ height:30px; margin-top:30px; text-align:center}
+#pages a {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #e3e3e3;
+    color: #333;
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 10px;
+    text-align: center; margin-right:5px;	font-family:Arial, Helvetica, sans-serif;
+}
+#pages .a1{ padding: 0; width: 56px;}
+#pages span {
+ font-weight:bold; font-family:Arial, Helvetica, sans-serif; 
+    color: #ff0000;
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 10px;
+    text-align: center;
+	float:none;
+	 margin:0;
+}
+strong{ color:#ff0000}
+
+.right{width:285px; float:right}
+.right .zxbtn{width:283px; height:130px; border:1px solid #e2e2e2; border-top-width:5px; margin-bottom:10px}
+.right .zxbtn a{ display:block; width:249px; height:46px; margin:13px 0 0 15px}
+.right .zxbtn a.zx{ background:url(../images/zixun_32.jpg)}
+.right .zxbtn a.wt{ background:url(../images/zixun_36.jpg)}
+.right .cj{ margin-bottom:10px; border:1px solid #e1e1e1; padding-bottom:10px; background:#fcfcfc;border-top-width:5px;}
+.right .cj .tt{ height:38px; line-height:38px; background:url(../images/zixun_41.jpg) 0 bottom no-repeat;}
+.right .cj .tt .rmzx{ display:block; float:left; margin-left:8px;}
+.right .cj .tt .more{ display:block; float:right; margin-right:10px}
+.right .cj .tt .rmzx a{ font-size:16px; font-family:"微软雅黑"; color:#d22800}
+.right .cj ul{ padding-top:8px }
+.right .cj ul li{ line-height:32px; height:32px; background:url(../images/wenfa_59.png) no-repeat 0px center; padding-left:12px; margin-left:15px; border-bottom:1px dashed #cecece; width:235px;}
+.right .cj ul li.first{ border-bottom:0}
+.right .cj ul li a{ font-size:12px; } 
+.clear{ clear:both}
+
+.fk{ clear:both; padding-bottom:10px;}
+.fk p{ color:#8b8b8b; text-align:center; height:24px; line-height:24px}
+.fk p a{ color:#8b8b8b; margin:0 8px}

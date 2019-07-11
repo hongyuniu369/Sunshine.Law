@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "咨询";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Cols = new Zephyr.Models.sys_roleMenuColumnMapService().GetCurrentUserMenuColumns();
+}
+
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.search.js"></script>
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var viewModel = function(){ 
+            var self = this;
+            com.viewModel.search.apply(this,arguments);
+
+            this.answerClick = function () {
+                var row = self.grid.datagrid('getSelected');
+                if (!row) return com.message('warning', self.resx.noneSelect);
+                com.openTab(self.resx.detailTitle, self.urls.edit + row[self.idField]);
+            };
+            this.bestClick = function () {
+                var row = self.grid.datagrid('getSelected');
+                if (!row) return com.message('warning', self.resx.noneSelect);
+                if(row.MsgStatus < 30) return com.message('warning', '还没有律师答复 无法择优');
+                com.dialog({
+                    title: "答复择优",
+                    width: 800,
+                    height: 580,
+                    html: "#button-template",
+                    viewModel: function (w) {
+                        var self = this;
+                        com.loadCss('/Content/css/metro/css/modern.css', parent.document);
+                        this.buttons = ko.observableArray();
+                        this.refresh = function () {
+                            com.ajax({
+                                url: '/api/msg/advisoryanswer/GetByAdvisoryCode/' + row.AdvisoryCode,
+                                type: 'GET',
+                                async: false,
+                                success: function (d) {
+                                    self.buttons(ko.mapping.fromJS(d)());
+                                }
+                            });
+                        };
+                        this.refresh();
+                        this.checkAll = ko.observable(false);
+                        this.checkAll.subscribe(function (value) {
+                            $.each(self.buttons(), function () {
+                                this.Selected(value ? 1 : 0);
+                            });
+                        });
+                        this.buttonClick = function (row) {
+                            $.each(self.buttons(), function () {
+                                this.Selected(0);
+                            });
+                            row.Selected(1);
+                        };
+                        this.confirmClick = function () {
+                            var data = utils.filterProperties($.grep(self.buttons(), function (row) {
+                                return row.Selected() > 0;
+                            }), ['AnswerCode']);
+                            if(data.length <= 0) return com.message('warning', '还没有律师答复 无法择优');
+                            com.ajax({
+                                url: '/api/msg/advisoryanswer/best/' + data[0].AnswerCode(),
+                                success: function (d) {
+                                    com.message('success', '择优成功！');
+                                    viewModel.grid.datagrid("reload");
+                                    self.cancelClick();
+                                }
+                            });
+                        };
+                        this.cancelClick = function () {
+                            w.dialog('close');
+                        };
+                    }
+                });
+            };
+        }
+        var viewModel = new viewModel(data);
+        ko.bindingViewModel(viewModel);
+        var formatterEnable = function (value,row) {return '<img src="/Content/images/' + ((value||'').toString()=="true" ? "checkmark.gif" : "checknomark.gif") + '"/>';};
+        var formatMsgStatus = function (value,row) {return $.grep(viewModel.dataSource.msgStatus, function (n) { return n.value ==value })[0].text;};
+    </script>
+}
+
+    @Html.RenderToolbar()
+
+    <div class="container_12" style="position:relative;">
+        <div class="grid_1 lbl">编号</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.AdvisoryCode" data-options="url:'/api/msg/advisory/getadvisorycode'" class="z-txt easyui-autocomplete" /></div>
+        <div class="grid_1 lbl">标题</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.MsgTitle" class="z-txt " /></div>
+        <div class="grid_1 lbl">咨询类别</div>
+        <div class="grid_2 val"><input type="text" data-bind="lookupValue:form.MsgClass" data-options="editable:false,lookupType:'Msg.class',queryParams:{IsEnable:'1', ParentClassCode:'true'}" class="z-txt easyui-lookup" /></div>
+        
+        <div class="clear"></div>
+        
+        <div class="grid_1 lbl">状态</div>
+        <div class="grid_2 val"><input type="text" data-bind="datasource:dataSource.msgStatus, comboboxValue:form.MsgStatus" data-options="showblank:true" class="z-txt easyui-combobox" /></div>
+        <div class="grid_1 lbl">日期</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.MsgInDate" class="z-txt easyui-daterange" /></div>
+
+        <div class="clear"></div>
+
+        <div class="prefix_9" style="position:absolute;top:5px;height:0;">  
+            <a id="a_search" href="#" class="buttonHuge button-blue" data-bind="click:searchClick" style="margin:0 15px;">查询</a> 
+            <a id="a_reset"  href="#" class="buttonHuge button-blue" data-bind="click:clearClick">清空</a>
+        </div>
+    </div>
+ 
+    <table data-bind="datagrid:grid">
+            <thead>  
+            <tr>  
+                <th field="AdvisoryCode"    sortable="true" align="left"    width="95"     @Html.HideColumn(Cols,"AdvisoryCode") >编号</th>
+                <th field="MsgTitle"    sortable="true" align="left"    width="320"     @Html.HideColumn(Cols,"MsgTitle") >标题</th>
+                <th field="MsgStatus"    sortable="true" align="left"    width="100" formatter="formatMsgStatus"     @Html.HideColumn(Cols,"MsgStatus") >状态</th>
+                <th field="ClassName"    sortable="true" align="left"    width="100"     @Html.HideColumn(Cols,"MsgClass") >类别</th>
+                <th field="IsOpen"    sortable="true" align="center"    width="80" formatter="com.formatCheckbox"    @Html.HideColumn(Cols,"IsOpen") >是否公开</th>
+                <th field="HitCount"    sortable="true" align="right"    width="60"     @Html.HideColumn(Cols,"HitCount") >浏览量</th>
+                <th field="MsgInDate"    sortable="true" align="left"    width="120" formatter="com.formatTime"    @Html.HideColumn(Cols,"MsgInDate") >日期</th>
+            </tr>                            
+        </thead>      
+    </table>
+
+@* 答复择优*@
+<script type="text/html" id="button-template">
+    <div style="margin:5px;height:500px;overflow:auto;">
+        <style type="text/css">
+            .listview{ margin:0 !important;}
+            .listview li{width:auto !important;background-color:#ECECFF !important;float:left;margin:3px;overflow:hidden;}
+            .listview span{width: auto !important; font-size:14px !important;height:auto !important; padding:0px 18px;}
+            .listview .icon:before{content:"" !important}
+            .metrouicss .input-control.checkbox .helper::before {z-index:99;}
+        </style>
+
+        <div style="border-bottom:1px solid #CCC; margin-bottom:5px;">
+            <span class="icon32 icon-settings32" style="padding-left:48px;font-weight:bold; font-size:14px;color:#666;">请选择最佳答复</span> 
+        </div>
+ 
+        <div class="metrouicss">
+            <ul class="listview" data-bind="foreach: buttons" style="clear:both">
+                <li data-bind="click:$parent.buttonClick,css:{selected:Selected()>0}"><span class="icon" data-bind="html:AnswerContent"></span></li>
+            </ul>
+        </div>
+ 
+    </div>
+    <div style="text-align:center;">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" data-bind="click:confirmClick" href="javascript:void(0)"  >确定</a>  
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" data-bind="click:cancelClick" href="javascript:void(0)">取消</a> 
+    </div>
+</script>

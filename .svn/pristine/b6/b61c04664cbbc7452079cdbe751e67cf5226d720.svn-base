@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "阳光问法-注册";
+    Layout = "~/Views/Shared/_ChildlayoutPerson.cshtml";
+}
+@section scripts{
+<script src="/Content/law/js/viewModel/personPwd.js"></script>
+<script type="text/javascript">
+    var easyLoaded = function(){
+
+        using('jquery.easyui.validator.extend.js');
+    };
+
+    using(['validatebox','combobox'], easyLoaded);
+    
+    var viewModel = function(data){ 
+        var self = this;
+        com.viewModel.edit.apply(self,arguments);
+    } 
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    viewModel=new viewModel(data)
+    ko.bindingViewModel(viewModel);
+</script>
+}
+<link href="~/Content/law/css/reg.css" rel="stylesheet" type="text/css" />
+<div class="line"></div>
+<div class="tt"><span class="hy">会员注册</span><span class="wel">欢迎注册阳光问法会员，填写以下信息并提交即可完成注册。</span></div>
+<div class="left">
+<div class="grid_1 lbl">会员名：</div>
+<div class="grid_3 val"><input type="text" class="z-txt easyui-validatebox" data-bind="value:pageData.form.UserCode"   required="true" /></div>
+<div class="clear"></div>
+<div class="grid_1 lbl">真实姓名：</div>
+<div class="grid_3 val"><input type="text" class="z-txt easyui-validatebox" data-bind="value:pageData.form.UserName"  required="true" /></div>
+<div class="clear"></div>
+<div class="grid_1 lbl">登陆密码：</div>
+<div class="grid_3 val"><input type="password" class="z-txt easyui-validatebox" data-bind="value:pageData.form.Password"  required="true" id="password"/></div>
+<div class="clear"></div>
+<div class="grid_1 lbl">确认密码：</div>
+<div class="grid_3 val"><input type="password" class="z-txt easyui-validatebox" data-bind="value:pageData.form.Password2" validType="equalTo['#password']" invalidMessage="两次输入密码不匹配" required="true"/></div>
+<div class="clear"></div>
+<div class="grid_1 lbl">电子邮箱：</div>
+<div class="grid_3 val"><input type="text"  class="z-txt easyui-validatebox" data-bind="value:pageData.form.Email"  data-options="required:true,validType:'email'"/></div>
+<div class="clear"></div>
+<div class="grid_1 lbl">手机号码：</div>
+<div class="grid_3 val"><input type="text"  class="z-txt easyui-validatebox" data-bind="value:pageData.form.ContactNO"  data-options="required:true,validType:'contactNO'"/></div>
+<div class="clear"></div>
+<div><input type="checkbox" id="agreeBox" />我已阅读并完全同意注册协议</div>
+<div><a  class="easyui-linkbutton btn" plain="true" text="" data-bind="click:readonly()?null:saveClick,enable:!readonly()"></a></div>
+    
+</div>
+<div class="right">已经有了帐号<br />请直接登录
+<input type="button" class="login" onclick="window.location.href='/law/login'"/>
+</div>
+

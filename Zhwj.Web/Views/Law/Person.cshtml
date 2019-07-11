@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "阳光问法-个人资料";
+    Layout = "~/Views/Shared/_ChildlayoutPerson.cshtml";
+}
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".content1 .left ul li:not(.current)").hover(function () {
+                $(this).addClass("current");
+            }, function () {
+                $(this).removeClass("current");
+            })
+
+        })
+</script>
+}
+<link href="~/Content/law/css/person.css" rel="stylesheet" type="text/css" />
+<div class="line"></div>
+<div class="left">
+<div class="tt">个人中心</div>
+<ul>
+<li class="current"><a href="/law/person">个人资料</a></li>
+<li><a href="/law/personzx">我的咨询</a></li>
+<li ><a href="/law/personwt">我的委托</a></li>
+<li><a href="/law/personpwd">修改密码</a></li>
+<li><a href="/Login/LogoutIndex">退出登录</a></li>
+</ul>
+</div>
+<div class="right">
+<div class="tt">我的个人信息</div>
+<div>会员名：<span>@Model.Person.UserName</span></div>
+<div>姓名：<span>@Model.Person.UserCode</span></div>
+<div>电子邮箱：<span>@Model.Person.Email</span></div>
+<div>手机号码：<span>@Model.Person.ContactNO</span></div>
+</div>
+
+

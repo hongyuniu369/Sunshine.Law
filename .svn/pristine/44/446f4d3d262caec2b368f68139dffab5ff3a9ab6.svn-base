@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<settings lookupType="project" defaultOrderBy='FirmCode'>
+	<module>Law</module>
+	<select>
+		FirmCode   as   value, FirmName   as   text
+	</select>
+	<from>
+		law_firm
+	</from>
+	<where defaultForAll='true' defaultCp='equal' defaultIgnoreEmpty='true' >
+		<field name='FirmCode'         cp='startwith'  ></field>
+		<field name='FirmName'         cp='like'       ></field>
+	</where>
+</settings>

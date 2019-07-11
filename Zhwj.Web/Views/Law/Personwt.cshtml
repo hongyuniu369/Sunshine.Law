@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "阳光问法-我的委托";
+    Layout = "~/Views/Shared/_ChildlayoutPerson.cshtml";
+}
+@section scripts{
+    <script src="/Content/law/js/viewModel/personwt.js"></script>
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var formatMsgStatus = function (value) {return $.grep(data.dataSource.msgStatus, function (n) { return n.value ==value })[0].text;};
+        
+        var viewModel = function(){
+            var self = this;
+            com.viewModel.list.apply(this,arguments);
+        }
+
+        var easyLoaded = function(){
+            //绑定地址
+            var view = new viewModel(data);
+            ko.applyBindings(view);
+        };
+        //数据绑定
+        using(['pagination','combobox'], easyLoaded);
+
+        
+        
+        $(document).ready(function () {
+            $(".content1 .left ul li:not(.current)").hover(function () {
+                $(this).addClass("current");
+            }, function () {
+                $(this).removeClass("current");
+            })
+            
+
+        })
+</script>
+}
+<link href="~/Content/law/css/personwt.css" rel="stylesheet" type="text/css" />
+<div class="line"></div>
+<div class="content1">
+<div class="line"></div>
+<div class="left">
+<div class="tt">个人中心</div>
+<ul>
+<li><a href="/law/person">个人资料</a></li>
+<li><a href="/law/personzx">我的咨询</a></li>
+<li class="current"><a href="/law/personwt">我的委托</a></li>
+<li><a href="/law/personpwd">修改密码</a></li>
+</ul>
+</div>
+<div class="right">
+<div class="tt" >我的委托</div>
+<div data-bind="foreach: items">
+<div class="ans">
+<p>委托标题：<span data-bind="html:MsgTitle"></span></p>
+<p>案件详情：<span data-bind="html:(MsgSubdescription().replace(/<[^>]+>/g,'').substring(0,40)+'...<a href=\'/wt/show/' + EntrustCode() + '\' target=\'_blank\'>[详细]</a>')"></span></p>
+<p>审核状态：<span data-bind="html:formatMsgStatus(MsgStatus())"></span></p>
+<p>委托费用：<span data-bind="html:InvolvedMoney"></span></p>
+<div class="hf">有<strong data-bind="html:WtReplyCount"></strong>条回复<a href="" data-bind="attr:{id:'btn'+EntrustCode()},click:function(){$parent.getReply(EntrustCode(),EntrustAnswer)}">查看接洽律师</a><span data-bind="html:'提问时间：'+com.formatDate(MsgInDate())"></span></div>
+</div>
+<div class="reply" loaded="" data-bind="attr:{id:'reply'+EntrustCode()}">
+<div class="tt1">接洽律师</div>
+<ul data-bind="foreach:EntrustAnswer">
+<li>
+<div class="pic">
+<img  data-bind="attr:{src:LawyerPic}">
+</div>
+<div class="rt">
+<p class="ls"><span data-bind="html:ProfessionalTitle"></span>：<a   data-bind="attr: {'href':'/lawyer/show/' + LawyerCode() },html:LawyerName()+''&nbsp&nbsp"></a></p>
+<div class="phone" data-bind="html:ContactNO"></div>
+<div class="con" data-bind="html:AnswerContent"></div>
+<div class="time" data-bind="html:'回答时间:'+com.formatDate(AnswerDate())"></div>
+<div class="clear"></div>
+</div>
+    <div style="float:left;" data-bind="attr:{id:'answer'+AnswerCode(),class:BestBtnClass},html:HtmlText,click:function(){$root.setBestAnswer(FunState(),'answer'+AnswerCode(),$parent.EntrustCode,$parent.EntrustAnswer)}">最佳</div>
+</li>
+</ul>
+
+
+</div>
+</div>
+<div id="pp" class="pp"></div>
+</div> 
+</div>

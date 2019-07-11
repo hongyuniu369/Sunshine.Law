@@ -1,0 +1,73 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body,
+button, input, select, textarea /* for ie */ {
+    font: 12px/1.6 /*字号与行高*/
+	Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /*字体*/
+}
+a{ text-decoration:none; color:#535353}
+a:hover{ color:#d90000}
+/*------------------------------------------------------------------*/
+body{ }
+.top{ padding-top:20px; padding-bottom:5px}
+.top .logo{width:458px; height:60px; float:left}
+.top .rtbtn{width:226px; float:right; margin-right:20px}
+.top .rtbtn ul li{width:50px; float:left; margin-right:20px; display:inline}
+.top .rtbtn ul li a img{ display:block; margin:0 auto}
+.clear{ clear:both}
+.wrap{ width:980px; margin:0 auto }
+.main{ width:980px; background:#ffffff}
+.nav{ height:40px; background:url(../images/listnavbg.jpg); line-height:40px; padding-left:25px; border:1px solid #6392d7; border-top-width:2px; clear:both }
+.nav ul li{ float:left; color:#FFFFFF;}
+.nav ul li.sep{width:5px; background:url(../images/zixun_17.jpg) no-repeat center; margin:0 30px; height:40px;}
+.nav ul li.first{background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.nav ul li a{color:#ffffff;font-size:16px; font-family:"微软雅黑"; display:block; width:80px; text-align:center}
+.nav ul li a:hover{ color:#CC3300; background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.pos{ height:50px;line-height:50px; font-size:16px;font-family:"微软雅黑"; color:#1162c9 }
+.pos span{ margin-right:4px; color:#6c6c6c; font-size:12px; font-family:"宋体"; margin-left:4px }
+.pos span a{ font-size:12px; font-family:"宋体"}
+.content1{ width:980px;margin-top:3px; margin-bottom:10px; }
+.content1 .left{ width:668px;float:left; padding-bottom:50px; display:inline; border:1px solid #e0e0e0; border-top:0; min-height:893px }
+.content1 .left .topline{ height:2px; background:url(../images/xixun-09.jpg)}.content1 .left .wlhd{ height:310px; background:#fcfcfb}
+.content1 .left .wlhd .title{ font-size:28px; color:#1e60c0;font-family:"微软雅黑";  height:78px; line-height:78px; padding-left:40px; position:relative}
+.content1 .left .wlhd .title div{ position:absolute; right:20px; width:70px; color:#666666; top:0px; font-size:14px}
+.content1 .left .wlhd .title div span{ font-style:italic; color:#CC0000; margin-right:5px; font-size:14px;  font-family:Arial, Helvetica, sans-serif}
+.content1 .left .wlhd .jdlist{width:639px; padding-bottom:15px; border:1px solid #e0e0e0; border-top:0}
+.tar{ display:block; margin:0 auto; width:480px; height:125px}
+.tar1{width:580px; padding:20px 0 0 20px}
+
+.content1 .left .wlhd .jdlist p{ height:40px; line-height:40px; color:red; font-weight:bold; padding-left:15px; font-size:14px;}
+.content1 .left .wlhd .jdlist div{ padding-left:15px; width:604px; line-height:22px; margin:5px 0}
+.nicename{ float:left; font-family:"微软雅黑"; font-size:14px; margin-left:35px; height:40px; line-height:40px; color:#8d8d8d; margin-top:15px}
+.ncname{ height:25px; line-height:25px}
+.submit{ float:right; margin-right:55px}
+.btn{display:block; margin:10px auto; width:103px; height:45px; background:url(../images/comment_03.jpg); border:0; cursor:pointer;}
+.mline{ height:10px; background:url(../images/comment_07.jpg)}
+.newcomt{ background:#f4f3f1; color:#272727; height:39px; line-height:39px;font-family:"微软雅黑"; font-size:18px; padding-left:35px }
+.content1 .left ul li{width:604px; margin:0 auto;border-bottom:1px solid #e7e7e7; padding:15px 0;}
+.content1 .left ul li p{ height:32px; line-height:32px; font-size:14px; font-family:"微软雅黑"; color:#ee5400}
+.content1 .left ul li .comt{ line-height:24px; font-size:14px; color:#2d2d2d}
+.content1 .left ul li .time{ font-size:14px; color:#999999; float:right; margin-top:5px}
+
+.pagination td {
+    border: 0 none; vertical-align:middle;height:40px; line-height:40px;
+}
+.right{width:285px; float:right}
+.right .zxbtn{width:283px; height:130px; border:1px solid #e2e2e2; border-top-width:5px; margin-bottom:10px}
+.right .zxbtn a{ display:block; width:249px; height:46px; margin:13px 0 0 15px}
+.right .zxbtn a.zx{ background:url(../images/zixun_32.jpg)}
+.right .zxbtn a.wt{ background:url(../images/zixun_36.jpg)}
+.right .cj{ margin-bottom:10px; border:1px solid #e1e1e1; padding-bottom:10px; background:#fcfcfc;border-top-width:5px;}
+.right .cj .tt{ height:38px; line-height:38px; background:url(../images/zixun_41.jpg) 0 bottom no-repeat;}
+.right .cj .tt .rmzx{ display:block; float:left; margin-left:8px;}
+.right .cj .tt .more{ display:block; float:right; margin-right:10px}
+.right .cj .tt .rmzx a{ font-size:16px; font-family:"微软雅黑"; color:#d22800}
+.right .cj ul{ padding-top:8px }
+.right .cj ul li{ line-height:32px; height:32px; background:url(../images/wenfa_59.png) no-repeat 0px center; padding-left:12px; margin-left:15px; border-bottom:1px dashed #cecece; width:235px;}
+.right .cj ul li.first{ border-bottom:0}
+.right .cj ul li a{ font-size:12px; } 
+.clear{ clear:both}
+
+.fk{ clear:both; padding-bottom:10px;}
+.fk p{ color:#8b8b8b; text-align:center; height:24px; line-height:24px}
+.fk p a{ color:#8b8b8b; margin:0 8px}

@@ -1,0 +1,84 @@
+﻿<!--导航内容开始-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var classViewModel = {
+            items: ko.observableArray()
+        };
+        $.ajax({
+            type: 'GET',
+            url: '/api/home/GetRootNewsClass/',
+            async: true,
+            success: function (d) {
+                classViewModel.items(ko.mapping.fromJS(d)());
+            }
+        });
+        ko.applyBindings(classViewModel, document.getElementById('divNav'));
+
+        $("#btnSearch").bind("click", function () {
+            var title = $("#txtSearch").val();
+            window.location.href = "/list?title=" + encodeURIComponent(title); 
+        });
+    });
+</script>
+<div class="nav">
+    <div class="navcon w1100" style="background: #810720" id="divNav">
+        <ul>
+            <li><a href="/">网站首页</a></li>
+            <!-- ko foreach: items -->
+            <li><a href="#" target="_blank" data-bind="attr: {'href':'/list-' + ClassCode() },html:ClassName"></a></li>
+            <!-- /ko -->
+            <li><a href="http://zsb.hebmu.edu.cn/" target="_blank">高招信息</a></li>
+        </ul>
+    </div>
+</div>
+<!--导航内容结束-->
+<script>
+    function sethome() {
+        var url = window.location.href;
+        try {
+            this.style.behavior = "url(#default#homepage)";
+            this.setHomePage(url);
+        } catch (e) {
+            if (document.all) {
+                document.body.style.behavior = "url(#default#homepage)";
+                document.body.setHomePage(url);
+            } else if (window.sidebar) {
+                if (window.netscape) {
+                    try {
+                        netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                    } catch (e) {
+                        alert("此操作被浏览器拒绝！\n请在浏览器地址栏输入“about:config”并回车\n然后将 [signed.applets.codebase_principal_support]的值设置为'true',双击即可。");
+                        return false;
+                    }
+                }
+                var prefs = Components.classes["@@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+                prefs.setCharPref('browser.startup.homepage', url);
+            } else {
+                alert('您的浏览器不支持自动设置首页, 使用浏览器菜单或在浏览器地址栏输入“chrome://settings/browser”手动设置!');
+                //$("#sethomepage").href();
+            }
+        }
+        return false;
+    }
+</script>
+<div class="indexWrap">
+    <div class="w1100">
+        <div class="head1 ">
+            <div class="logo">
+            </div>
+            <div class="sch">
+                <div class="top_nav">
+                    <p>
+                        <img src="~/content/jwc/images/share.jpg">&nbsp;<a href="mailto:wuym@hebmu.edu.cn?subject=给河北医科大学教务处的一封信&body=你好">处长信箱</a>&nbsp;|
+                        <img src="~/content/jwc/images/rel.jpg">&nbsp;<a href="show-201508130001" target="_blank">联系我们</a>&nbsp;|
+                        <img src="~/content/jwc/images/shouye.jpg">&nbsp;<a href="http://202.206.48.73/jwc/index.asp">旧版入口</a>
+                    </p>
+                </div>
+
+                <div class="schx">
+                    <input type="text" class="txt" id="txtSearch"/><input type="button" class="btn" id="btnSearch"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

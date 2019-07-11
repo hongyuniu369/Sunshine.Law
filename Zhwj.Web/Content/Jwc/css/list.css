@@ -1,0 +1,45 @@
+﻿@charset "utf-8";
+/* CSS Document */
+.left{width:750px; border:1px solid #dbdbdb; margin-right:20px; float:left; min-height:470px; margin-bottom:15px; border-top:4px solid #AD153C}
+.right{width:321px; float:left}
+
+
+
+.newslist{width:319px;  float: right; border:1px solid #dbdbdb; height:370px }
+ .tt{ height:41px; }
+ .tt a.gg{ display:block;width:90px;  padding-left:28px;  height:40px; font-size:16px; font-family:"微软雅黑"; line-height:40px; margin-left:10px; display:inline; }
+ .tt a.more{ display:block; float:right; margin-right:10px; width:40px; height:11px; background:url(../images/yd_21.png); margin-top:14px}
+.newslist ul{ padding-top:5px}
+.newslist ul li{ width:300px; height:33px; line-height:33px; margin:0 auto;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
+.newslist ul li.last{ background:none}
+.newslist ul li a{ display:block; width:296px; float:left;  display:inline;margin-left:10px;}
+.pageindex{ width:620px; text-align:right; line-height:50px; display: inline;
+font-size: 14px; float:right;padding-right: 24px;}
+
+.newslist1{ height:160px; margin-top:15px}
+.newslist1 .txt{width:155px; border:0;  height:34px; margin:15px 30px; background:url(../images/listsch.png); padding-left:30px;}
+.newslist1 .btn{ display:block; width:58px; height:31px; border:0; margin-top:5px; background:url(../images/sx.png); cursor:pointer; margin-right:130px; float:right}
+
+
+
+.conlist ul{ padding-top:15px; padding-left:20px; }
+.conlist ul li{  height:33px; line-height:33px;  background:url(../images/dot.png) no-repeat 0 center; padding-left:15px;overflow:hidden;text-overflow:ellipsis;}
+
+.conlist ul li a{ display:block; width:560px;  display:inline; font-size:14px;}
+.conlist ul li span{ display:block; width:84px; float:right; margin-right:20px; color:#a8a8a8;font-size:14px}
+
+
+.content{ margin:0 15px 20px}
+.content .title{padding:15px 0px; text-align:center; font-size:22px; font-family:"微软雅黑"}
+.content div.ft{ text-align:center; color:#7c7c7c; height:40px; border-bottom:1px dashed #C6C6C6}
+.content div.ft span{ margin-right:15px}
+.content .cont{ margin-top:15px; line-height:150%; font-size:15pt; font-family:"宋体"; color:#333;}
+.content .cont p{ text-indent:2em; padding:4px 0px;}
+.content .cont img{ display:block; margin:30px auto}
+.content .cont a{ text-decoration:none; color:blue;}
+.content .cont a:hover{ color:#dd4647}
+
+
+
+
+

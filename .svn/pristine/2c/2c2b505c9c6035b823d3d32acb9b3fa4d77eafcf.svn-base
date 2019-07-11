@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Firm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Cols = new Zephyr.Models.sys_roleMenuColumnMapService().GetCurrentUserMenuColumns();
+}
+
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.search.js"></script>
+    <script src="~/areas/msg/viewmodels/FirmClassMap.js"></script>
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var viewModel = function(){ 
+            var self = this;
+            com.viewModel.search.apply(this,arguments);
+        }
+        ko.bindingViewModel(new viewModel(data));
+        var formatterButton = function (value, row) { return '<a href="#" onclick="setButton(\'' + row.FirmCode + '\')"><span class="icon icon-set2">&nbsp;</span>[业务领域]</a>'; };
+    </script>
+}
+
+    @Html.RenderToolbar()
+
+    <div class="container_12" style="position:relative;">
+        <div class="grid_1 lbl">律所编号</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.FirmCode" class="z-txt easyui-autocomplete" data-options="url:'/api/msg/firm/getfirmcode'" /></div>
+        <div class="grid_1 lbl">律所名称</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.FirmName" class="z-txt easyui-autocomplete grid_12" data-options="url:'/api/msg/firm/getfirmname'" /></div>
+        <div class="grid_1 lbl">联系电话</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.ContactNO" class="z-txt" /></div>
+        
+        <div class="clear"></div>
+        
+        <div class="grid_1 lbl">所在区域</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.FirmAddress" class="z-txt " /></div>
+
+        <div class="clear"></div>
+
+        <div class="prefix_9" style="position:absolute;top:5px;height:0;">  
+            <a id="a_search" href="#" class="buttonHuge button-blue" data-bind="click:searchClick" style="margin:0 15px;">查询</a> 
+            <a id="a_reset"  href="#" class="buttonHuge button-blue" data-bind="click:clearClick">清空</a>
+        </div>
+    </div>
+ 
+    <table data-bind="datagrid:grid">
+            <thead>  
+            <tr>  
+                <th field="FirmCode"    sortable="true" align="left"    width="90"      @Html.HideColumn(Cols,"FirmCode") >编号</th>
+                <th field="FirmName"    sortable="true" align="left"    width="210"     @Html.HideColumn(Cols,"FirmName") >名称</th>
+                <th field="ContactNO"    sortable="true" align="left"    width="120"    @Html.HideColumn(Cols,"ContactNO") >联系电话</th>
+                <th field="Fax"    sortable="true" align="left"    width="120"          @Html.HideColumn(Cols,"Fax") >传真</th>
+                <th field="Email"    sortable="true" align="left"    width="180"        @Html.HideColumn(Cols,"Email") >Email</th>
+                <th field="FirmAddress"    sortable="true" align="left"    width="260"  @Html.HideColumn(Cols,"FirmAddress") >地址</th>
+                <th field="FirmOrder"    sortable="true" align="right"    width="60"    @Html.HideColumn(Cols,"FirmOrder") >排序</th>
+                <th field="Button"      align="center"      width="100" formatter="formatterButton">页面按钮 </th> 
+            </tr>                            
+        </thead>      
+    </table>
+
+@* 业务领域处理*@
+<script type="text/html" id="button-template">
+    <div style="margin:5px;height:320px;overflow:auto;">
+        <style type="text/css">
+            .listview{ margin:0 !important;}
+            .listview li{width:auto !important;background-color:#ECECFF !important;float:left;margin:3px;overflow:hidden;}
+            .listview span{width: auto !important; font-size:14px !important;height:auto !important; white-space: nowrap;padding:0px 18px;}
+            .listview .icon:before{content:"" !important}
+            .metrouicss .input-control.checkbox .helper::before {z-index:99;}
+        </style>
+
+        <div style="border-bottom:1px solid #CCC; margin-bottom:5px;">
+            <span class="icon32 icon-settings32" style="padding-left:48px;font-weight:bold; font-size:14px;color:#666;">请选择页面按钮</span> 
+        </div>
+ 
+        <div class="metrouicss">
+            <label class="input-control checkbox" style="margin-top:6px;margin-left:3px;">
+                <input type="checkbox" data-bind="checked:checkAll"><span class="helper">全选</span>
+            </label>
+            <ul class="listview" data-bind="foreach: buttons" style="clear:both">
+                <li data-bind="click:$parent.buttonClick,css:{selected:Selected()>0}"><span class="icon" data-bind="text:ClassName"></span></li>
+            </ul>
+        </div>
+ 
+    </div>
+    <div style="text-align:center;">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" data-bind="click:confirmClick" href="javascript:void(0)"  >确定</a>  
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" data-bind="click:cancelClick" href="javascript:void(0)">取消</a> 
+    </div>
+</script>

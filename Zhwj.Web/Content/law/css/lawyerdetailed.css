@@ -1,0 +1,66 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body,
+button, input, select, textarea /* for ie */ {
+    font: 12px/1.6 /*字号与行高*/
+	Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /*字体*/
+}
+a{ text-decoration:none; color:#535353}
+a:hover{ color:#d90000}
+/*------------------------------------------------------------------*/
+body{ }
+.top{ padding-top:20px; padding-bottom:5px}
+.top .logo{width:458px; height:60px; float:left}
+.top .rtbtn{width:226px; float:right; margin-right:20px}
+.top .rtbtn ul li{width:50px; float:left; margin-right:20px; display:inline}
+.top .rtbtn ul li a img{ display:block; margin:0 auto}
+
+.wrap{ width:980px; margin:0 auto }
+.main{ width:980px; background:#ffffff}
+.nav{ height:40px; background:url(../images/listnavbg.jpg); line-height:40px; padding-left:25px; border:1px solid #6392d7; border-top-width:2px; clear:both }
+.nav ul li{ float:left; color:#FFFFFF;}
+.nav ul li.sep{width:5px; background:url(../images/zixun_17.jpg) no-repeat center; margin:0 30px; height:40px;}
+.nav ul li.first{background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.nav ul li a{color:#ffffff;font-size:16px; font-family:"微软雅黑"; display:block; width:80px; text-align:center}
+.nav ul li a:hover{ color:#CC3300; background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.pos{ height:50px;line-height:50px; font-size:16px;font-family:"微软雅黑"; color:#1162c9 }
+.pos span{ margin-right:8px; color:#6c6c6c}
+.pos span a{ font-size:12px; font-family:"宋体"}
+.content1{ width:980px;margin-top:3px; margin-bottom:10px; }
+.content1 .left{ width:670px;float:left; display:inline;}
+.tt{ height:2px; background:url(../images/xixun-09.jpg); }
+.zxcon{width:663px; border:1px solid #c8c8c8; border-top:0; padding-top:15px; padding-bottom:30px; padding-left:5px  }
+.zxcon .title{ width:617px; height:41px; background:url(../images/lawyerdetailed_03.jpg); padding-left:40px; line-height:41px; margin-bottom:15px; font-size:16px; font-family:"微软雅黑"}
+.zxcon .lawyerimg{width:249px; float:left; height:283px; background:#efefef }
+.zxcon .lawyerimg img{width:239px; height:273px; margin:5px}
+.zxcon .desc{width:380px; float:left; margin-left:15px; display:inline;}
+.zxcon .desc p{ height:26px; line-height:26px}
+.zxcon .desc div{ margin:5px 0;line-height:18px}
+.zxcon .desc .zxls{width:63px; height:18px;background:#fff4e7; border:1px solid #ffd1b7; text-align:center; line-height:18px; margin-left:0; margin-top:12px}
+.zxcon .desc .zxls a{ color:#ff6600;}
+.zxcon .title1{ clear:both; margin-top:15px}
+.zxcon .lawyerdesc{width:622px; margin:15px 20px 15px 15px; line-height:22px}
+.zxcon ul li{ height:32px; line-height:32px;width:545px; margin-left:20px; border-bottom:1px dashed #dddddd}
+.zxcon ul li a{ display:block; float:left; width:440px;}
+.zxcon ul li span{ display:block; float:right; width:75px; color:#c2c2c2}
+
+
+.right{width:285px; float:right; margin-top:45px}
+.right .zxbtn{width:283px; height:130px; border:1px solid #e2e2e2; border-top-width:5px; margin-bottom:10px}
+.right .zxbtn a{ display:block; width:249px; height:46px; margin:13px 0 0 15px}
+.right .zxbtn a.zx{ background:url(../images/zixun_32.jpg)}
+.right .zxbtn a.wt{ background:url(../images/zixun_36.jpg)}
+.right .cj{ margin-bottom:10px; border:1px solid #e1e1e1; padding-bottom:10px; background:#fcfcfc}
+.right .cj .tt{ height:38px; line-height:38px; background:url(../images/zixun_41.jpg) 0 bottom no-repeat;}
+.right .cj .tt .rmzx{ display:block; float:left; margin-left:8px;}
+.right .cj .tt .more{ display:block; float:right; margin-right:10px}
+.right .cj .tt .rmzx a{ font-size:16px; font-family:"微软雅黑"; color:#d22800}
+.right .cj ul{ padding-top:8px; padding-left:15px; }
+.right .cj ul li{ line-height:32px; height:32px; background:url(../images/wenfa_59.png) no-repeat 0px center; padding-left:12px; margin-left:0px; border-bottom:1px dashed #cecece; width:235px;}
+.right .cj ul li.first{ border-bottom:0}
+.right .cj ul li a{ font-size:12px; } 
+.clear{ clear:both}
+
+.fk{ clear:both; padding-bottom:10px;}
+.fk p{ color:#8b8b8b; text-align:center; height:24px; line-height:24px}
+.fk p a{ color:#8b8b8b; margin:0 8px}

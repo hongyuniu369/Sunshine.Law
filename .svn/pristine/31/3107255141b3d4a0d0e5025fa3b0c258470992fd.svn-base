@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "委托管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Cols = new Zephyr.Models.sys_roleMenuColumnMapService().GetCurrentUserMenuColumns();
+}
+
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.search.js"></script>
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var viewModel = function(){ 
+            var self = this;
+            com.viewModel.search.apply(this,arguments);
+
+            this.ignoreClick = function(){
+                var row = self.grid.datagrid('getSelected');
+                if (!row) return com.message('warning', '请选择一条信息');
+                if(row.MsgStatus != 0) return com.message('warning', '不能忽略该信息');
+                com.dialog({
+                    title: "&nbsp;忽略留言",
+                    iconCls:'icon-note_delete',
+                    width: 834,//=内部宽+14
+                    height: 410,//=内部高度+70
+                    html: "#ignore-template",
+                    viewModel: function (w) {
+                        var that = this
+                        this.grid = {
+                            width: 820,
+                            height: 340,
+                            pagination: true,
+                            pageSize:10,
+                            url: "/api/msg/ignore/",
+                            queryParams: ko.observable(),
+                            idField: 'IgnoreCode'
+                        };
+                        this.gridEdit = new com.editGridViewModel(that.grid);
+                        this.addClick = function () {
+                            com.ajax({
+                                type: 'GET',
+                                url: '/api/msg/ignore/getnewkey',
+                                success: function (d) {//设置新增行默认属性
+                                    var row = { IgnoreCode: d, IgnoreReason:'', IgnoreOrder:'99', IgnoreRemark: ''};
+                                    that.gridEdit.addnew(row);
+                                }
+                            });
+                        };
+                        this.editClick = function () {
+                            var row = that.grid.datagrid('getSelected');
+                            that.gridEdit.begin(row);
+                        };
+                        this.grid.onClickRow = that.gridEdit.ended;
+                        this.grid.onDblClickRow = that.editClick;
+                        this.grid.OnAfterCreateEditor = function (editors, row) {
+                            //if (!row._isnew) com.readOnlyHandler('input')(editors["ClassCode"].target, true);
+                            com.readOnlyHandler('input')(editors["IgnoreCode"].target, true);
+                        };
+                        this.saveClick = function () {
+                            if (that.gridEdit.isChangedAndValid()) {
+                                var list = that.gridEdit.getChanges(['IgnoreCode', 'IgnoreReason',  'IgnoreRemark', 'IgnoreOrder']);
+                                com.ajax({
+                                    url: '/api/msg/ignore/edit/',
+                                    data: ko.toJSON({list:list}),
+                                    success: function (d) {
+                                        com.message('success', '保存成功！');
+                                    }
+                                });
+                            }
+                        };
+                        this.grid.toolbar = [
+                            { text: '新增', iconCls: 'icon-add1', handler: that.addClick }, '-',
+                            { text: '编辑', iconCls: 'icon-edit', handler: that.editClick }, '-',
+                            { text: '删除', iconCls: 'icon-cross', handler: that.gridEdit.deleterow },
+                            { text: '保存', iconCls: 'icon-save', handler: that.saveClick }
+                        ];
+                        this.confirmClick = function () {
+                            var item = that.grid.datagrid('getSelected');
+                            if (!item) return com.message('warning', '请选择忽略原因');
+                            var post = { form: {},tabs:[],_changed:true};
+                            post.form = {EntrustCode:row.EntrustCode, MsgStatus:-9, IgnoreCode:item.IgnoreCode};
+                            //数据提交
+                            com.ajax({
+                                url: '/api/msg/entrust/edit/',
+                                data: ko.toJSON(post),
+                                success: function (d) {
+                                    com.message('success', '操作成功');
+                                    that.cancelClick();
+                                    self.grid.datagrid('reload');
+                                }
+                            });
+                        };
+                        this.cancelClick = function () {
+                            w.dialog('close');
+                        };
+                    }
+                });
+            };
+            this.auditClick = function(){
+                var row = self.grid.datagrid('getSelected');
+                if (!row) return com.message('warning', '请选择一条信息');
+                if(row.MsgStatus > 0) return com.message('warning', '不能审核该信息');
+                var post = { form: {},tabs:[],_changed:true};
+                post.form = {EntrustCode:row.EntrustCode, MsgStatus:5, IgnoreCode:'', ApproveDate:com.getCurrentTime()};
+                //数据提交
+                com.message('confirm', '确定审核通过该信息？', function (b) {
+                    if (b) {
+                        com.ajax({
+                            url: '/api/msg/entrust/edit/',
+                            data: ko.toJSON(post),
+                            success: function (d) {
+                                com.message('success', '操作成功');
+                                self.grid.datagrid('reload');
+                            }
+                        });
+                    }
+                });
+            }
+        }
+        var viewModel = new viewModel(data);
+        ko.bindingViewModel(viewModel);
+        var formatterEnable = function (value,row) {return '<img src="/Content/images/' + ((value||'').toString()=="true" ? "checkmark.gif" : "checknomark.gif") + '"/>';};
+        var formatMsgStatus = function (value,row) {return $.grep(viewModel.dataSource.msgStatus, function (n) { return n.value ==value })[0].text;};
+    </script>
+}
+
+    @Html.RenderToolbar()
+
+    <div class="container_12" style="position:relative;">
+        <div class="grid_1 lbl">编号</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.EntrustCode" data-options="url:'/api/msg/entrust/getentrustcode'" class="z-txt easyui-autocomplete" /></div>
+        <div class="grid_1 lbl">标题</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.MsgTitle" class="z-txt " /></div>
+        <div class="grid_1 lbl">委托类别</div>
+        <div class="grid_2 val"><input type="text" data-bind="lookupValue:form.MsgClass" data-options="editable:false,lookupType:'Msg.class',queryParams:{IsEnable:'1', ParentClassCode:'true'}" class="z-txt easyui-lookup" /></div>
+        
+        <div class="clear"></div>
+        
+        <div class="grid_1 lbl">状态</div>
+        <div class="grid_2 val"><input type="text" data-bind="datasource:dataSource.msgStatus, comboboxValue:form.MsgStatus" data-options="showblank:true" class="z-txt easyui-combobox" /></div>
+        <div class="grid_1 lbl">日期</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.MsgInDate" class="z-txt easyui-daterange" /></div>
+
+        <div class="clear"></div>
+
+        <div class="prefix_9" style="position:absolute;top:5px;height:0;">  
+            <a id="a_search" href="#" class="buttonHuge button-blue" data-bind="click:searchClick" style="margin:0 15px;">查询</a> 
+            <a id="a_reset"  href="#" class="buttonHuge button-blue" data-bind="click:clearClick">清空</a>
+        </div>
+    </div>
+ 
+    <table data-bind="datagrid:grid">
+            <thead>  
+            <tr>  
+                <th field="EntrustCode"    sortable="true" align="left"    width="95"     @Html.HideColumn(Cols,"EntrustCode") >编号</th>
+                <th field="MsgTitle"    sortable="true" align="left"    width="320"     @Html.HideColumn(Cols,"MsgTitle") >标题</th>
+                <th field="MsgStatus"    sortable="true" align="left"    width="100" formatter="formatMsgStatus"     @Html.HideColumn(Cols,"MsgStatus") >状态</th>
+                <th field="ClassName"    sortable="true" align="left"    width="100"     @Html.HideColumn(Cols,"MsgClass") >类别</th>
+                <th field="ActiveTime"    sortable="true" align="left"    width="70" formatter="com.formatDate"    @Html.HideColumn(Cols,"ActiveTime") >有效日期</th>
+                <th field="HitCount"    sortable="true" align="right"    width="60"     @Html.HideColumn(Cols,"HitCount") >浏览量</th>
+                <th field="MsgInDate"    sortable="true" align="left"    width="120" formatter="com.formatTime"    @Html.HideColumn(Cols,"MsgInDate") >日期</th>
+            </tr>                            
+        </thead>      
+    </table>
+
+@*忽略留言*@
+<script type="text/html" id="ignore-template">
+    <style type="text/css">
+        .datagrid-wrap{border-width:0 0 1px 0;}
+        .datagrid-toolbar{background-color:#E0ECFF !important}
+    </style>
+
+    <table data-bind="datagrid:grid">
+        <thead>  
+            <tr>  
+                <th field="IgnoreCode"		sortable="true"	align="left"	width="95" editor="{type:'validatebox',options:{required:true}}" >编号</th>
+                <th field="IgnoreReason"		sortable="true"	align="left"	width="480" editor="{type:'validatebox',options:{required:true}}" >忽略原因</th>
+                <th field="IgnoreOrder"		sortable="true"	align="right"	width="80" editor="{type: 'numberbox',options:{required:true, min: 0, value:99}}" >排序</th>
+                <th field="IgnoreRemark"		sortable="true"	align="left"	width="120" editor="text" >备注</th>
+            </tr>                            
+        </thead>      
+    </table> 
+    
+    <div style="text-align:center;margin:5px;">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" data-bind="click:confirmClick" href="javascript:void(0)"  >确定</a>  
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" data-bind="click:cancelClick" href="javascript:void(0)">取消</a> 
+    </div>
+</script> 

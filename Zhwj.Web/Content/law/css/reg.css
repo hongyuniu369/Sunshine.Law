@@ -1,0 +1,46 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body,
+button, input, select, textarea /* for ie */ {
+    font: 12px/1.6 /*字号与行高*/
+	Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /*字体*/
+}
+a{ text-decoration:none; color:#535353}
+a:hover{ color:#d90000}
+/*------------------------------------------------------------------*/
+body{ }
+.top{ padding-top:20px; padding-bottom:5px}
+.top .logo{width:458px; height:60px; float:left}
+.top .rtbtn{width:226px; float:right; margin-right:20px}
+.top .rtbtn ul li{width:50px; float:left; margin-right:20px; display:inline}
+.top .rtbtn ul li a img{ display:block; margin:0 auto}
+
+.wrap{ width:980px; margin:0 auto }
+.main{ width:980px; background:#ffffff}
+.nav{ height:40px; background:url(../images/listnavbg.jpg); line-height:40px; padding-left:25px; border:1px solid #6392d7; border-top-width:2px; clear:both }
+.nav ul li{ float:left; color:#FFFFFF;}
+.nav ul li.sep{width:5px; background:url(../images/zixun_17.jpg) no-repeat center; margin:0 30px; height:40px;}
+.nav ul li.first{background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.nav ul li a{color:#ffffff;font-size:16px; font-family:"微软雅黑"; display:block; width:80px; text-align:center}
+.nav ul li a:hover{ color:#CC3300; background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.pos{ height:50px;line-height:50px; font-size:16px;font-family:"微软雅黑"; color:#1162c9 }
+.pos span{ margin-right:8px; color:#6c6c6c}
+.pos span a{ font-size:14px; font-family:"宋体"}
+.content1{ width:980px;margin-top:3px; margin-bottom:10px; }
+.content1 .line{ height:2px;width:980px; background:url(../images/xixun-09.jpg); margin-top:15px;}
+.content1 .tt{margin-top:20px;border-bottom:1px dashed #b7b7b7; height:55px; line-height:55px}
+.content1 .tt .hy{ font-size:24px; color:#f12200;font-family:"微软雅黑";}
+.content1 .tt .wel{ font-size:14px; color:#505050; margin-left:50px; }
+.content1 .left{ width:450px; float:left; margin-left:150px; display:inline; margin-top:32px;}
+.content1 .left .btn{ display:block; width:235px; margin-top:20px;margin-bottom:20px; height:47px; background:url(../images/reg_07.png); border:0;padding:0;}
+.content1 .right{width:100px; float:left; border-left:1px dashed #d2d2d2; height:160px; padding-left:100px;margin-top:32px; color:#666666}
+.content1 .right .login{ display:block; width:50px; height:31px; background:url(../images/reg_08.png); border:0; margin-top:10px}
+
+.content1 .left .grid_1 {font-size:14px;height:30px;line-height:30px;color:#2d2d2d    }
+.content1 .left .grid_3 {font-size:14px;height:30px;line-height:30px    }
+.content1 .left .xy { margin-top:10px    }
+
+
+.fk{ clear:both; padding-bottom:10px;}
+.fk p{ color:#8b8b8b; text-align:center; height:24px; line-height:24px}
+.fk p a{ color:#8b8b8b; margin:0 8px}

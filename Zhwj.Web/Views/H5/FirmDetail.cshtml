@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "律所明细-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_LayoutH5.cshtml";
+}
+<style>.am-accordion-default {margin: 0.3rem;}</style>
+<div data-am-widget="list_news" class="am-list-news am-list-news-default am-no-layout">
+    <!--列表标题-->
+    <div class="am-list-news-hd list-news-hd am-cf">
+        <h2>@Model.Form.FirmName</h2>
+    </div>
+</div>
+<section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
+    <dl class="am-accordion-item am-active">
+        <dt class="am-accordion-title">律所基本资料
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+            <div class="am-accordion-content">
+                <p>律所名称：<span>@Model.Form.FirmName</span></p>
+                <p>详细地址：<span>@Model.Form.FirmAddress @Model.Form.FrimDetailAddress</span></p>
+                <p>邮编：<span>@Model.Form.ZIPCode</span></p>
+                <p>联系电话：<span>@Model.Form.ContactNO</span></p>
+                <p>电子邮件：<span>@Model.Form.Email</span></p>
+                <p>网址：<span>@Model.Form.WebAddress</span></p>
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item am-active">
+        <dt class="am-accordion-title">律所概况
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+            <div class="am-accordion-content">
+                @Html.Raw(Model.Form.FirmDescription)
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item am-active">
+        <dt class="am-accordion-title">业务领域
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                @for (var i = 0; i < Model.FirmClasses.Count; i++)
+                {@Html.Raw(Model.FirmClasses[i].ClassName + "  ")}
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item am-active">
+        <dt class="am-accordion-title">律师团队
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                @for (var i = 0; i < Model.Lawyers.Count; i++)
+                {<a href="/h5/lawyerdetail/@Model.Lawyers[i].LawyerCode">@Model.Lawyers[i].LawyerName</a>  }
+            </div>
+        </dd>
+    </dl>
+</section>

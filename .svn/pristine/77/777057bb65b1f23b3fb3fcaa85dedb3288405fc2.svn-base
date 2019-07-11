@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "用户登录";
+    Layout = "~/Views/Shared/_Childlayoutperson.cshtml";
+}
+@section scripts{
+        <script src="~/Content/law/js/viewModel/login.js"></script>
+}
+<link href="~/Content/law/css/login.css" rel="stylesheet" type="text/css" />
+<div class="line"></div>
+
+<form data-bind="submit:loginClick">
+<div class="tt"><span class="hy">欢迎登录</span></div>
+<div class="left">
+<div class="grid_1 lbl">会员名：</div>
+<div class="grid_3 val"><input type="text"  data-bind="value:form.usercode" /></div>
+<div class="clear"></div>
+<div class="grid_1 lbl">密&nbsp;&nbsp;码：</div>
+<div class="grid_3 val"><input type="password" data-bind="value:form.password" /></div>
+<div class="clear"></div>
+ <div class="mem">  <input type="checkbox" data-bind="checked:form.remember" /><span>系统记住我</span></div> 
+<div class="message" data-bind="html:message"></div>
+<div><input type="submit" class="btn" id="submit_btn"/></div>
+</div>
+</form>
+<script>
+    $("#submit_btn").val("");
+</script>

@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "委托答复";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+<script src="~/Content/js/jquery-plugin/ckeditor/ckeditor.js"></script>
+<script src="~/Content/js/jquery-plugin/ckeditor/adapters/jquery.js"></script>
+<script src="~/Content/js/jquery-plugin/ckfinder/ckfinder.js"></script>
+}
+
+@section scripts{
+<script src="/Content/js/viewModel/com.viewModel.edit.js"></script>
+<script type="text/javascript">
+    var easyLoaded = function(){
+        //设置ckeditor
+        $('#txtCkeditor').ckeditor();
+        var editor = $('#txtCkeditor').ckeditor().editor;
+        editor.on( 'blur', function( event) {
+            if(editor.getData())
+                viewModel.pageData.form.AnswerContent(editor.getData());
+        } );
+        editor.on('change',function(event){
+            if(editor.getData())
+                viewModel.pageData.form.AnswerContent(editor.getData());
+        });
+        editor.on( 'loaded', function( event) {
+            editor.setData( viewModel.pageData.form.AnswerContent());
+            editor.setReadOnly(viewModel.readonly());
+        } );
+    }
+    using(['validatebox','combobox'], easyLoaded);
+
+    var viewModel = function(data){ 
+        var self = this;
+        com.viewModel.edit.apply(self,arguments);
+        this.dsBit = [{value:true, text:'是'},{value:false, text:'否'}];
+    } 
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    viewModel=new viewModel(data)
+    ko.bindingViewModel(viewModel);
+
+    $(document).ready(function(){
+    });
+</script>
+}
+
+<div class="z-toolbar">
+    <a id="a_save" href="#" plain="true" class="easyui-linkbutton" icon="icon-save" data-bind="click:readonly()?null:saveClick,linkbuttonDisable:readonly" title="保存">保存</a>
+    <a id="a_undo" href="#" plain="true" class="easyui-linkbutton" icon="icon-undo" data-bind="click:readonly()?null:rejectClick,linkbuttonDisable:readonly" title="撤消">撤消</a>
+    @Html.RenderMenue()
+    <a id="a_refresh" href="#" plain="true" class="easyui-linkbutton"  icon="icon-arrow_refresh"   title="刷新" data-bind="click:refreshClick">刷新</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_other" href="#" class="easyui-splitbutton" data-options="menu:'#divother',iconCls:'icon-application_go'" title="其他">其他</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_first" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_first" data-bind="click:firstClick,linkbuttonEnable:pageData.scrollKeys.firstEnable" title="第一条"></a> 
+    <a id="a_previous" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_previous" data-bind="click:previousClick,linkbuttonEnable:pageData.scrollKeys.previousEnable" title="上一条"></a> 
+    <a id="a_next" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_next" data-bind="click:nextClick,linkbuttonEnable:pageData.scrollKeys.nextEnable" title="下一条"></a> 
+    <a id="a_last" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_last" data-bind="click:lastClick,linkbuttonEnable:pageData.scrollKeys.lastEnable" title="最后一条"></a> 
+</div>
+
+<div id="divother" style="width:100px; display:none;">
+    <div data-options="iconCls:'icon-cross'" data-bind="click:fnIsNew()?null:deleteClick,linkbuttonDisable:true">删除</div>
+    <div data-options="iconCls:'icon-arrow_refresh'" data-bind="click:refreshClick">刷新</div>
+</div>  
+
+
+<div id="master" class="container_12" data-bind="inputwidth:0.9">
+    <div class="grid_1 lbl">答复编号</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.AnswerCode ,readOnly : true" class="z-txt " /></div>
+    <div class="grid_1 lbl">委托编号</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.AdvisoryCode ,readOnly : true" class="z-txt " /></div>
+    <div class="grid_1 lbl">答复日期</div>
+    <div class="grid_3 val"><input type="text" data-bind="dateboxValue:pageData.form.AnswerDate ,dateboxReadOnly : true" class="z-txt easyui-datebox" /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">保密</div>
+    <div class="grid_3 val"><input type="text" data-bind="datasource:dataSource.dsBit,comboboxValue:pageData.form.IsSecret ,comboboxReadOnly : readonly" data-options="required:true" class="z-txt easyui-combobox" /></div>
+    <div class="grid_1 lbl">点赞数</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.PraiseCount ,readOnly:readonly" class="z-txt easyui-numberbox" data-options="required:true,min:0,precision:0" /></div>
+    <div class="grid_1 lbl">排序</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.AnswerOrder ,readOnly:readonly" class="z-txt easyui-numberbox" data-options="required:true,min:0,precision:0" /></div>
+    
+    <div class="clear"></div>
+
+    <div class="grid_1 lbl">答复内容</div>
+    <div class="grid_11 val" style="margin:0.9%;min-height:260px;"><textarea id="txtCkeditor" data-bind="value:pageData.form.AnswerContent ,readOnly:readonly" data-options="required:true,missingMessage:'内容为必输项'" class="z-txt grid_11 easyui-validatebox" style="height:240px;" ></textarea></div>
+
+    <div class="clear"></div>
+</div>
+
+<div id="tt" class="easyui-tabs">  
+    <div title="审核信息" style="padding-top:2px;">
+        <div class="container_12" data-bind="inputwidth:0.9,autoheight:492" id = "form0">
+            <div class="grid_1 lbl">审核状态</div>
+            <div class="grid_3 val"><input type="text" data-bind="datasource:dataSource.dsAudit,comboboxValue:pageData.form.ApproveState,comboboxReadOnly : true" class="z-txt easyui-combobox"/></div>
+            <div class="grid_1 lbl">审核人</div>
+            <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ApprovePerson ,readOnly:true" class="z-txt  readonly"/></div>
+            <div class="grid_1 lbl">审核日期</div>
+            <div class="grid_3 val"><input type="text" data-bind="dateboxValue:pageData.form.ApproveDate ,dateboxReadOnly:true" class="z-txt easyui-datebox readonly"/></div>
+                
+            <div class="clear"></div>
+                
+            <div class="grid_1 lbl">审批意见</div>
+            <div class="grid_11 val" data-bind="inputwidth:0.98"><input type="text" data-bind="value:pageData.form.ApproveRemark ,readOnly:true" class="z-txt  readonly"/></div>
+        </div>     
+    </div>
+    <div title="律师信息" style="padding-top:2px;">
+        <div class="container_12" data-bind="inputwidth:0.9,autoheight:492" id = "form1">
+            <div class="grid_1 lbl">姓名</div>
+            <div class="grid_3 val"><input type="text" data-bind="value:pageData.tab1.LawyerName ,readOnly:true" class="z-txt  readonly"/></div>
+            <div class="grid_1 lbl">执业证号</div>
+            <div class="grid_3 val"><input type="text" data-bind="value:pageData.tab1.LicenseNumber ,readOnly:true" class="z-txt  readonly"/></div>
+            <div class="grid_1 lbl">联系电话</div>
+            <div class="grid_3 val"><input type="text" data-bind="value:pageData.tab1.ContactNO ,readOnly:true" class="z-txt  readonly"/></div>
+                
+            <div class="clear"></div>
+                
+            <div class="grid_1 lbl">手机</div>
+            <div class="grid_3 val"><input type="text" data-bind="value:pageData.tab1.MobilePhone ,readOnly:true" class="z-txt  readonly"/></div>
+        </div>     
+    </div>
+    <div title="择优信息" style="padding-top:2px;">
+        <div class="container_12" data-bind="inputwidth:0.9,autoheight:492" id = "form2">
+            <div class="grid_1 lbl">最佳答复</div>
+            <div class="grid_3 val"><input type="text" data-bind="datasource:dsBit,comboboxValue:pageData.form.IsBestAnswer, comboboxReadOnly:true" class="z-txt easyui-combobox"/></div>
+            <div class="grid_1 lbl">择优日期</div>
+            <div class="grid_3 val"><input type="text" data-bind="dateboxValue:pageData.form.SelectDate ,dateboxReadOnly:true" class="z-txt easyui-datebox readonly"/></div>
+            <div class="grid_1 lbl">择优人</div>
+            <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.SelectUserCode ,readOnly:true" class="z-txt  readonly"/></div>
+        </div>     
+    </div>
+</div>

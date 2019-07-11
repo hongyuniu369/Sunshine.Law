@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "律所资料-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+<link href="~/Content/law/css/lsdetailed.css" rel="stylesheet" type="text/css" />
+<div class="pos">
+    当前位置：<span><a href="/">阳光问法</a></span><span>></span><span><a href="/firm/">找律所</a></span><span>></span><span><a href="#">律所资料</a></span>
+</div>
+<div class="tt"></div>
+<div class="zxcon">
+    <div class="title">律所基本资料</div>
+    <div>
+        <div class="desc">
+            <p>律所名称：<span>@Model.Form.FirmName</span></p>
+            <p>详细地址：<span>@Model.Form.FirmAddress @Model.Form.FrimDetailAddress</span></p>
+            <p>邮编：<span>@Model.Form.ZIPCode</span></p>
+            <p>联系电话：<span>@Model.Form.ContactNO</span></p>
+            <p>电子邮件：<span>@Model.Form.Email</span></p>
+            <p>网址：<span>@Model.Form.WebAddress</span></p>
+        </div>
+    </div>
+    <div class="title title1">律所概况</div>
+    <div class="lawyerdesc">
+        @Html.Raw(Model.Form.FirmDescription)
+    </div>
+    <div class="title title1">业务领域</div>
+    <div class="lawyerdesc">
+        @for (var i = 0; i < Model.FirmClasses.Count; i++)
+        {@Html.Raw(Model.FirmClasses[i].ClassName + "  ")}
+    </div>
+    <div class="title title1">律师团队</div>
+    <div class="lawyerdesc">
+        @for (var i = 0; i < Model.Lawyers.Count; i++)
+        {<a href="/lawyer/show/@Model.Lawyers[i].LawyerCode">@Model.Lawyers[i].LawyerName</a>  }
+    </div>
+</div>

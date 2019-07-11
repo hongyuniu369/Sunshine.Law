@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "咨询评论-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+
+@section scripts{
+<script src="~/Content/js/viewModel/com.viewModel.razorList.js"></script>
+    <script type="text/javascript">
+        //设置列表、分页
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.page));
+        var formatMsgStatus = function (value) {return $.grep(data.dataSource.msgStatus, function (n) { return n.value ==value })[0].text;};
+        var viewModel = function(){ 
+            var self = this;
+            com.viewModel.razorList.apply(this,arguments);
+        };
+        var easyLoaded = function () {
+            //咨询列表
+            viewModel = new viewModel(data);
+            ko.applyBindings(viewModel, document.getElementById("list"));
+        };
+        using(['parser', 'pagination'], easyLoaded);
+
+        //评论
+        function commentClick (){
+            //数据验证
+            var formValid = com.formValidate(document.getElementById("comment")); 
+            if (!formValid) {
+                com.message('warning', '验证不通过，请检查数据！');
+                return;
+            } 
+            var post = { form: {},tabs:[],_changed:true};
+            post.form = {MasterKey:data.dataSource.masterKey,MasterValue:data.dataSource.masterValue,CommentorName:$("#CommentorName").val(), CommentContent:$("#CommentContent").val()};
+            //数据提交
+            com.ajax({
+                url: '/api/law/editcomment/',
+                data: ko.toJSON(post),
+                success: function (d) {
+                    com.message('success', '感谢您的评论！');
+                    $("#CommentorName").val("");
+                    $("#CommentContent").val("");
+                }
+            });
+        } 
+
+        $(document).ready(function(){
+            //comment
+            $("#btnComment").on("click", function(){
+                commentClick();
+            });
+            $("#btnCommentReset").on("click", function(){
+                $("#CommentorName").val("");
+                $("#CommentContent").val("");
+            });
+        });
+    </script>
+}
+
+<link href="~/Content/law/css/comment.css" rel="stylesheet" type="text/css" />
+<div class="pos">
+    当前位置：<span><a href="/">阳光问法</a></span><span>></span><span><a href="/zx">咨询</a><span>></span><span>评论列表</span></span>
+</div>
+<div class="topline"></div>
+<div class="wlhd" id="list">
+    <div class="title">我有话说<div><span data-bind="html:dataSource.total"></span>条评论</div>
+    </div>
+    <textarea id="CommentContent" cols="50" rows="7" class="tar tar1 easyui-validatebox" data-options="required:true"></textarea>
+    <div>
+        <div class="nicename">昵称：<input id="CommentorName" type="text" size="20" class="ncname easyui-validatebox" data-options="required:true"/></div>
+        <div class="submit">
+            <input id="btnComment" type="button" value="" class="btn" />
+        </div>
+    </div>
+</div>
+<div class="mline"></div>
+<div class="newcomt">最新评论</div>
+<ul>
+@for (var i = 0; i < Model.rows.Count; i++)
+{
+    <li>
+        <p>@Model.rows[i].CommentorName</p>
+        <div class="comt">@Html.Raw(@Model.rows[i].CommentContent)</div>
+        <div class="time">@Model.rows[i].CommentDate.ToString("yyyy-MM-dd")</div>
+        <div class="clear"></div>
+    </li>
+}
+</ul>
+    <div id="pp" ></div> 
+

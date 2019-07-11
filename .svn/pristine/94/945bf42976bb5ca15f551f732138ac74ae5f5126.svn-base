@@ -1,0 +1,71 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body, h1, h2, h3, h4, p, ul, ol, dl, dt, dd{margin:0px; padding:0px;}
+body, input, textarea, select { font-size: 12px; color: #333; font-family: "microsoft yahei", Arial, Helvetica, sans-serif; }
+div,p,li{overflow:hidden;}
+ul, ol, dl, dt, dd { padding-left: 0; list-style-type: none; }
+input[type="textbox"] {height: 20px; line-height: 20px; border-radius: 1px; }
+input[type="checkbox"], input[type="radio"] { margin-right: 5px; height: 14px; line-height: 14px; }
+a{text-decoration:none; color:#9a3500; font-weight:bold}
+a:hover {color: #000; }
+a:active {color: #000; }
+a:visited {
+	color: #42414a; text-decoration: none;
+}
+
+/*   头部导航    */
+.fl { float: left !important; }
+.fr { float: right !important; }
+.clearfix { overflow: hidden; zoom: 1; }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clear { clear: both; display: block; overflow: hidden; visibility: hidden; width: 0; height: 0; }
+.hide { display: none; }
+body { background: #EFEFEF; -webkit-tap-highlight-color: rgba(0,0,0,0); }
+header, section, footer { -webkit-animation: pulsate .5s ease-in-out; }
+.ts1 { text-shadow: 0px -1px 1px #666; }
+.ts2 { text-shadow: 0px 1px 1px #fff; }
+.org { color: #f60; }
+/*================= webpage rebuild by zhouwy in 2013-06-03 */
+header { height: 44px; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#63B908), to(#459605)); color: #fff; }
+header.hbg1 { box-shadow: 0px 1px 1px #D2D2D2; border-bottom: #DEDEDE 1px solid; }
+header .logo { display: inline-block; width: 90px; height: 23px; margin-left: 10px; margin-top: 9px; font-size: 18px; color: #fff; overflow: hidden; -webkit-text-shadow:0px 0px 2px rgb(25,131,11);}
+.u_back { background: url(img/icon_back.png) no-repeat left center; background-size: contain; padding-left: 24px; color: #fff; font-size: 14px; margin-top: 11px; margin-left: 10px; width: 30px; height: 19px; line-height: 19px; overflow: hidden; }
+.u_topbar li { float: right; height: 36px; padding-top: 5px; background: url(img/topbar_line.jpg) right no-repeat; background-size: contain; font-size: 14px; }
+.u_topbar li:first-child { background: none; }
+.u_topbar li a { display: inline-block; padding: 6px 5px 0; margin: 0 5px; text-align: center; color: #fff; }
+.u_topbar li a.current { border-bottom: 2px solid #8fc31f; padding-bottom: 6px; }
+.topbar li { float: right; background: url(img/topbar_line.jpg) right no-repeat; background-size: contain; }
+.topbar li:first-child { background: none; }
+.topbar li a { display: inline-block; height: 14px; text-align: center; padding: 22px 10px 8px; color: #fff; position: relative; }
+.topbar li a.icon_user i { background: url(img/ico_liuyan.png) no-repeat; }
+.topbar li a.icon_shang i { background: url(img/icon_shang.png) no-repeat; }
+.topbar li a.icon_class i { background: url(img/icon_class.png) no-repeat; }
+.topbar li a.icon_shopping i { background: url(img/icon_shopping.png) no-repeat; }
+.topbar li a.icon_index i{background:url(img/icon_index.png) no-repeat;}
+.topbar li a.icon_user i, .topbar li a.icon_shang i, .topbar li a.icon_class i, .topbar li a.icon_shopping i ,.topbar li a.icon_index i{ position: absolute; top: 5px; left: 50%; width: 16px; height: 16px; margin-left: -8px; -webkit-background-size: 16px 16px; background-size: 16px 16px; background-position: center 0px; font-size: 12px; }
+.topbar li a:hover, .topbar li a:active { background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#488211), to(#406d1e)); color: #fff; }
+
+/* 首页 */
+.f_index_search{margin: 5px}
+.f_index_button{display:block; width:154px; height: 74px; background: url(img/ico_dian.png) no-repeat; background-size: cover;margin: 15px auto; text-indent: -999px;}
+.f_index ul {margin-top: 15px; margin:auto;}
+.f_index ul li{width: 44%; text-align: center; margin: 3%}
+.f_index ul li a{display: block; width: 57px; margin: auto; padding-top: 63px;}
+.f_index .c_button_search{background: url(img/ico_search.png) no-repeat;background-size: 57px;}
+.f_index .c_button_list{background: url(img/ico_list.png) no-repeat;background-size: 57px;}
+.f_index .c_button_over{background: url(img/ico_over.png) no-repeat;background-size: 57px;}
+.f_index .c_button_smail{background: url(img/ico_smail.png) no-repeat;background-size: 57px;}
+.f_index_button {
+    background: rgba(0, 0, 0, 0) url("img/ico_dian.png") no-repeat scroll 0 0 / cover ;
+    display: block;
+    height: 74px;
+    margin: 15px auto;
+    text-indent: -999px;
+    width: 154px;
+}
+
+.tittle {
+    font-weight: bold;
+    padding: 6px 8px;
+}

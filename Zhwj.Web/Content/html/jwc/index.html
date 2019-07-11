@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>河北医科大学教务处</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="css/master.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.SuperSlide.js"></script>
+    <script type="text/javascript" src="js/jflow.plus.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#myController").jFlow({
+                controller: ".jFlowControl", // must be class, use . sign
+                slideWrapper: "#jFlowSlider", // must be id, use # sign
+                slides: "#mySlides",  // the div where all your sliding divs are nested in
+                selectedWrapper: "jFlowSelected",  // just pure text, no sign
+                effect: "flow", //this is the slide effect (rewind or flow)
+                width: "484px",  // this is the width for the content-slider
+                height: "310px",  // this is the height for the content-slider
+                duration: 400,  // time in milliseconds to transition one slide
+                pause: 5000, //time between transitions
+                prev: ".jFlowPrev", // must be class, use . sign
+                next: ".jFlowNext", // must be class, use . sign
+                auto: true
+            });
+            $(".txt-bg").css("opacity", 0.5);
+            $(".txtbg").css("opacity", 0.5);
+        });
+    </script>
+</head>
+<body>
+<div class="nav">
+        <div class="navcon w1100" style="background:#810720">
+            <ul>
+                <li><a href="#">网站首页</a></li>
+                <li><a href="#">机构设置</a></li>
+                <li><a href="#">规章制度</a></li>
+                <li><a href="#">办事指南</a></li>
+                <li><a href="#">教学管理</a></li>
+                <li><a href="#">考试信息</a></li>
+                <li><a href="#">教材管理</a></li>
+                <li><a href="#">课程建设</a></li>
+                <li><a href="#">临床教学</a></li>
+                <li ><a href="#">高招信息</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="indexWrap">
+    <!--头部内容开始-->
+    <div class="w1100">
+    <div class="head1 ">
+        <div class="logo">
+        </div>
+        <div class="sch">
+        <div class="top_nav">
+            <p>
+                <img src="images/shouye.jpg">&nbsp;<a href="javascript:;" onclick="this.style.behavior = 'url(#default#homepage)'; this.setHomePage('http://www.hbnhd的cn.com');">设为首页</a>&nbsp;|
+                <img src="images/share.jpg">&nbsp;<a href="#" onclick="javascript:window.external.AddFavorite(location.href,document.title)">处长信箱</a>&nbsp;|
+                <img src="images/rel.jpg">&nbsp;<a href="#">联系我们</a>
+            </p>
+        </div>
+           
+            <div class="schx">
+                <input type="text" class="txt" /><input type="button" class="btn" />
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    <!--头部内容结束-->
+    <!--页面内容开始-->
+    <div class="wrap">
+        <!--主体内容开始-->
+        <div class="w1100">
+            <div class="news">
+                <div class="newscon">
+                    <div class="left">
+                        <div class="focusBox">
+                            <ul class="pic" style="position: relative; width: 498px; height: 332px;">
+                                <li style="position: absolute; width: 498px; left: 0px; top: 0px; display: none;"><a
+                                    href="http://www.97zzw.com/" target="_blank">
+                                    <img src="images/1.png"></a></li>
+                                <li style="position: absolute; width: 498px; left: 0px; top: 0px; display: none;"><a
+                                    href="http://www.97zzw.com/" target="_blank">
+                                    <img src="images/1.png"></a></li>
+                                <li style="position: absolute; width: 498px; left: 0px; top: 0px; display: list-item;">
+                                    <a href="http://www.97zzw.com/" target="_blank">
+                                        <img src="images/1.png"></a></li>
+                                <li style="position: absolute; width: 498px; left: 0px; top: 0px; display: none;"><a
+                                    href="http://www.97zzw.com/" target="_blank">
+                                    <img src="images/1.png"></a></li>
+                            </ul>
+                            <div class="txt-bg">
+                            </div>
+                            <div class="txt">
+                                <ul>
+                                    <li style="bottom: -36px;"><a href="http://www.97zzw.com/">省委书记张庆黎到三友集团调研考察</a></li>
+                                    <li style="bottom: -36px;"><a href="http://www.97zzw.com/">标题2</a></li>
+                                    <li style="bottom: 0px;"><a href="http://www.97zzw.com/">标题3</a></li>
+                                    <li style="bottom: -36px;"><a href="http://www.97zzw.com/">标题4</a></li>
+                                </ul>
+                            </div>
+                            <ul class="num">
+                                <li class=" "><a>1</a><span></span></li>
+                                <li class=" "><a>2</a><span></span></li>
+                                <li class="  on"><a>3</a><span></span></li>
+                                <li class=" "><a>4</a><span></span></li>
+                            </ul>
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(".focusBox").slide({ titCell: ".num li", mainCell: ".pic", effect: "fold", autoPlay: true, trigger: "click", startFun: function (i) { jQuery(".focusBox .txt li").eq(i).animate({ "bottom": 0 }).siblings().animate({ "bottom": -36 }); } });
+                        </script>
+                    </div>
+                    <div class="newslist">
+                        <div class="tt">
+                            <a href="#" class="gg icon4">教务公告</a><a href="#" class="more">MORE></a></div>
+                           <p class="newspic"><a href="#" target="_blank"><img src="images/newspic.jpg" width="394" height="118" /></a></p>
+                        <ul>
+                          <li ><span>2012-01-12</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><span>2012-01-12</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                           
+                           <li ><span>2012-01-12</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><span>2012-01-12</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                           
+                             <li><span>2012-01-12</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            
+             <!--第二部分内容开始-->
+            <div class="content1">
+                
+                <div class="wx">
+                    <img src="images/yd_27.png" width="80" height="80"/>
+                    <p>教师微信平台</p>
+                </div>
+                <div class="wx">
+                    <img src="images/yd_30.png" width="80" height="80"/><p>学生微信平台</p>
+                </div>
+                <div class="down">
+                    <a href="#">
+                        <img src="images/yd_44.png" /></a></div>
+                <div class="leftbt">
+                </div>
+                <div class="btn1">
+                    <a href="#">
+                        <img src="images/yd_33.png" /></a><p>
+                            <a href="#">题库建设</a></p>
+                </div>
+                <div class="btn1">
+                    <a href="#">
+                        <img src="images/yd_36.png" /></a><p>
+                            <a href="#">选课</a></p>
+                </div>
+                <div class="btn1">
+                    <a href="#">
+                        <img src="images/yd_38.png" /></a><p>
+                            <a href="#">成绩查询</a></p>
+                </div>
+                <div class="btn1">
+                    <a href="#">
+                        <img src="images/yd_42.png" /></a><p>
+                            <a href="#">教学评测</a></p>
+                </div>
+                <div class="btn1">
+                    <a href="#">
+                        <img src="images/yd_mail.png" /></a><p>
+                            <a href="#">处长信箱</a></p>
+                </div>
+                <div class="rightbt">
+                </div>
+            </div>
+            <!--第二部分内容结束-->
+            
+            
+            <!--第一部分内容开始-->
+            <div class="content">
+                <div class="left">
+                    <div class=" newslist1">
+                        <div class="tt tt-border">
+                            <a href="#" class="gg icon1">浏览排行榜</a><a href="#" class="more">MORE></a></div>
+                        <ul>
+                            <li ><span class="red">1</span><a href="#">以推动北京环保工作扎实</a></li>
+                            <li><span class="red">2</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><span class="red">3</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><span>4</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><span>5</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><span>6</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><span>7</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li class="last"><span>8</span><a href="#">以推动北京环保工作扎实程度</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="center">
+                    <div class="newslist2">
+                        <div class="tt tt-border">
+                            <a href="#" class="gg icon2">教务动态</a><a href="#" class="more">MORE></a></div>
+                        <ul>
+                            <li ><a href="#" class="cc">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#" class="cc">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#" class="cc">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#" class="cc">以推动北京环保工作动北京环保工扎实程度</a></li>
+                            <li><a href="#" class="cc">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#" class="cc">以推动北京环保动北京环保工作扎实程度</a></li>
+                            <li><a href="#" class="cc">以推动北京环保工动北京环保工动北京环保工作扎实程度</a></li>
+                            <li ><a href="#" class="cc">以推动北京环保工动北京环保工作扎实程度</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class=" newslist3">
+                        <div class="tt tt-border ">
+                            <a href="#" class="gg icon3">教务表格下载</a><a href="#" class="more">MORE></a></div>
+                        <ul>
+                            <li ><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#">以推动北京环保工作扎实程度</a></li>
+                            <li><a href="#">以推动北京环保工作扎实程度</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--第一部分内容结束-->
+           
+           
+        </div>
+    </div>
+    
+    </div>
+    <div class="clear">
+    </div>
+     <!--第三部分内容开始-->
+            <div class="content2">
+             <div class="w1100">
+                <div id="con1">
+                    <ul id="tags">
+                        <li class="selectTag"><a onclick="selectTag('tagContent0',this)" href="javascript:void(0)">
+                            学校网站</a></li>
+                        <li><a onclick="selectTag('tagContent1',this)" href="javascript:void(0)">医院网站</a></li>
+                        <li><a onclick="selectTag('tagContent2',this)" href="javascript:void(0)">相关链接</a>
+                        </li>
+                    </ul>
+                    <div id="tagContent">
+                        <div class="tagContent selectTag" id="tagContent0">
+                            <a href="#">中国教育部</a><a href="#">河北医科大学</a><a href="#">中国教育部</a><a href="#">河北医科大学</a><a
+                                href="#">中国教育部</a>
+                        </div>
+                        <div class="tagContent " id="tagContent1">
+                            <a href="#">中国教育部</a><a href="#">河北医科大学</a><a href="#">中国教育部</a><a href="#">河北医科大学</a><a
+                                href="#">中国教育部</a><a href="#">河北医科大学</a>
+                        </div>
+                        <div class="tagContent" id="tagContent2">
+                            <a href="#">中国教育部</a><a href="#">河北医科大学</a><a href="#">中国教育部</a><a href="#">河北医科大学</a><a
+                                href="#">中国教育部</a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <script type="text/javascript">
+                    function selectTag(showContent, selfObj) {
+                        // 操作标签
+                        var tag = document.getElementById("tags").getElementsByTagName("li");
+                        var taglength = tag.length;
+                        for (i = 0; i < taglength; i++) {
+                            tag[i].className = "";
+                        }
+                        selfObj.parentNode.className = "selectTag";
+                        // 操作内容
+                        for (i = 0; j = document.getElementById("tagContent" + i); i++) {
+                            j.style.display = "none";
+                        }
+                        document.getElementById(showContent).style.display = "block";
+
+
+                    }
+                </script>
+            </div>
+            <!--第三部分内容结束-->
+    <div class="footer">
+        <div class="footercon">
+            <div class="txt">
+                CopyRight&copy;2014-2015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;河北医科大学教务处版权所有&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                地址：河北石家庄市中山东路361号<br>email:jwc@hebmu.edu.cn
+            </div>
+        </div>
+    </div>
+    <!--页面内容结束-->
+</body>
+</html>

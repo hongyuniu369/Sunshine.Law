@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "咨询查询-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_LayoutWap.cshtml";
+}
+
+@section head{
+    <link href="~/Content/law/wap/table.css" rel="stylesheet" type="text/css" />
+}
+
+<script type="text/javascript">
+    function doSearch() {
+        var ac = encodeURIComponent(document.getElementById('AdvisoryCode').value);
+        var mt = encodeURIComponent(document.getElementById('MsgTitle').value);
+        var id = encodeURIComponent(document.getElementById('intime').value);
+        window.location.href = "/wap/list?ac=" + ac + "&mt=" + mt + "&id=" + id;
+    }
+</script>
+<div class="boxl" style="margin-bottom: 20px; width: 100%">
+    <div class="tittle">
+        <a href="/wap">首页</a> >> 咨询查询
+    </div>
+    <div class="con" style="width: 100%; padding: 0px 8px;">
+        <ul>
+            <li>
+                <h3>编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</h3>
+                <input type="text" id="AdvisoryCode" style="width: 120px" />
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h3>关键字：</h3>
+                <input type="text" id="MsgTitle" />
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <h3>时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间：</h3>
+                <input type="text" id="intime" style="width: 120px" />
+                <span style="color: #666666">
+                    <br />
+                    格式:2014-01-01</span></li>
+        </ul>
+        <ul>
+            <li>
+                <input name="查询" type="button" class="btn" onclick="doSearch(); return false;" value="查询" /></li>
+        </ul>
+    </div>
+</div>

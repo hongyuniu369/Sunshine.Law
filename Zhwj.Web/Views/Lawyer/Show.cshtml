@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "律师资料-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+
+<link href="~/Content/law/css/lawyerdetailed.css" rel="stylesheet" type="text/css" />
+
+<div class="pos">
+    当前位置：<span><a href="#">阳光问法</a></span><span>></span><span><a href="#">找律师</a></span>
+</div>
+<div class="tt"></div>
+<div class="zxcon">
+    <div class="title">律师基本资料</div>
+    <div>
+        <div class="lawyerimg">
+            <img src="@Model.Lawyer.LawyerPic" /></div>
+        <div class="desc">
+            <p>律师姓名：<span>@Model.Lawyer.LawyerName</span></p>
+            <p>执业证号：<span>@Model.Lawyer.LicenseNumber</span></p>
+            <p>执业机构：<span>@Model.Lawyer.FirmName</span></p>
+            <p>电子邮件：<span>@Model.Lawyer.Email</span></p>
+            <p>手机：<span>@Model.Lawyer.MobilePhone</span></p>
+            <p>详细地址：<span>@Model.Lawyer.DetailAddress</span></p>
+            <div>业务专长：<span>@Model.Lawyer.MsgClasses</span></div>
+            <p>职称：<span>@Model.Lawyer.ProfessionalTitle</span></p>
+            <p>积分：<span>@Model.Lawyer.TotalScore</span></p>
+            <div class="zxls"><a href="/zx/wyzx/@Model.Lawyer.LawyerCode" target="_blank">咨询律师</a></div>
+        </div>
+    </div>
+    <div class="title title1">律师简介</div>
+    <div class="lawyerdesc">
+        @Html.Raw(Model.Lawyer.LawyerDescription)
+    </div>
+    <div class="title title1">询问我的问题</div>
+    <ul>
+        @for (var i = 0; i < Model.Advisorys.Count; i++)
+        {<li><a href="/zx/show/@Model.Advisorys[i].AdvisoryCode" target="_blank">@Model.Advisorys[i].MsgTitle</a><span>@Model.Advisorys[i].MsgInDate.ToString("yyyy-MM-dd")</span></li>}
+    </ul>
+
+</div>

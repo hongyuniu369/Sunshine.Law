@@ -1,0 +1,4 @@
+E:\Developing Projects\Projects\Sunshine.Law\CKFinder\bin\Debug\CKFinder.dll
+E:\Developing Projects\Projects\Sunshine.Law\CKFinder\bin\Debug\CKFinder.pdb
+E:\Developing Projects\Projects\Sunshine.Law\CKFinder\obj\Debug\CKFinder.dll
+E:\Developing Projects\Projects\Sunshine.Law\CKFinder\obj\Debug\CKFinder.pdb

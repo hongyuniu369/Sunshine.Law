@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "委托管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+<script src="~/Content/js/jquery-plugin/ckeditor/ckeditor.js"></script>
+<script src="~/Content/js/jquery-plugin/ckeditor/adapters/jquery.js"></script>
+<script src="~/Content/js/jquery-plugin/ckfinder/ckfinder.js"></script>
+}
+
+@section scripts{
+<script src="/Content/js/viewModel/com.viewModel.edit.js"></script>
+<script type="text/javascript">
+    var easyLoaded = function(){
+        //设置联动Address
+        setAddress(viewModel.pageData.form.Address(),'Address');
+        //设置ckeditor
+        var editor = $('#txtCkeditor').ckeditor().editor;
+        editor.on( 'blur', function( event) {
+            if(editor.getData())
+                viewModel.pageData.form.MsgContent(editor.getData());
+        } );
+        editor.on('change',function(event){
+            if(editor.getData())
+                viewModel.pageData.form.MsgContent(editor.getData());
+        });
+        editor.on( 'loaded', function( event) {
+            editor.setData( viewModel.pageData.form.MsgContent());
+        } );
+
+        var MsgSubdescriptionEditor =$('#MsgSubdescription').ckeditor().editor;
+        MsgSubdescriptionEditor.on( 'blur', function( event) {
+            if(editor.getData())
+                viewModel.pageData.form.MsgSubdescription(MsgSubdescriptionEditor.getData());
+        } );
+        MsgSubdescriptionEditor.on('change',function(event){
+            if(editor.getData())
+                viewModel.pageData.form.MsgSubdescription(MsgSubdescriptionEditor.getData());
+        });
+        MsgSubdescriptionEditor.on( 'loaded', function( event) {
+            MsgSubdescriptionEditor.setData( viewModel.pageData.form.MsgSubdescription());
+            MsgSubdescriptionEditor.setReadOnly(viewModel.readonly());
+        } );
+        MsgSubdescriptionEditor.on( 'configLoaded', function() {
+            MsgSubdescriptionEditor.config.toolbar = "Basic";
+        });
+
+        var MsgRequirementEditor =$('#MsgRequirement').ckeditor().editor;
+        MsgRequirementEditor.on( 'blur', function( event) {
+            if(editor.getData())
+                viewModel.pageData.form.MsgRequirement(MsgRequirementEditor.getData());
+        } );
+        MsgRequirementEditor.on('change',function(event){
+            if(editor.getData())
+                viewModel.pageData.form.MsgRequirement(MsgRequirementEditor.getData());
+        });
+        MsgRequirementEditor.on( 'loaded', function( event) {
+            MsgRequirementEditor.setData( viewModel.pageData.form.MsgRequirement());
+            MsgRequirementEditor.setReadOnly(viewModel.readonly());
+        } );          
+        MsgRequirementEditor.on( 'configLoaded', function() {
+            MsgRequirementEditor.config.toolbar = "Basic";
+        });
+    };
+
+    using(['validatebox','combobox'], easyLoaded);
+    using('jquery.easyui.validator.extend.js');
+    var viewModel = function(data){ 
+        var self = this;
+        com.viewModel.edit.apply(self,arguments);
+        this.dsIsOrNot = [{value:'true', text:'是'},{value:'false', text:'否'}];
+    } 
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    viewModel=new viewModel(data)
+    ko.bindingViewModel(viewModel);
+
+    $(document).ready(function(){
+    });
+</script>
+}
+
+<div class="z-toolbar">
+    <a id="a_save" href="#" plain="true" class="easyui-linkbutton" icon="icon-save" data-bind="click:readonly()?null:saveClick,linkbuttonDisable:readonly" title="保存">保存</a>
+    <a id="a_undo" href="#" plain="true" class="easyui-linkbutton" icon="icon-undo" data-bind="click:readonly()?null:rejectClick,linkbuttonDisable:readonly" title="撤消">撤消</a>
+    <a id="a_refresh" href="#" plain="true" class="easyui-linkbutton"  icon="icon-arrow_refresh"   title="刷新" data-bind="click:refreshClick">刷新</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_other" href="#" class="easyui-splitbutton" data-options="menu:'#divother',iconCls:'icon-application_go'" title="其他">其他</a>
+    <div class="datagrid-btn-separator"></div>
+</div>
+
+<div id="divother" style="width:100px; display:none;">
+    <div data-options="iconCls:'icon-arrow_refresh'" data-bind="click:refreshClick">刷新</div>
+</div>  
+
+
+<div id="master" class="container_12" data-bind="inputwidth:0.9">
+    <div class="grid_1 lbl">编号</div>
+    <div class="grid_3 val" data-bind="inputwidth:0.5"><input type="text" data-bind="value:pageData.form.EntrustCode ,readOnly : true" class="z-txt easyui-validatebox" data-options="required:true"/></div>
+    <div class="grid_1 lbl required">案件标题</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgTitle ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="required:true, validType:['length[6,64]']" /></div>
+    <div class="grid_1 lbl">状态</div>
+    <div class="grid_3 val"><input type="text" data-bind="datasource:data.dataSource.msgStatus,comboboxValue:pageData.form.MsgStatus ,comboboxReadOnly : true" class="z-txt easyui-combobox" /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl required">案件类别</div>
+    <div class="grid_3 val"><input type="text" data-bind="lookupValue:pageData.form.MsgClass ,lookupReadOnly : readonly" data-options="required:true,editable:false,lookupType:'Msg.class',queryParams:{IsEnable:'1', ParentClassCode:'true'}" class="z-txt easyui-lookup" /></div>
+    <div class="grid_1 lbl required">涉案金额</div>
+    <div class="grid_3 val"><input type="text" data-bind="datasource:data.dataSource.involvedMoney,comboboxValue:pageData.form.InvolvedMoney ,comboboxReadOnly : readonly" class="z-txt easyui-combobox" data-options="required:true,showblank:true" /></div>
+    <div class="grid_1 lbl">有效日期</div>
+    <div class="grid_3 val"><input type="text" data-bind="dateboxValue:pageData.form.ActiveTime ,dateboxReadOnly : readonly" data-options="required:true" class="z-txt easyui-datebox"/></div>
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl required">真实姓名</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.TrueName ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="required:true" /></div>
+    <div class="grid_1 lbl required">联系电话</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ContactNO ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="required:true,validType:['contactNO']" /></div>
+    <div class="grid_1 lbl">电子邮箱</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.Email ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:['email']" /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">关键词</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.Keyword ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">IP</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgIP ,readOnly : true" class="z-txt " /></div>
+    <div class="grid_1 lbl">浏览量</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.HitCount ,readOnly : true" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">咨询日期</div>
+    <div class="grid_3 val"><input type="text" data-bind="dateboxValue:pageData.form.MsgInDate ,dateboxReadOnly : true" data-options="formatter:com.formatTime()" class="z-txt easyui-datebox" /></div>
+    <div class="grid_1 lbl">备注</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgRemark ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">咨询人</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.UserCode ,readOnly:true" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl required" data-bind="style:{display:pageData.form.MsgStatus()!='-9'?'none':''}">忽略</div>
+    <div class="grid_11 val required" data-bind="inputwidth:0.8,style:{display:pageData.form.MsgStatus()!='-9'?'none':''}"><label data-bind="text:pageData.extend.IgnoreReason"></label></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">案发区域</div>
+    <div class="grid_4 val">
+        <select class="z-txt" id="Province" name="Province" style="width:70px;"></select> 
+        <select class="z-txt" id="City" name="City" style="width:85px;"></select>
+        <select class="z-txt" id="District" name="District" style="width:95px;"></select>
+    </div>
+    <div class="grid_1 lbl">详细地址</div>
+    <div class="grid_6 val" data-bind="inputwidth:0.8"><input type="text" data-bind="value:pageData.form.DetailAddress ,readOnly:readonly" class="z-txt " /></div>
+
+    <div class="clear"></div>
+
+    <div class="grid_1 lbl required">案件简介</div>
+    <div class="grid_11 val" style="margin:0.9%;min-height:260px;"><textarea id="MsgSubdescription" data-bind="value:pageData.form.MsgSubdescription ,readOnly:readonly" data-options="required:true,missingMessage:'案件简介为必输项'" class="z-txt grid_11 easyui-validatebox" style="height:120px;" ></textarea></div>
+
+    <div class="clear"></div>
+
+    <div class="grid_1 lbl required">案件详情</div>
+    <div class="grid_11 val" style="margin:0.9%;min-height:260px;"><textarea id="txtCkeditor" data-bind="value:pageData.form.MsgContent ,readOnly:readonly" data-options="required:true,missingMessage:'案件详情为必输项'" class="z-txt grid_11 easyui-validatebox" style="height:340px;" ></textarea></div>
+
+    <div class="clear"></div>
+
+    <div class="grid_1 lbl">委托要求</div>
+    <div class="grid_11 val" style="margin:0.9%;min-height:260px;"><textarea id="MsgRequirement" data-bind="value:pageData.form.MsgRequirement ,readOnly:readonly" class="z-txt grid_11 easyui-validatebox" style="height:240px;" ></textarea></div>
+
+    <div class="clear"></div>
+</div>
+<script>
+    var setAddress = function(bindValue,valueField){
+        $.ajaxSettings.async = false;
+        var province = $('#Province').combobox({
+            url: '/api/msg/region/GetByPid/0',
+            method:"Get",
+            valueField: 'RegionID', //值字段
+            textField: 'RegionName', //显示的字段
+            editable: false,
+            onSelect: function (record) {
+                $.get('/api/msg/region/GetByPid/'+record.RegionID , function (data) {
+                    city.combobox("clear").combobox('loadData', data);
+                    district.combobox("clear")
+                }, 'json');
+                getValue();
+            }
+        });
+
+        var city = $('#City').combobox({
+            valueField: 'RegionID', //值字段
+            textField: 'RegionName', //显示的字段
+            editable: false,
+            onSelect: function (record) {
+                $.get('/api/msg/region/GetByPid/'+ record.RegionID, function (data) {
+                    district.combobox("clear").combobox('loadData', data);
+                }, 'json');
+                getValue();
+            }
+        });
+
+        var district = $('#District').combobox({
+            valueField: 'RegionID', //值字段
+            textField: 'RegionName', //显示的字段
+            editable: false,
+            onSelect: function (newValue, oldValue) {
+                getValue();
+            }
+        });
+        
+        var getValue = function(){
+            var selvalue= province.combobox("getText") + " " + city.combobox("getText") + " " + district.combobox("getText");
+            viewModel.pageData.form.Address(selvalue);
+        }
+
+        var initValue = function(){
+            if(bindValue){
+                var arrValue= bindValue.split(' ');
+                if(arrValue[0])
+                    setSelectValue(province, arrValue[0]);
+                if(arrValue[1])
+                    setSelectValue(city, arrValue[1]);
+                if(arrValue[2])
+                    setSelectValue(district, arrValue[2]);
+            }
+            else
+                $('#Province').combobox("select",684);//初始化为河北省
+        }
+        var setSelectValue = function(obj, text){//根据text选中select相应item
+            var data = obj.combobox("getData");
+            var selectedValue = null;
+            try{
+                selectedValue = $.grep(data, function (item) {
+                    return item.RegionName == text;
+                })[0].RegionID;
+            }catch(e){}
+            if(selectedValue){
+                obj.combobox("select",selectedValue);
+            }
+            else{
+                obj.combobox("setText",text)
+            }
+        }
+
+        initValue();
+    }
+</script>

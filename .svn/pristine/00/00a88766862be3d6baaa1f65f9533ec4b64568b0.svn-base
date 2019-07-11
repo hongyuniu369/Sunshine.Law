@@ -1,0 +1,42 @@
+﻿@charset "utf-8";
+/* CSS Document */
+*{margin:0px; padding:0px;}
+div,p,li{overflow:hidden;}
+a{text-decoration:none; color:#9a3500; font-weight:bold}
+a:hover {color: #000; }
+a:active {color: #000; }
+a:visited {
+	color: #42414a; text-decoration: none;
+}
+
+
+.tittle{padding:6px 8px; font-weight:bold;}
+.con{font-size:14px;}
+.con ul{margin: 0 auto;
+}
+.con li{padding:8px 0px;}
+.con li h3{ float:left; font-size:16px; color:#9a361c;font-family:"微软雅黑";}
+.con p {color:#9a3500;font-family:"微软雅黑";}
+.listcon{border-bottom:1px dotted #9a361c; padding:6px 0}
+.listcon p{ text-align:center; color:#9a361c; padding:0px 8px; text-align:left;}
+.pageindex{ margin:10px 8px; float:right; color:#9a3500;}
+.fenlei { padding: 4px 0px;}
+.fenlei a {	border: #aaaadd 1px solid; padding:0px 2px; margin:0px 4px 0px 0px; text-decoration: none}
+.fenlei a:hover {border: #000099 1px solid; color: #000; }
+.fenlei a:active {border: #000099 1px solid; color: #000; }
+.fenlei ul{float: right;
+    margin: 0 auto;
+    padding:0 8px 0 0;}
+.fenlei li{ float:left; line-height:24px; height:24px}
+
+
+.btn{    background: url("img/tijiao.png") no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+    border: 0 none;
+    height: 48px;
+    width: 100px;
+     text-indent: -999px;
+     cursor:pointer;
+}
+
+
+

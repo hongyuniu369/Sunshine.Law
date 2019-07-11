@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutH5.cshtml";
+    ViewBag.Title = "找律所-阳光问法-河北新闻网";
+    ViewBag.EasyuiVersion = "1.3.2";
+    ViewBag.locale = "zh_CN";
+    ViewBag.theme = "gray";
+    ViewBag.Keywords = "阳光问法,河北法律,河北法律平台";
+}
+@section head{
+    <script src="~/Content/js/jquery/jquery-1.8.1.min.js" type="text/javascript"></script>
+    <!--加载脚本库-->
+    @Scripts.Render("~/Content/js/library")
+    <!--加载easyui加载器-->
+    <script type="text/javascript" src="~/Content/js/jquery-easyui-@ViewBag.EasyuiVersion/easyloader.js?locale=@ViewBag.locale&theme=@ViewBag.theme"></script>
+}
+
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.list.js"></script>
+
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var viewModel = function(){
+            var self = this;
+            com.viewModel.list.apply(this,arguments);
+        }
+        var easyLoaded = function(){
+            //数据绑定
+            var view = new viewModel(data);
+            ko.applyBindings(view);
+            $('#pp').pagination({
+                showPageList:false,
+                showRefresh:false,
+                displayMsg:""
+            });
+        };
+        using(['parser', 'pagination'], easyLoaded);
+
+        $(document).ready(function () {
+        })
+    </script>
+}
+<div data-am-widget="list_news" class="am-list-news am-list-news-default am-no-layout">
+    <!--列表标题-->
+    <div class="am-list-news-hd list-news-hd am-cf">
+        <!--带更多链接-->
+        <h2>加盟律所</h2>
+    </div>
+    <div class="am-list-news-bd">
+        <ul class="am-list" data-bind="foreach: items">
+            <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
+                <div class="am-list-main">
+                    <h3 class="am-list-item-hd"><a data-bind="attr: {'href':'/h5/firmdetail/' + FirmCode() },html:FirmName" href="#"></a></h3>
+                    <div class="am-list-item-text" data-bind="html:FirmAddress"></div>
+                    <div class="am-list-item-text" data-bind="html:(FirmDescription().replace(/<[^>]+>/g,'').substring(0,80)+'...<a href=\'/h5/firmdetail/' + FirmCode() + '\' target=\'_blank\'>[详细]</a>')"></div>
+                </div>
+            </li>
+        </ul>
+        <ul class="am-pagination blog-pagination">
+            <li class="am-pagination-next">
+                <div id="pp"></div>
+            </li>
+        </ul>
+    </div>
+</div>

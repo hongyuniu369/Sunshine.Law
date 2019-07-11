@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "律师-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+
+@section head{
+    <script type="text/javascript">var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));</script>
+}
+
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.list.js"></script>
+    <script type="text/javascript">
+        var viewModel = function(){
+            var self = this;
+            com.viewModel.list.apply(this,arguments);
+        }
+        $(document).ready(function () {
+            var easyLoaded = function(){
+                //绑定地址
+                var view = new viewModel(data);
+                ko.applyBindings(view, document.getElementById('zxcon'));
+                setAddress(view,'Address');
+                setMsgClass(view,'MsgClass');
+        
+                //样式处理
+                $(".zxcon ul li").not(".sep").hover(function () {
+                    $(".zxcon ul li").removeClass("first");
+                    $(this).addClass("first");
+
+                }, function () {
+                    $(this).removeClass("first");
+
+                })
+            };
+            //数据绑定
+            using(['pagination','combobox'], easyLoaded);
+        })
+    </script>
+}
+<link href="~/Content/law/css/lawyerlist.css" rel="stylesheet" type="text/css" />
+<div class="pos">
+    当前位置：<span><a href="#">阳光问法</a></span><span>></span><span><a href="#">找律师</a></span>
+</div>
+<div class="tt"></div>
+<div class="zxcon" id="zxcon">
+    <div class="sch">
+        <div class="grid_1 lbl"><span class="red"></span>分类：</div>
+        <div class="grid_3 val">
+            <input id="MsgRootClass" type="text" class="z-txt easyui-combobox" panelheight="auto" style="width: 110px" />
+            <input id="MsgClass" type="text" class="z-txt easyui-combobox" panelheight="auto" style="width: 80px" />
+        </div>
+        <div class="grid_1 lbl">地区： </div>
+        <div class="grid_3 val">
+            <select class="z-txt" id="City" name="City" style="width: 85px;"></select>
+        </div>
+        <input type="button" class="btn" data-bind="click:searchClick" />
+    </div>
+    <ul data-bind="foreach: items">
+        <li class="first">
+            <a href="#" data-bind="attr: {'href':'/lawyer/show/' + LawyerCode()}">
+                <img data-bind="attr: {'src':LawyerPic}" /></a>
+            <div>
+                <p class="lawyername"><span class="xm"><a data-bind="attr: {'href':'/lawyer/show/' + LawyerCode() },html:LawyerName"></a><span data-bind="html:ProfessionalTitle"></span></span><span class="area" data-bind="html:Address"></span><span class="area" data-bind="html:'积分：' + (TotalScore()==null?0:TotalScore())"></span></p>
+                <p class="zc" data-bind="html:'专长：'+MsgClasses()"></p>
+                <p class="desc" data-bind="html:(LawyerDescription().replace(/<[^>]+>/g,'').substring(0,35)+'...<a href=\'/lawyer/show/' + LawyerCode() + '\' target=\'_blank\'>[详细]</a>')">...<a href="#" data-bind="attr: {'href':'/lawyer-' + LawyerCode() }">[详细]</a></p>
+                <div class="zxls"><a data-bind="attr: {'href':'/zx/wyzx/' + LawyerCode() }">咨询律师</a></div>
+                <div class="phone" data-bind="html:MobilePhone()+' '+ContactNO()"></div>
+            </div>
+        </li>
+        <li class="sep"></li>
+    </ul>
+    <div id="pp"></div>
+</div>
+
+
+<script type="text/javascript" src="~/Content/js/utils/setCity.js"></script>
+<script>
+    var setMsgClass = function (view, valueField) {
+        // var bindValue=view.form.MsgClass();
+        $.ajaxSettings.async = false;
+        var rootClass = $('#MsgRootClass').combobox({
+            url: '/api/msg/msgclass/GetValueTextListRoot',
+            method: "Get",
+            queryParams: { IsEnable: '1' },
+            editable: false,
+            onSelect: function (record) {
+                $.get('/api/msg/msgclass/GetValueTextListByPid/' + record.value,{IsEnable:'1'}, function (data) {
+                    msgClass.combobox("clear").combobox('loadData', data);
+                }, 'json');
+                getValue();
+            }
+        });
+
+        var msgClass = $('#MsgClass').combobox({
+            editable: false,
+            onSelect: function (record) {
+                getValue();
+            }
+        });
+
+        var getValue = function () {
+            var selvalue = msgClass.combobox("getValue");
+            view.form.ClassCode(selvalue);
+        }
+    }
+</script>

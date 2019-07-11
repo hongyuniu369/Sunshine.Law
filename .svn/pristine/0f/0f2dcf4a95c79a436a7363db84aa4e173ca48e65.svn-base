@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<settings lookupType="project" defaultOrderBy='ParentClassCode,ClassOrder'>
+	<module>Law</module>
+	<select>
+		ClassCode   as   value, ClassName   as   text
+	</select>
+	<from>
+		msg_class
+	</from>
+	<where defaultForAll='true' defaultCp='equal' defaultIgnoreEmpty='true' >
+		<field name='ClassCode'         cp='startwith'  ></field>
+		<field name='ClassName'         cp='like'       ></field>
+		<field name='IsEnable'							></field>
+		<field name='ParentClassCode'	cp='isnotnullorempty'></field>
+	</where>
+</settings>

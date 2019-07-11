@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewBag.Title = "Lawyer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Cols = new Zephyr.Models.sys_roleMenuColumnMapService().GetCurrentUserMenuColumns();
+}
+
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.search.js"></script>
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var viewModel = function(){ 
+            var self = this;
+            com.viewModel.search.apply(this,arguments);
+        }
+        ko.bindingViewModel(new viewModel(data));
+        var formatterButton = function (value, row) {
+            var html = '<a href="#" onclick="setButton(\'' + row.LawyerCode + '\')"><span class="icon icon-set2">&nbsp;</span>[业务专长]</a>'
+            html += '<a href="#" onclick="linkUserClick(\'' + row.LawyerCode + '\')" style="margin-left:10px"><span class="icon icon-users">&nbsp;</span>[关联用户]</a>'; 
+            return html;
+        };
+        var formatterFirmCode = function (value,row) {return row.FirmName;};
+    </script>
+}
+
+    @Html.RenderToolbar()
+
+    <div class="container_12" style="position:relative;">
+        <div class="grid_1 lbl">律师编号</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.LawyerCode" class="z-txt easyui-autocomplete" data-options="url:'/api/msg/lawyer/getlawyercode'" /></div>
+        <div class="grid_1 lbl">律所编号</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.FirmCode" class="z-txt easyui-autocomplete" data-options="url:'/api/msg/firm/getfirmcode'" /></div>
+        <div class="grid_1 lbl">姓名</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.LawyerName" class="z-txt easyui-autocomplete" data-options="url:'/api/msg/lawyer/getlawyername'" /></div>
+        
+        <div class="clear"></div>
+        
+        <div class="grid_1 lbl">执业证号</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.LicenseNumber" class="z-txt easyui-autocomplete"  data-options="url:'/api/msg/lawyer/getlicencenumber'"/></div>
+
+        <div class="clear"></div>
+
+        <div class="prefix_9" style="position:absolute;top:5px;height:0;">  
+            <a id="a_search" href="#" class="buttonHuge button-blue" data-bind="click:searchClick" style="margin:0 15px;">查询</a> 
+            <a id="a_reset"  href="#" class="buttonHuge button-blue" data-bind="click:clearClick">清空</a>
+        </div>
+    </div>
+ 
+    <table data-bind="datagrid:grid">
+            <thead>  
+            <tr>  
+                <th field="LawyerCode"    sortable="true" align="left"    width="90"     @Html.HideColumn(Cols,"LawyerCode") >编号</th>
+                <th field="FirmCode"    sortable="true" align="left"    width="210"     @Html.HideColumn(Cols,"FirmCode") formatter="formatterFirmCode" >所属律所</th>
+                <th field="LawyerName"    sortable="true" align="left"    width="120"     @Html.HideColumn(Cols,"LawyerName") >姓名</th>
+                <th field="LicenseNumber"    sortable="true" align="left"    width="180"     @Html.HideColumn(Cols,"LicenseNumber") >执业证号</th>
+                <th field="ContactNO"    sortable="false" align="left"    width="120"     @Html.HideColumn(Cols,"ContactNO") >联系电话</th>
+                <th field="LawyerOrder"    sortable="true" align="right"    width="60"     @Html.HideColumn(Cols,"LawyerOrder") >排序</th>
+                <th field="Button"      align="center"       formatter="formatterButton">页面按钮 </th> 
+            </tr>                            
+        </thead>      
+    </table>
+ 
+@* 业务专长处理*@
+<script type="text/html" id="button-template">
+    <div style="margin:5px;height:500px;overflow:auto;">
+        <style type="text/css">
+            .listview{ margin:0 !important;}
+            .listview li{width:auto !important;background-color:#ECECFF !important;float:left;margin:3px;overflow:hidden;}
+            .listview span{width: auto !important; font-size:14px !important;height:auto !important; white-space: nowrap;padding:0px 18px;}
+            .listview .icon:before{content:"" !important}
+            .metrouicss .input-control.checkbox .helper::before {z-index:99;}
+        </style>
+
+        <div style="border-bottom:1px solid #CCC; margin-bottom:5px;">
+            <span class="icon32 icon-settings32" style="padding-left:48px;font-weight:bold; font-size:14px;color:#666;">请选择页面按钮</span> 
+        </div>
+ 
+        <div class="metrouicss">
+            <label class="input-control checkbox" style="margin-top:6px;margin-left:3px;">
+                <input type="checkbox" data-bind="checked:checkAll"><span class="helper">全选</span>
+            </label>
+            <ul class="listview" data-bind="foreach: buttons" style="clear:both">
+                <li data-bind="click:$parent.buttonClick,css:{selected:Selected()>0}"><span class="icon" data-bind="text:ClassName"></span></li>
+            </ul>
+        </div>
+ 
+    </div>
+    <div style="text-align:center;">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" data-bind="click:confirmClick" href="javascript:void(0)"  >确定</a>  
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" data-bind="click:cancelClick" href="javascript:void(0)">取消</a> 
+    </div>
+</script>
+
+@*关联用户*@
+<script type="text/html" id="user-template">
+    <style type="text/css">
+        .datagrid-wrap{border-width:0 0 1px 0;}
+        .datagrid-toolbar{background-color:#E0ECFF !important}
+        .lbl{line-height:25px; text-align:right;}
+        .z-toolbar{border-bottom-width: 1px; margin:0px;}
+    </style>
+
+        <div class="z-toolbar" style="">
+            <div id="master" class="container_16" data-bind="inputwidth:0.9">
+                <div class="grid_2 lbl">编码</div>
+                <div class="grid_4 val"><input type="text" class="z-txt" data-bind="value:form.value"></div>
+                <div class="grid_2 lbl">姓名</div>
+                <div class="grid_4 val"><input type="text" class="z-txt" data-bind="value:form.text"></div>
+                <div class="grid_4 val" style="margin-top: 0;">
+                    <a href="#" plain="true" class="easyui-linkbutton" icon="icon-search" title="查询" data-bind="click:searchClick">查询</a>
+                    <a href="#" plain="true" class="easyui-linkbutton" icon="icon-clear" title="清空" data-bind="click:clearClick">清空</a>
+                </div>
+            </div>
+        </div>
+        <table data-bind="datagrid:grid">
+        <thead>  
+            <tr>  
+                <th field="UserCode"            sortable="true" align="left"    width="70"  editor="{type:'validatebox',options:{required:true}}"  >用户编码   </th>  
+                <th field="UserName"            sortable="true" align="left"    width="80"  editor="{type:'validatebox',options:{required:true}}"  >用户名称     </th>  
+                <th field="Description"         sortable="true" align="left"    width="180" editor="text"  >描述说明   </th>  
+                <th field="IsEnable"            sortable="true" align="center"    width="70" formatter="com.formatCheckbox"  editor="{type:'checkbox',options:{on:true,off:false}}">是否启用   </th>  
+                <th field="LoginCount"          sortable="true" align="right"    width="60" >登陆次数       </th>  
+                <th field="LastLoginDate"       sortable="true" align="center"    width="120" formatter="com.formatTime"  >最后登陆时间   </th>   
+            </tr>                            
+        </thead>      
+    </table> 
+    
+    <div style="text-align:center;margin:5px;">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" data-bind="click:confirmClick" href="javascript:void(0)"  >确定</a>  
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" data-bind="click:cancelClick" href="javascript:void(0)">取消</a> 
+    </div>
+</script> 
+<script>
+    //设置业务领域
+    var setButton = function (firmCode) {
+        com.dialog({
+            title: "设置按钮",
+            width: 800,
+            height: 580,
+            html: "#button-template",
+            viewModel: function (w) {
+                var self = this;
+                com.loadCss('/Content/css/metro/css/modern.css', parent.document);
+                this.buttons = ko.observableArray();
+                this.refresh = function () {
+                    com.ajax({
+                        url: '/api/msg/lawyer/GetlawyerClasses/' + firmCode,
+                        type: 'GET',
+                        async: false,
+                        success: function (d) {
+                            self.buttons(ko.mapping.fromJS(d)());
+                        }
+                    });
+                };
+                this.refresh();
+                this.checkAll = ko.observable(false);
+                this.checkAll.subscribe(function (value) {
+                    $.each(self.buttons(), function () {
+                        this.Selected(value ? 1 : 0);
+                    });
+                });
+                this.buttonClick = function (row) {
+                    row.Selected(row.Selected() ? 0 : 1);
+                };
+                this.confirmClick = function () {
+                    var data = utils.filterProperties($.grep(self.buttons(), function (row) {
+                        return row.Selected() > 0;
+                    }), ['ClassCode']);
+                    com.ajax({
+                        url: '/api/msg/lawyer/editlawyerclasses/' + firmCode,
+                        data: ko.toJSON(data),
+                        success: function (d) {
+                            com.message('success', '保存成功！');
+                            self.cancelClick();
+                        }
+                    });
+                };
+                this.cancelClick = function () {
+                    w.dialog('close');
+                };
+            }
+        });
+    };
+    //设置关联用户
+    this.linkUserClick = function(lawyerCode){
+        com.dialog({
+            title: "&nbsp;关联用户",
+            iconCls:'icon-users',
+            width: 629,//=内部宽+14
+            height: 417,//=内部高度+110
+            html: "#user-template",
+            viewModel: function (w) {
+                var that = this
+                this.form = ko.mapping.fromJS({value:'',text:'', RoleCode:'Lawyer'});
+
+                this.grid = {
+                    width: 615,
+                    height: 307,
+                    pageSize:10,
+                    url: "/api/sys/user/",
+                    queryParams: ko.observable(),
+                    idField: 'UserCode',
+                    pagination: true,
+                    customLoad: false
+                };
+                this.grid.queryParams(that.form);
+
+                this.searchClick = function(){
+                    var param = ko.toJS(that.form);
+                    para.RoleCode = 'Lawyer';
+                    that.grid.queryParams(param);
+                };
+                this.clearClick = function(){
+                    $.each(that.form, function (i, n) {if(typeof(this)=='function') this(''); });
+                    that.searchClick();
+                };
+                this.confirmClick = function () {
+                    var item = that.grid.datagrid('getSelected');
+                    if (!item) return com.message('warning', '请选择关联用户');
+                    var post = { form: {},tabs:[],_changed:true};
+                    post.form = {LawyerCode:lawyerCode, UserCode:item.UserCode};
+                    //数据提交
+                    com.ajax({
+                        url: '/api/msg/lawyer/edit/',
+                        data: ko.toJSON(post),
+                        success: function (d) {
+                            com.message('success', '操作成功');
+                            that.cancelClick();
+                        }
+                    });
+                };
+                this.cancelClick = function () {
+                    w.dialog('close');
+                };
+                this.grid.onDblClickRow = this.confirmClick;
+            }
+        });
+    };
+</script>

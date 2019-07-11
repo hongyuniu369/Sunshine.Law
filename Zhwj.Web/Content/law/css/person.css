@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+body,
+button, input, select, textarea /* for ie */ {
+    font: 12px/1.6 /*字号与行高*/
+	Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /*字体*/
+}
+a{ text-decoration:none; color:#535353}
+a:hover{ color:#d90000}
+/*------------------------------------------------------------------*/
+body{ }
+.top{ padding-top:20px; padding-bottom:5px}
+.top .logo{width:458px; height:60px; float:left}
+.top .rtbtn{width:226px; float:right; margin-right:20px}
+.top .rtbtn ul li{width:50px; float:left; margin-right:20px; display:inline}
+.top .rtbtn ul li a img{ display:block; margin:0 auto}
+
+.wrap{ width:980px; margin:0 auto }
+.main{ width:980px; background:#ffffff}
+.nav{ height:40px; background:url(../images/listnavbg.jpg); line-height:40px; padding-left:25px; border:1px solid #6392d7; border-top-width:2px; clear:both }
+.nav ul li{ float:left; color:#FFFFFF;}
+.nav ul li.sep{width:5px; background:url(../images/zixun_17.jpg) no-repeat center; margin:0 30px; height:40px;}
+.nav ul li.first{background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.nav ul li a{color:#ffffff;font-size:16px; font-family:"微软雅黑"; display:block; width:80px; text-align:center}
+.nav ul li a:hover{ color:#CC3300; background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.pos{ height:50px;line-height:50px; font-size:16px;font-family:"微软雅黑"; color:#1162c9 }
+.pos span{ margin-right:8px; color:#6c6c6c}
+.pos span a{ font-size:14px; font-family:"宋体"}
+.content1{ width:980px;margin-top:3px; margin-bottom:10px; }
+.content1 .line{ height:2px;width:980px; background:url(../images/xixun-09.jpg); margin-top:15px;}
+.content1 .left{ width:245px; float:left; display:inline; margin-top:15px; border:1px solid #e2e2e2;border-top:4px solid #e2e2e2; height:322px}
+.content1 .left .tt{ height:57px; line-height:57px;  background:url(../images/person_03.png) no-repeat 40px center; padding-left:80px; width:165px; font-family:"微软雅黑"; font-size:20px; color:#FF3300}
+.content1 .left ul li{ height:45px;width:240px;border-bottom:1px dashed #f1f0f0; margin-left:3px;line-height:45px;background:url(../images/person_04.png) 45px center no-repeat; padding-left:80px;width:160px}
+.content1 .left ul li.current{background:#f5f5f5 url(../images/person_05.png) 45px center no-repeat;}
+.content1 .left ul li a{font-family:"微软雅黑"; font-size:16px; color:#0f5fb7}
+.content1 .left ul li a:hover{ color:#df2a00}
+.content1 .right{width:708px; float:right; border-left:1px dashed #d2d2d2; height:160px; border:1px solid #e2e2e2;margin-top:15px; height:324px }
+.content1 .right .tt{ height:40px; background:#f3f3f3 url(../images/person_06.png) no-repeat 25px center; padding-left:50px; width:658px; line-height:40px; color:#0065bc; font-size:16px;font-family:"微软雅黑"; margin-left:0; margin-bottom:25px}
+.content1 .right div{ height:36px; line-height:36px;margin-left:32px; font-size:14px; border-bottom:1px dashed #efefef; width:556px}
+.content1 .right div span{ color:#00509d}
+

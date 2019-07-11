@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "LawyerScore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+<script src="/Content/js/viewModel/com.viewModel.searchEdit.js"></script>
+<script type="text/javascript">
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    ko.bindingViewModel(new com.viewModel.searchEdit(data));
+    var formatMasterKey = function(value,row){return $.grep(data.dataSource.dsScoreItem, function (n) {return n.value ==value })[0].text;};
+</script>
+}
+<div class="z-toolbar">
+    <a href="#" plain="true" class="easyui-linkbutton"  icon="icon-arrow_refresh"   title="刷新" data-bind="click:refreshClick">刷新</a>
+    <a href="#" plain="true" class="easyui-linkbutton"  icon="icon-add"             title="新增" data-bind="click:addClick"    >新增</a>
+    <a href="#" plain="true" class="easyui-linkbutton"  icon="icon-edit"            title="编辑" data-bind="click:editClick"   >编辑</a>
+    <a href="#" plain="true" class="easyui-linkbutton"  icon="icon-cross"           title="删除" data-bind="click:deleteClick" >删除</a>
+    <a href="#" plain="true" class="easyui-linkbutton"  icon="icon-save"            title="保存" data-bind="click:saveClick"   >保存</a>
+    <a href="#" plain="true" class="easyui-splitbutton" data-options="menu:'#dropdown',iconCls:'icon-download'"                >导出</a>
+</div>
+
+<div id="dropdown" style="width:100px; display:none;">  
+    <div data-options="iconCls:'icon-ext-xls'"      suffix="xls"    data-bind="click:downloadClick">Excel2003   </div>  
+    <div data-options="iconCls:'icon-page_excel'"   suffix="xlsx"   data-bind="click:downloadClick">Excel2007   </div>  
+    <div data-options="iconCls:'icon-ext-doc'"      suffix="doc"    data-bind="click:downloadClick">Word2003    </div>  
+</div> 
+
+<div class="container_12" style="position:relative;">
+    <div class="grid_1 lbl">律师编号</div>
+        <div class="grid_2 val"><input type="text" data-bind="value:form.LawyerCode" class="z-txt easyui-autocomplete" data-options="url:'/api/msg/lawyer/getlawyercode'" /></div>
+
+    <div class="clear"></div>
+    <div class="grid_1 lbl">&nbsp;</div>
+    <div class="grid_2 val">&nbsp;</div>
+    <div class="clear"></div>
+
+    <div class="prefix_9" style="position:absolute;top:5px;height:0;">  
+        <a id="a_search" href="#" class="buttonHuge button-blue" data-bind="click:searchClick" style="margin:0 15px;">查询</a> 
+        <a id="a_reset"  href="#" class="buttonHuge button-blue" data-bind="click:clearClick">清空</a>
+    </div>
+</div>
+
+<table data-bind="datagrid:grid" style="display:none">
+    <thead>  
+        <tr>  
+            <th field="ScoreCode"		sortable="true"	align="left"	width="95" editor="text" >编号</th>
+            <th field="LawyerCode"		sortable="true"	align="left"	width="95" editor="text" >律师编号</th>
+            <th field="MasterKey"		sortable="true"	align="left"	width="160" formatter="formatMasterKey" editor="{type:'combobox',options:{data:data.dataSource.dsScoreItem}}" >项目</th>
+            <th field="MasterValue"		sortable="true"	align="left"	width="95" editor="text" >项目编号</th>
+            <th field="WebScore"		sortable="true"	align="right"	width="80" editor="text" >网友评分</th>
+            <th field="AnswerScore"		sortable="true"	align="right"	width="80" editor="text" >答复评分</th>
+            <th field="BestScore"		sortable="true"	align="right"	width="80" editor="text" >择优评分</th>
+            <th field="AdminScore"		sortable="true"	align="right"	width="80" editor="text" >管理员评分</th>
+        </tr>                            
+    </thead>      
+</table> 

@@ -1,0 +1,260 @@
+﻿@{
+    ViewBag.Title = "新闻主表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+    <link href="~/Content/js/jquery-plugin/ckeditor/contents.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery-plugin/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/js/jquery-plugin/ckeditor/adapters/jquery.js"></script>
+    <script src="~/Content/js/jquery-plugin/ckfinder/ckfinder.js"></script>
+    <style type="text/css">
+        div#navigation {background: white;float: left;width: 15%;}
+
+        div#wrapper {
+            float: right; width:100%;
+        }
+
+        div#form {
+            float: left;
+            width: 25%;
+            padding:0 5px;
+        }
+
+        div#content {float:left;width:58%;
+        }
+        div#divCKEditor {
+            text-indent: 2em;
+        }
+    </style>
+}
+
+@section scripts{
+    <script src="/Areas/CMS/ViewModels/News.js"></script>
+    <script type="text/javascript">
+        var easyLoaded = function(){
+            //设置ckeditor
+            var editor = $('#txtCkeditor').ckeditor().editor;
+            editor.on( 'blur', function( event) {
+                if(editor.getData())
+                    viewModel.pageData.form.NewsContent(editor.getData());
+            });
+            editor.on('change',function(event){
+                if(editor.getData())
+                    viewModel.pageData.form.NewsContent(editor.getData());
+            });
+            editor.on( 'loaded', function( event) {
+                editor.setData( viewModel.pageData.form.NewsContent());
+            });
+            editor.on( 'configLoaded', function() {
+                //editor.config.height = $(window).height() - 208;
+                editor.config.toolbar = "Simple";
+                //配置上传
+                editor.config.filebrowserBrowseUrl =  '/Content/js/jquery-plugin/ckfinder/ckfinder.html' ;  
+                editor.config.filebrowserImageBrowseUrl =  '/Content/js/jquery-plugin/ckfinder/ckfinder.html?type=Images' ;  
+                editor.config.filebrowserFlashBrowseUrl =  '/Content/js/jquery-plugin/ckfinder/ckfinder.html?type=Flash' ;  
+                editor.config.filebrowserUploadUrl =  '/Content/js/jquery-plugin/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files' ;  
+                editor.config.filebrowserImageUploadUrl =  '/Content/js/jquery-plugin/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images' ;  
+                editor.config.filebrowserFlashUploadUrl =  '/Content/js/jquery-plugin/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash' ;  
+                //设置只读
+                editor.setReadOnly(viewModel.readonly());
+            });
+            editor.on( 'instanceReady', function( event )
+            {
+                editor.resize( editor.container.getStyle( 'width' ), CKEDITOR.document.getById( 'cke_'+'txtCkeditor' ).getParent().$.offsetHeight - 2);
+            });
+        };
+        using(['validatebox','combobox'], easyLoaded);
+        using('jquery.easyui.validator.extend.js');
+        var viewModel = function(data){ 
+            var self = this;
+            news.viewModel.apply(self,arguments);
+            this.signClick = function(){
+                if(self.pageData.form.Signed() == true) return com.message('warning', '请不要重复签发 ');
+                //数据验证
+                if (!self.ParentClassCode()) return com.message('warning', '请先在左边选择栏目！');
+                if (!self.pageData.form.NewsContent()) return com.message('warning', '请填写新闻内容！');
+                var validMessage = self.fnIsPageValid();
+                if (validMessage) {
+                    com.message('warning', validMessage);
+                    return;
+                }
+                var signedtime = CurentTime();
+                if(self.pageData.form.SignedTime()=="")
+                    self.pageData.form.SignedTime(signedtime);
+                self.pageData.form.ApproveState("passed");
+                self.pageData.form.Signed("1");
+                self.saveClick();
+            };
+        } 
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        viewModel=new viewModel(data)
+        ko.bindingViewModel(viewModel);
+
+        $(document).ready(function(){
+        });
+
+        function BrowseServer( startupPath, functionData )
+        {
+            var finder = new CKFinder();
+            finder.basePath = '/Content/js/jquery-plugin/ckfinder/';
+            finder.startupPath = startupPath;
+            finder.selectActionFunction = SetFileField;
+            finder.selectActionData = functionData;
+            finder.popup();
+        }
+
+        function SetFileField( fileUrl, data )
+        {
+            viewModel.pageData.form.TitlePic(fileUrl);
+        }
+        function CurentTime()
+        { 
+            var now = new Date();
+       
+            var year = now.getFullYear();       //年
+            var month = now.getMonth() + 1;     //月
+            var day = now.getDate();            //日
+       
+            var hh = now.getHours();            //时
+            var mm = now.getMinutes();          //分
+       
+            var clock = year + "-";
+       
+            if(month < 10)
+                clock += "0";
+       
+            clock += month + "-";
+       
+            if(day < 10)
+                clock += "0";
+           
+            clock += day + " ";
+       
+            if(hh < 10)
+                clock += "0";
+           
+            clock += hh + ":";
+            if (mm < 10) clock += '0'; 
+            clock += mm; 
+            return(clock); 
+        } 
+    </script>
+}
+
+<div class="z-toolbar">
+    <a id="a_save" href="#" plain="true" class="easyui-linkbutton" icon="icon-save" data-bind="click:readonly()?null:saveClick,linkbuttonDisable:readonly" title="保存">保存</a>
+    <a href="#" plain="true" class="easyui-linkbutton"  icon="icon-page_forward"    title="签发"  data-bind="click:pageData.form.Signed()?null:signClick,linkbuttonDisable:pageData.form.Signed"    >签发</a>
+    <a id="a_undo" href="#" plain="true" class="easyui-linkbutton" icon="icon-undo" data-bind="click:readonly()?null:rejectClick,linkbuttonDisable:readonly" title="撤消">撤消</a>
+    <a id="a_refresh" href="#" plain="true" class="easyui-linkbutton" icon="icon-arrow_refresh" title="刷新" data-bind="click:refreshClick">刷新</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_other" href="#" class="easyui-splitbutton" data-options="menu:'#divother',iconCls:'icon-application_go'" title="其他">其他</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_first" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_first" data-bind="click:firstClick,linkbuttonEnable:pageData.scrollKeys.firstEnable" title="第一条"></a>
+    <a id="a_previous" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_previous" data-bind="click:previousClick,linkbuttonEnable:pageData.scrollKeys.previousEnable" title="上一条"></a>
+    <a id="a_next" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_next" data-bind="click:nextClick,linkbuttonEnable:pageData.scrollKeys.nextEnable" title="下一条"></a>
+    <a id="a_last" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_last" data-bind="click:lastClick,linkbuttonEnable:pageData.scrollKeys.lastEnable" title="最后一条"></a>
+</div>
+
+<div id="divother" style="width: 100px; display: none;">
+    <div data-options="iconCls:'icon-cross'" data-bind="click:fnIsNew()?null:deleteClick,linkbuttonDisable:true">删除</div>
+    <div data-options="iconCls:'icon-arrow_refresh'" data-bind="click:refreshClick">刷新</div>
+</div>
+
+<div id="container">
+    <div id="wrapper">
+    <div id="navigation">
+        <div title="新闻栏目" class="easyui-panel" data-options="title: '新闻栏目', iconCls: 'icon-node_tree', height: $(window).height() - 38 ">
+            <ul data-bind="easyuiTree:tree"></ul>
+        </div>
+    </div>
+        <div id="form">
+            <div title="新闻设置" class="easyui-panel" data-options="title: '新闻设置', iconCls: 'icon-report', height: $(window).height() - 38 ">
+                <div id="master" class="container_12" data-bind="inputwidth:0.99">
+                    <div class="grid_3 lbl">新闻编号</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="value:pageData.form.NewsCode ,readOnly : true" class="z-txt " />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">标题</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="value:pageData.form.Title ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="required:true, validType:['length[1,64]']"/>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">副标题</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="value:pageData.form.SubTitle ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:['length[1,64]']"/>
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">新闻摘要</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="value:pageData.form.SubDescription ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:['length[1,500]']" />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">关键字</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="value:pageData.form.Keywords ,readOnly:readonly" class="z-txt " />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">标题图片</div>
+                    <div class="grid_9 val">
+                        <span class="combo lookup" style="width:99%">
+                            <input id="ckFinder" class="combo-text" style="width:90%" type="text" data-bind="value:pageData.form.TitlePic ,readOnly:readonly">
+                            <span>
+                                <span class="combo-arrow" onclick="BrowseServer( 'Images:/', 'ckFinder' );"></span>
+                            </span>
+                        </span>    
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">图片新闻</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="datasource:dataSource.dsBit, comboboxValue:pageData.form.IsPicNews ,comboboxReadOnly:readonly" class="z-txt easyui-combobox" data-options="required:true" />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">作者</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="value:pageData.form.UserName ,readOnly : readonly" class="z-txt" />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">点击量</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="value:pageData.form.OnClick ,readOnly : readonly" class="z-txt easyui-validatebox" data-options="validType:['number']" />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">置顶</div>
+                    <div class="grid_9 val">
+                        <input type="text" data-bind="datasource:dataSource.dsBit, comboboxValue:pageData.form.IsTop ,comboboxReadOnly : readonly" class="z-txt easyui-combobox" data-options="required:true" />
+                    </div>
+                    <div class="clear"></div>
+
+                    <div class="grid_3 lbl">发布时间</div>
+                    <div class="grid_9 val"><input type="text" data-bind="dateboxValue:pageData.form.SignedTime ,dateboxReadOnly : readonly" data-options="" class="z-txt easyui-datebox" /></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <div title="新闻内容" class="easyui-panel" data-options="title: '新闻内容', iconCls: 'icon icon-page_world', height: $(window).height() - 38 ">
+                <textarea id="txtCkeditor" name="txtCkeditor" data-options="required:true,missingMessage:'内容为必输项'" class="z-txt easyui-validatebox" style="width:98%;" data-bind="value:pageData.form.NewsContent"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

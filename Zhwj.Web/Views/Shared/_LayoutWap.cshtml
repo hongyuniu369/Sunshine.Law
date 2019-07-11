@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.locale = "zh_CN";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/content/law/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <title>@ViewBag.Title</title>
+    <!--加载共通CSS-->
+    <link href="~/Content/law/wap/main.css" rel="stylesheet" type="text/css" />
+    @RenderSection("head", required: false)
+</head>
+<body>
+        <header class="ts1">
+		<a class="u_back fl" href="javascript:history.go(-1)"></a>
+		<ul class="topbar fr">
+			<li>
+				<a class="icon_user" href="/wap/wyzx"> <i></i>
+					咨询
+				</a>
+			</li>
+			<li>
+				<a class="icon_shopping" href="/wap/list"> <i></i>
+					列表
+				</a>
+			</li>
+			<li>
+				<a class="icon_class" href="/wap/query">
+					<i></i>
+					查询
+				</a>
+			</li>
+			<li>
+				<a class="icon_index" href="/wap">
+					<i></i>
+					主页
+				</a>
+			</li>
+		</ul>
+	</header>
+        @RenderBody()
+        @RenderSection("scripts", required: false)
+</body>
+</html>

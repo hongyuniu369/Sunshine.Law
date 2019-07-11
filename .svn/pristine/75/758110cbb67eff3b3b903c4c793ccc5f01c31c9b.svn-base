@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "阳光问法-我的咨询";
+    Layout = "~/Views/Shared/_ChildlayoutPerson.cshtml";
+}
+@section scripts{
+    <script src="/Content/law/js/viewModel/personzx.js"></script>
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var formatMsgStatus = function (value) {return $.grep(data.dataSource.msgStatus, function (n) { return n.value ==value })[0].text;};
+        
+        var viewModel = function(){
+            var self = this;
+            com.viewModel.list.apply(this,arguments);
+        }
+
+        var easyLoaded = function(){
+            //绑定地址
+            var view = new viewModel(data);
+            ko.applyBindings(view);
+        };
+        //数据绑定
+        using(['pagination','combobox'], easyLoaded);
+        $(document).ready(function () {
+            $(".content1 .left ul li:not(.current)").hover(function () {
+                $(this).addClass("current");
+            }, function () {
+                $(this).removeClass("current");
+            })
+
+        })
+</script>
+}
+<link href="~/Content/law/css/personzx.css" rel="stylesheet" type="text/css" />
+<div class="line"></div>
+<div>
+<div class="left">
+<div class="tt">个人中心</div>
+<ul>
+<li><a href="/law/person">个人资料</a></li>
+<li class="current"><a href="/law/personzx">我的咨询</a></li>
+<li ><a href="/law/personwt">我的委托</a></li>
+<li><a href="/law/personpwd">修改密码</a></li>
+</ul>
+</div>
+<div class="right">
+<div class="tt">我的咨询</div>
+<div data-bind="foreach:items">
+<div class="ans">
+<p>问题：<span data-bind="html:MsgTitle"></span></p>
+<p>详情：<span data-bind="html:(MsgContent().replace(/<[^>]+>/g,'').substring(0,40)+'...<a href=\'/wt/show/' + AdvisoryCode() + '\' target=\'_blank\'>[详细]</a>')"></span></p>
+<div class="hf">有<strong data-bind="html:ZxReplyCount"></strong>条回复<a  data-bind="attr:{id:'btn'+AdvisoryCode()},click:function(){$parent.getReply(AdvisoryCode(),AdvisoryAnswer)}">查看律师回复</a><span>提问时间：2015年8月9日</span></div>
+</div>
+
+<div class="reply" loaded="" data-bind="attr:{id:'reply'+AdvisoryCode()}">
+<div class="tt1">律师回复</div>
+<ul data-bind="foreach:AdvisoryAnswer">
+<li>
+<div class="pic">
+<img data-bind="attr:{src:LawyerPic}" />
+</div>
+<div class="rt">
+<p class="ls"><span data-bind="html:ProfessionalTitle"></span>：<a   data-bind="attr: {'href':'/lawyer/show/' + LawyerCode() },html:LawyerName()+''&nbsp&nbsp"></a></p>
+<div class="phone">15023564512</div>
+<div class="con" data-bind="html:AnswerContent"></div>
+<div class="time" data-bind="html:'回答时间:'+com.formatDate(AnswerDate())"></div>
+<div class="clear"></div>
+</div>
+</li>
+</ul>
+
+
+</div>
+</div>
+    <div class="pp" id="pp"></div>
+</div>
+</div>
+

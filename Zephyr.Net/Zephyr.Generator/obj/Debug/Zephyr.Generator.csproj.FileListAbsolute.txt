@@ -1,0 +1,4 @@
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Generator\obj\Debug\Zephyr.Generator.csprojResolveAssemblyReference.cache
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Generator\obj\Debug\Zephyr.Generator.Form1.resources
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Generator\obj\Debug\Zephyr.Generator.Properties.Resources.resources
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Generator\obj\Debug\Zephyr.Generator.csproj.GenerateResource.Cache

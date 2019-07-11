@@ -1,0 +1,201 @@
+﻿@{
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+
+@section head{
+<script src="~/Content/law/js/viewModel/advisoryAnswer.js"></script>
+<script src="~/Content/js/jquery-plugin/ckeditor/adapters/jquery.js"></script>
+}
+
+@section scripts{
+<script src="/Content/js/viewModel/com.viewModel.edit.js"></script>
+<script src="~/Content/js/viewModel/com.viewModel.razorList.js"></script>
+    <script type="text/javascript">
+        using(['messager']);
+        //设置列表、分页
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.page));
+        var viewModelAnswer = function(data){ 
+            var self = this;
+            com.viewModel.edit.apply(self,arguments);
+
+            this.saveClick = function () {
+                //数据验证
+                var validMessage = self.fnIsPageValid(document.getElementById("answer")); 
+                if (validMessage) {
+                    com.message('warning', validMessage);
+                    return;
+                } 
+                //取得数据
+                var post = self.fnIsPageChanged(); 
+                if (!post._changed) {
+                    com.message('success', '页面没有数据被修改！');
+                    return;
+                }
+        
+                //数据提交
+                $.ajax({
+                    type: "POST",
+                    url: self.urls.edit,
+                    data: ko.toJSON(post),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (d) {
+                        if (d.status == 'success') {
+                            com.message('success', "网友衷心感谢您的答复...");
+                            $.each(self.pageData.form, function () { this(''); });
+                        }else if(d.status == 'role'){
+                            com.message('confirm', "只有律师才能回复,是否重新登录？", function (b) {
+                                if (b) {
+                                    window.location.href = "/login/?ReturnUrl=" + encodeURIComponent(window.location.href);
+                                }
+                            });
+                        }else {
+                            com.message('error', "系统错误，请联系管理员！");
+                        }
+                    },
+                    error: function(e){
+                        var msg = e.responseText;
+                        if(msg.indexOf("已拒绝为此请求授权") > 0){
+                            com.message('confirm', "请登录后进行答复,是否登录？", function (b) {
+                                if (b) {
+                                    window.location.href = "/login/?ReturnUrl=" + encodeURIComponent(window.location.href);
+                                }
+                            });
+                        }
+                    }
+                });
+            };
+        } 
+        var viewModel=new viewModelAnswer(data)
+        ko.bindingViewModel(viewModel, document.getElementById("answer"));        
+        var formatMsgStatus = function (value) {return $.grep(data.dataSource.msgStatus, function (n) { return n.value ==value })[0].text;};
+        //评论
+        function commentClick (){
+            //数据验证
+            var formValid = com.formValidate(document.getElementById("comment")); 
+            if (!formValid) {
+                com.message('warning', '验证不通过，请检查数据！');
+                return;
+            } 
+            var post = { form: {},tabs:[],_changed:true};
+            post.form = {MasterKey:'msg_advisory',MasterValue:'@Model.form.AdvisoryCode',CommentorName:$("#CommentorName").val(), CommentContent:$("#CommentContent").val()};
+            //数据提交
+                    com.ajax({
+                        url: '/api/law/editcomment/',
+                        data: ko.toJSON(post),
+                        success: function (d) {
+                            com.message('success', '感谢您的评论！');
+                            $("#CommentorName").val("");
+                            $("#CommentContent").val("");
+                        }
+                    });
+        } 
+        $(document).ready(function(){
+            //comment
+            $("#btnComment").on("click", function(){
+                commentClick();
+            });
+            $("#btnCommentReset").on("click", function(){
+                $("#CommentorName").val("");
+                $("#CommentContent").val("");
+            });
+
+            //设置ckeditor
+            $('#txtCkeditor').ckeditor();
+            var editor = $('#txtCkeditor').ckeditor().editor;
+            editor.on( 'blur', function( event) {
+                if(editor.getData())
+                    viewModel.pageData.form.AnswerContent(editor.getData());
+            } );
+            editor.on( 'loaded', function( event) {
+                editor.setData( viewModel.pageData.form.AnswerContent());
+                editor.setReadOnly(viewModel.readonly());
+            } );
+        });
+
+   </script>
+}
+        <div id="notity"></div>
+
+<link href="~/Content/law/css/zxdetailed.css" rel="stylesheet" type="text/css" />
+<div class="quest">
+    <div class="title">问题（@Model.msgStatus）</div>
+    <div class="questcon">
+        <p class="tt">标题：<span>@Model.form.MsgTitle</span></p>
+        <p class="name">发表人：<span>@(string.IsNullOrEmpty(Model.user.UserCode)?"阳光问法网友":Model.user.UserCode)</span></p>
+        <p class="name">提问时间：<span>@Model.form.MsgInDate.ToString("yyyy-MM-dd")</span></p>
+        <div class="qcon">内容：<div>@Html.Raw(Model.form.MsgContent)</div>
+        </div>
+    </div>
+</div>
+
+<div class="quest answer">
+    <div class="title">律师解答</div>
+    <ul>
+        @for (var i = 0; i < Model.answers.Count; i++)
+        {
+            <li>
+                <div class="pic">
+                    <img src="@Model.answers[i].LawyerPic" />
+                    <p><a href="/lawyer/show/@Model.answers[i].LawyerCode">@Model.answers[i].LawyerName</a></p>
+                    <div>@Model.answers[i].ContactNO</div>
+                </div>
+                <div class="ans">
+                    <div class="con">@Html.Raw(Model.answers[i].AnswerContent)</div>
+                    <div class="time">回答时间：<span>@Model.answers[i].AnswerDate.ToString("yyyy-MM-dd HH-mm")</span></div>
+                    <div class="clear"></div>
+                    <div class="yzx"><a href="/zx/wyzx/@Model.answers[i].LawyerCode">一对一咨询</a></div>
+                </div>
+                <div class="clear"></div>
+            </li>
+        }
+    </ul>
+</div>
+<div class="quest jdans">
+    <div class="title">已解决咨询</div>
+    <div class="jdlist">
+        <div class="bt">咨询标题</div>
+        <div class="lb">咨询类别</div>
+        <div class="clear"></div>
+        <ul>
+        @for (var i = 0; i < Model.zxOver.Count; i++)
+        {
+            <li><a href="/zx/show/@Model.zxOver[i].AdvisoryCode">@Model.zxOver[i].MsgTitle</a><span><a href="/zx?MsgClass=@Model.zxOver[i].MsgClass">[@Model.zxOver[i].ClassName]</a></span></li>
+        }
+        </ul>
+    </div>
+</div>
+<div class="quest wlhd" id="answer">
+    <div class="title">我来回答</div>
+    <div class="jdlist">
+        <textarea id="txtCkeditor" data-bind="value:pageData.form.AnswerContent ,readOnly:readonly" data-options="required:true,missingMessage:'内容为必输项'" class="tar easyui-validatebox"></textarea>
+        <input type="button" class="btn" data-bind="click:readonly()?null:saveClick,linkbuttonDisable:readonly" />
+    </div>
+</div>
+<div class="quest wlhd" id="comment">
+    <div class="title">网友评论</div>
+    <div class="jdlist">
+        <p>请文明上网，理性发言</p>
+        <div>你的昵称：<input type="text" id="CommentorName" size="20" data-options="required:true" class="easyui-validatebox" /></div>
+        <textarea id="CommentContent" cols="50" rows="7" data-options="required:true" class="tar tar1 easyui-validatebox"></textarea>
+        <div>
+            <input type="button" id="btnComment" value="提交" />
+            <input type="button" id="btnCommentReset" value="重置" />
+            <span>网友评论仅供网友表达个人看法，并不表明河北新闻网同意其观点或证实其描述。</span>
+        </div>
+
+        <div><strong>请注意：</strong></div>
+        <div>
+            遵守中华人民共和国有关法律、法规，尊重网上道德，承担一切因您的行为而直接或间接引起的法律责任。<br />
+            河北新闻网拥有管理笔名和留言的一切权利。<br />
+            您在河北新闻网留言板发表的言论，河北新闻网有权在网站内转载或引用。<br />
+            河北新闻网新闻留言板管理人员有权保留或删除其管辖留言中的任意内容。<br />
+            如您对管理有意见请向留言板管理员反映。
+            <br />
+            参与本留言即表明您已经阅读并接受上述条款。
+        </div>
+
+
+    </div>
+</div>
+

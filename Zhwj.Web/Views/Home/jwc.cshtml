@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "河北医科大学教务处";
+    Layout = "~/Views/Shared/_LayoutJwc.cshtml";
+}
+@section head{
+    <script type="text/javascript" src="~/content/jwc/js/jquery.SuperSlide.js"></script>
+    <script type="text/javascript" src="~/content/jwc/js/jflow.plus.min.js"></script>
+}
+@section scripts{
+    <script src="~/Content/Jwc/viewModel/index.js"></script>
+    <script type="text/javascript">
+@*        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var viewModel = function(data){
+            var self = this;
+            jwc.viewModel.apply(self,arguments);
+            this.linkClick = function(newsCode){
+                window.open("/show-" + newsCode);return;
+            };
+        } *@
+        //viewModel=new viewModel(data);
+        //ko.applyBindings(viewModel, document.getElementById("wrap"));
+    </script>
+}
+<div class="wrap" id="wrap">
+    <!--主体内容开始-->
+    <div class="w1100">
+        <div class="news">
+            <div class="newscon">
+                <div class="left">
+                    <div class="focusBox">
+                        <ul class="pic" style="position: relative; width: 498px; height: 332px;">
+                    @for (var i = 0; i < Model.flash.Count; i++)
+                    {
+                            <li style="position: absolute; width: 498px; left: 0px; top: 0px; display: none;"><a
+                                href="/show-@Model.flash[i].NewsCode" target="_blank">
+                                <img src="@Model.flash[i].TitlePic"></a></li>
+                    }
+                        </ul>
+                        <div class="txt-bg">
+                        </div>
+                        <div class="txt">
+                            <ul data-bind="foreach: flash">
+                    @for (var i = 0; i < Model.flash.Count; i++)
+                    {
+                                <li style="bottom: -36px;"><a target="_blank" href="/show-@Model.flash[i].NewsCode" title="@Model.flash[i].Title">@Model.flash[i].Title</a></li>
+                    }
+                            </ul>
+                        </div>
+                        <ul class="num">
+                            <li class=" "><a>1</a><span></span></li>
+                            <li class=" "><a>2</a><span></span></li>
+                            <li class="  on"><a>3</a><span></span></li>
+                            <li class=" "><a>4</a><span></span></li>
+                        </ul>
+                    </div>
+                        <script type="text/javascript">
+                            jQuery(".focusBox").slide({ titCell: ".num li", mainCell: ".pic", effect: "fold", autoPlay: true, trigger: "click", startFun: function (i) { jQuery(".focusBox .txt li").eq(i).animate({ "bottom": 0 }).siblings().animate({ "bottom": -36 }); } });
+                        </script>
+                </div>
+                <div class="newslist">
+                    <div class="tt">
+                        <a target="_blank" href="list-0001" class="gg icon4">教务公告</a><a target="_blank" href="list-0001" class="more">MORE></a>
+                    </div>
+                    <p class="newspic">
+                        <a target="_blank" href="/show-@Model.jwggpic.NewsCode">
+                            <img src="@Model.jwggpic.TitlePic" width="394" height="118" /></a>
+                    </p>
+                    <ul>
+                    @for (var i = 0; i < Model.jwgg.Count; i++)
+                    {
+                        <li><span>@Model.jwgg[i].SignedTime.ToString("yyyy-MM-dd")</span><a target="_blank" href="/show-@Model.jwgg[i].NewsCode" title="@Model.jwgg[i].Title">@Model.jwgg[i].Title</a></li>
+                    }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!--第二部分内容开始-->
+        <div class="content1">
+
+            <div class="wx">
+                <img src="content/jwc/images/yd_27.png" width="80" height="80" />
+                <p>教师微信平台</p>
+            </div>
+            <div class="wx">
+                <img src="content/jwc/images/yd_30.png" width="80" height="80" /><p>学生微信平台</p>
+            </div>
+            <div class="down">
+                <a href="@Model.jwzy.LinkUrl" target="_blank">
+                    <img src="@Model.jwzy.LinkPic"/></a>
+            </div>
+            <div class="leftbt">
+            </div>
+            @for (var i = 0; i < Model.tplj.Count; i++)
+            {
+            <div class="btn1">
+                <a href="@Model.tplj[i].LinkUrl" target="_blank">
+                    <img src="@Model.tplj[i].LinkPic"/></a><p>
+                        <a href="@Model.tplj[i].LinkUrl" target="_blank">@Model.tplj[i].LinkName</a>
+                    </p>
+            </div>
+            }
+            <div class="rightbt">
+            </div>
+        </div>
+        <!--第二部分内容结束-->
+
+
+        <!--第一部分内容开始-->
+        <div class="content">
+            <div class="left">
+                <div class=" newslist1">
+                    <div class="tt tt-border">
+                        <a href="#" class="gg icon1">浏览排行榜</a>
+                    </div>
+                    <ul>
+                    @for (var i = 0; i < Model.llph.Count; i++)
+                    {
+                        <li><span class="@(i<3?"red":"")">@((i+1).ToString())</span><a target="_blank" href="/show-@Model.llph[i].NewsCode" title="@Model.llph[i].Title">@Model.llph[i].Title</a></li>
+                    }
+                    </ul>
+                </div>
+            </div>
+            <div class="center">
+                <div class="newslist2">
+                    <div class="tt tt-border">
+                        <a target="_blank" href="/list-jwdt" class="gg icon2">教务动态</a><a target="_blank" href="/list-jwdt" class="more">MORE></a>
+                    </div>
+                    <ul>
+                    @for (var i = 0; i < Model.jwdt.Count; i++)
+                    {
+                        <li><a target="_blank" class="cc" href="/show-@Model.jwdt[i].NewsCode" title="@Model.jwdt[i].Title">@Model.jwdt[i].Title</a></li>
+                    }
+                    </ul>
+                </div>
+            </div>
+            <div class="right">
+                <div class=" newslist3">
+                    <div class="tt tt-border ">
+                        <a href="list-0013" class="gg icon3" target="_blank">教务表格下载</a><a target="_blank" href="list-0013" class="more">MORE></a>
+                    </div>
+                    <ul>
+                    @for (var i = 0; i < Model.jwbgxz.Count; i++)
+                    {
+                        <li><a target="_blank" href="/show-@Model.jwbgxz[i].NewsCode" title="@Model.jwbgxz[i].Title">@Model.jwbgxz[i].Title</a></li>
+                    }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--第一部分内容结束-->
+
+
+    </div>
+
+<div class="clear">
+</div>
+<!--第三部分内容开始-->
+<div class="content2">
+    <div class="w1100">
+        <div id="con1">
+            <ul id="tags">
+                <li class="selectTag"><a onclick="selectTag('tagContent0',this)" href="javascript:void(0)">校内部门</a></li>
+                <li><a onclick="selectTag('tagContent4',this)" href="javascript:void(0)">学校网站</a></li>
+                <li><a onclick="selectTag('tagContent1',this)" href="javascript:void(0)">医院网站</a></li>
+                <li><a onclick="selectTag('tagContent2',this)" href="javascript:void(0)">相关链接</a>
+                <li><a onclick="selectTag('tagContent3',this)" href="javascript:void(0)">学习链接</a>
+                </li>
+            </ul>
+            <div id="tagContent">
+                <div class="tagContent selectTag" id="tagContent0">
+                @for (var i = 0; i < Model.link46.Count; i++)
+                {
+                    <a target="_blank" href="@Model.link46[i].LinkUrl">@Model.link46[i].LinkName</a>
+                }
+                </div>
+                <div class="tagContent " id="tagContent4">
+                @for (var i = 0; i < Model.link2.Count; i++)
+                {
+                    <a target="_blank" href="@Model.link2[i].LinkUrl">@Model.link2[i].LinkName</a>
+                }
+                </div>
+                <div class="tagContent " id="tagContent1">
+                @for (var i = 0; i < Model.link3.Count; i++)
+                {
+                    <a target="_blank" href="@Model.link3[i].LinkUrl">@Model.link3[i].LinkName</a>
+                }
+                </div>
+                <div class="tagContent" id="tagContent2">
+                @for (var i = 0; i < Model.link4.Count; i++)
+                {
+                    <a target="_blank" href="@Model.link4[i].LinkUrl">@Model.link4[i].LinkName</a>
+                }
+                </div>
+                <div class="tagContent" id="tagContent3">
+                @for (var i = 0; i < Model.link5.Count; i++)
+                {
+                    <a target="_blank" href="@Model.link5[i].LinkUrl">@Model.link5[i].LinkName</a>
+                }
+                </div>
+            </div>
+        </div>
+    </div></div>
+    <script type="text/javascript">
+        function selectTag(showContent, selfObj) {
+            // 操作标签
+            var tag = document.getElementById("tags").getElementsByTagName("li");
+            var taglength = tag.length;
+            for (i = 0; i < taglength; i++) {
+                tag[i].className = "";
+            }
+            selfObj.parentNode.className = "selectTag";
+            // 操作内容
+            for (i = 0; j = document.getElementById("tagContent" + i) ; i++) {
+                j.style.display = "none";
+            }
+            document.getElementById(showContent).style.display = "block";
+
+
+        }
+    </script>
+</div>
+<!--第三部分内容结束-->

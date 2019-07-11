@@ -1,0 +1,310 @@
+﻿@{
+    ViewBag.Title = "Firm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+<script src="~/Content/js/jquery-plugin/ckeditor/ckeditor.js"></script>
+<script src="~/Content/js/jquery-plugin/ckeditor/adapters/jquery.js"></script>
+<script src="~/Content/js/jquery-plugin/ckfinder/ckfinder.js"></script>
+}
+
+@section scripts{
+<script src="~/Content/js/viewModel/com.viewModel.edit.js"></script>
+
+<script type="text/javascript">
+    var easyLoaded = function(){
+        //设置联动Address
+        setAddress(viewModel.pageData.form.FirmAddress(),'firmAddress');
+    };
+
+    using(['validatebox','combobox'], easyLoaded);
+    using('jquery.easyui.validator.extend.js');
+
+    var viewModel = function(data){ 
+        var self = this;
+        com.viewModel.edit.apply(self,arguments);
+        self.firmClass = ko.mapping.fromJS(data.dataSource.pageData.firmClass);
+    };
+
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    viewModel=new viewModel(data)
+    ko.bindingViewModel(viewModel);
+    $(document).ready(function(){
+        //设置ckeditor
+        $('#txtCkeditor').ckeditor();
+        var editor = $('#txtCkeditor').ckeditor().editor;
+        editor.on( 'blur', function( event) {
+            if(editor.getData())
+                viewModel.pageData.form.FirmDescription(editor.getData());
+        } );
+        editor.on( 'loaded', function( event) {
+            editor.setData( viewModel.pageData.form.FirmDescription());
+        } );
+
+        //设置业务领域
+        $("#lnkFirmClass").on("click", function(){
+            setButton(viewModel.pageData.form.FirmCode());
+        });
+
+    });
+
+    function BrowseServer( startupPath, functionData )
+    {
+        var finder = new CKFinder();
+        finder.basePath = '/Content/js/jquery-plugin/ckfinder/';
+        finder.startupPath = startupPath;
+        finder.selectActionFunction = SetFileField;
+        finder.selectActionData = functionData;
+        finder.popup();
+    }
+
+    function SetFileField( fileUrl, data )
+    {
+        viewModel.pageData.form.FirmLogo(fileUrl);
+    }
+</script>
+}
+
+<div class="z-toolbar">
+    <a id="a_save" href="#" plain="true" class="easyui-linkbutton" icon="icon-save" data-bind="click:readonly()?null:saveClick,linkbuttonDisable:readonly" title="保存">保存</a>
+    <a id="a_undo" href="#" plain="true" class="easyui-linkbutton" icon="icon-undo" data-bind="click:readonly()?null:rejectClick,linkbuttonDisable:readonly" title="撤消">撤消</a>
+    <a id="a_refresh" href="#" plain="true" class="easyui-linkbutton"  icon="icon-arrow_refresh"   title="刷新" data-bind="click:refreshClick">刷新</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_other" href="#" class="easyui-splitbutton" data-options="menu:'#divother',iconCls:'icon-application_go'" title="其他">其他</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_first" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_first" data-bind="click:firstClick,linkbuttonEnable:pageData.scrollKeys.firstEnable" title="第一条"></a> 
+    <a id="a_previous" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_previous" data-bind="click:previousClick,linkbuttonEnable:pageData.scrollKeys.previousEnable" title="上一条"></a> 
+    <a id="a_next" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_next" data-bind="click:nextClick,linkbuttonEnable:pageData.scrollKeys.nextEnable" title="下一条"></a> 
+    <a id="a_last" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_last" data-bind="click:lastClick,linkbuttonEnable:pageData.scrollKeys.lastEnable" title="最后一条"></a> 
+</div>
+
+<div id="divother" style="width:100px; display:none;">
+    <div data-options="iconCls:'icon-cross'" data-bind="click:fnIsNew()?null:deleteClick,linkbuttonDisable:true">删除</div>
+    <div data-options="iconCls:'icon-arrow_refresh'" data-bind="click:refreshClick">刷新</div>
+</div>  
+
+<div id="master" class="container_12" data-bind="inputwidth:0.9">
+    <div class="grid_1 lbl">编号</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.FirmCode ,readOnly : true" class="z-txt easyui-validatebox" data-options="required:true" /></div>
+    <div class="grid_1 lbl">名称</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.FirmName ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="required:true,validType:['length[1,32]']" /></div>
+    <div class="grid_1 lbl">联系电话</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ContactNO ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:'contactNO'" /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">邮编</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ZIPCode ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:'ZIP'" /></div>
+    <div class="grid_1 lbl">传真</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.Fax ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:['phone']" /></div>
+    <div class="grid_1 lbl">Email</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.Email ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:'email'" /></div>
+   
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">网址</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.WebAddress ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:['WWW']"/></div>
+    <div class="grid_1 lbl">排序</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.FirmOrder ,readOnly:readonly" class="z-txt easyui-numberbox" data-options="required:true,min:0,precision:0" /></div>
+    <div class="grid_1 lbl">律所Logo</div>
+    <div class="grid_3 val">
+        <span class="combo lookup" style="width:90%">
+            <input id="FirmLogo" class="combo-text" style="width:90%" type="text" data-bind="value:pageData.form.FirmLogo ,readOnly:readonly">
+            <span>
+                <span class="combo-arrow" onclick="BrowseServer( 'Images:/', 'FirmLogo' );"></span>
+            </span>
+        </span>    
+    </div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">地址</div>
+    <div class="grid_5 val">
+        <select class="z-txt" id="Province" name="Province" style="width:80px;"></select> 
+        <select class="z-txt" id="City" name="City"></select>
+        <select class="z-txt" id="District" name="District"></select>
+        @*<input id="firmAddress" type="text" data-bind="value:pageData.form.FirmAddress ,readOnly:readonly" class="z-txt " />*@</div>
+    <div class="grid_1 lbl">详细地址</div>
+    <div class="grid_5 val" data-bind="inputwidth:0.9"><input type="text" data-bind="value:pageData.form.FrimDetailAddress ,readOnly:readonly" class="z-txt " /></div>
+
+    <div class="clear"></div>
+
+    <div class="clear"></div>
+    <div class="grid_1 lbl" data-bind="style:{display:fnIsNew()?'none':''}" style="padding:10px 0px 0px;">业务领域</div>
+    <div class="grid_11 val" data-bind="style:{display:fnIsNew()?'none':''}" style="padding:10px 0px 0px;">
+        <a id="lnkFirmClass" href="#"><span class="icon icon-set2">&nbsp;</span>[设置业务领域]</a>
+        <span data-bind="foreach: firmClass">
+        <label type="text" data-bind="text:ClassName"></label></span></div>
+    <div class="clear"></div>
+
+    <div class="grid_1 lbl">律所简介</div>
+    <div class="grid_11 val" style="margin:0.9%;"><textarea id="txtCkeditor" data-bind="value:pageData.form.FirmDescription ,readOnly:readonly" class="z-txt grid_11" style="height:240px;" ></textarea></div>
+
+    <div class="clear"></div>
+</div>
+
+@*<div id="tt" class="easyui-tabs">  
+    <div title="tab1"></div>
+</div>*@
+
+<script type="text/html" id="button-template">
+    <div style="margin:5px;height:320px;overflow:auto;">
+        <style type="text/css">
+            .listview{ margin:0 !important;}
+            .listview li{width:auto !important;background-color:#ECECFF !important;float:left;margin:3px;overflow:hidden;}
+            .listview span{width: auto !important; font-size:14px !important;height:auto !important; white-space: nowrap;padding:0px 18px;}
+            .listview .icon:before{content:"" !important}
+            .metrouicss .input-control.checkbox .helper::before {z-index:99;}
+        </style>
+
+        <div style="border-bottom:1px solid #CCC; margin-bottom:5px;">
+            <span class="icon32 icon-settings32" style="padding-left:48px;font-weight:bold; font-size:14px;color:#666;">请选择页面按钮</span> 
+        </div>
+ 
+        <div class="metrouicss">
+            <label class="input-control checkbox" style="margin-top:6px;margin-left:3px;">
+                <input type="checkbox" data-bind="checked:checkAll"><span class="helper">全选</span>
+            </label>
+            <ul class="listview" data-bind="foreach: buttons" style="clear:both">
+                <li data-bind="click:$parent.buttonClick,css:{selected:Selected()>0}"><span class="icon" data-bind="text:ClassName"></span></li>
+            </ul>
+        </div>
+ 
+    </div>
+    <div style="text-align:center;">
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" data-bind="click:confirmClick" href="javascript:void(0)"  >确定</a>  
+        <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" data-bind="click:cancelClick" href="javascript:void(0)">取消</a> 
+    </div>
+</script>
+
+<script>
+    var setAddress = function(bindValue,valueField){
+        $.ajaxSettings.async = false;
+        var province = $('#Province').combobox({
+            url: '/api/msg/region/GetByPid/0',
+            method:"Get",
+            valueField: 'RegionID', //值字段
+            textField: 'RegionName', //显示的字段
+            editable: false,
+            onSelect: function (record) {
+                $.get('/api/msg/region/GetByPid/'+record.RegionID , function (data) {
+                    city.combobox("clear").combobox('loadData', data);
+                    district.combobox("clear")
+                }, 'json');
+                getValue();
+            }
+        });
+
+        var city = $('#City').combobox({
+            valueField: 'RegionID', //值字段
+            textField: 'RegionName', //显示的字段
+            editable: false,
+            onSelect: function (record) {
+                $.get('/api/msg/region/GetByPid/'+ record.RegionID, function (data) {
+                    district.combobox("clear").combobox('loadData', data);
+                }, 'json');
+                getValue();
+            }
+        });
+
+        var district = $('#District').combobox({
+            valueField: 'RegionID', //值字段
+            textField: 'RegionName', //显示的字段
+            editable: false,
+            onSelect: function (newValue, oldValue) {
+                getValue();
+            }
+        });
+        
+        var getValue = function(){
+            var selvalue= province.combobox("getText") + " " + city.combobox("getText") + " " + district.combobox("getText");
+            viewModel.pageData.form.FirmAddress(selvalue);
+        }
+
+        var initValue = function(){
+            if(bindValue){
+                var arrValue= bindValue.split(' ');
+                if(arrValue[0])
+                    setSelectValue(province, arrValue[0]);
+                if(arrValue[1])
+                    setSelectValue(city, arrValue[1]);
+                if(arrValue[2])
+                    setSelectValue(district, arrValue[2]);
+            }
+            else
+                $('#Province').combobox("select",684);//初始化为河北省
+        }
+        var setSelectValue = function(obj, text){//根据text选中select相应item
+            var data = obj.combobox("getData");
+            var selectedValue = null;
+            try{
+                selectedValue = $.grep(data, function (item) {
+                    return item.RegionName == text;
+                })[0].RegionID;
+            }catch(e){}
+            if(selectedValue){
+                obj.combobox("select",selectedValue);
+            }
+            else{
+                obj.combobox("setText",text)
+            }
+        }
+
+        initValue();
+    }
+
+    var setButton = function (firmCode) {
+        com.dialog({
+            title: "设置按钮",
+            width: 555,
+            height: 400,
+            html: "#button-template",
+            viewModel: function (w) {
+                var self = this;
+                com.loadCss('/Content/css/metro/css/modern.css', parent.document);
+                this.buttons = ko.observableArray();
+                this.refresh = function () {
+                    com.ajax({
+                        url: '/api/msg/firm/GetFirmClasses/' + firmCode,
+                        type: 'GET',
+                        async: false,
+                        success: function (d) {
+                            self.buttons(ko.mapping.fromJS(d)());
+                        }
+                    });
+                };
+                this.refresh();
+                this.checkAll = ko.observable(false);
+                this.checkAll.subscribe(function (value) {
+                    $.each(self.buttons(), function () {
+                        this.Selected(value ? 1 : 0);
+                    });
+                });
+                this.buttonClick = function (row) {
+                    row.Selected(row.Selected() ? 0 : 1);
+                };
+                this.confirmClick = function () {
+                    var data = utils.filterProperties($.grep(self.buttons(), function (row) {
+                        return row.Selected() > 0;
+                    }), ['ClassCode']);
+                    com.ajax({
+                        url: '/api/msg/firm/editfirmclasses/' + firmCode,
+                        data: ko.toJSON(data),
+                        success: function (d) {
+                            com.message('success', '保存成功！');
+                            self.cancelClick();
+                            //更新修改页面业务领域
+                            viewModel.firmClass($.grep(self.buttons(), function (row) {
+                                return row.Selected() > 0;
+                            }));
+                        }
+                    });
+                };
+                this.cancelClick = function () {
+                    w.dialog('close');
+                };
+            }
+        });
+    };
+</script>

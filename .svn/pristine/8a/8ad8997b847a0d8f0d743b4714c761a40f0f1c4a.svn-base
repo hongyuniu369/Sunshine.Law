@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "委托明细-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+@section head{
+}
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.edit.js"></script>
+    <script src="~/Content/js/viewModel/com.viewModel.razorList.js"></script>
+        <script type="text/javascript">
+        using(['messager']);
+        //设置列表、分页
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.page));
+        var viewModelAnswer = function(data){ 
+            var self = this;
+            com.viewModel.edit.apply(self,arguments);
+            this.readonly=ko.observable(false);
+            this.saveClick = function () {
+                //数据验证
+                var validMessage = self.fnIsPageValid(); 
+                if (validMessage) {
+                    com.message('warning', validMessage);
+                    return;
+                } 
+                //取得数据
+                var post = self.fnIsPageChanged(); 
+                if (!post._changed) {
+                    com.message('success', '页面没有数据被修改！');
+                    return;
+                }
+                self.readonly(true);
+                //数据提交
+                $.ajax({
+                    type: "POST",
+                    url: self.urls.edit,
+                    data: ko.toJSON(post),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (d) {
+                        if (d.status == 'success') {
+                            com.message('success', "网友衷心感谢您的答复...");
+                            //$.each(self.pageData.form, function () { this(''); });
+                        }else if(d.status == 'role'){
+                            com.message('confirm', "只有律师才能回复,是否重新登录？", function (b) {
+                                if (b) {
+                                    window.location.href = "/login/?ReturnUrl=" + encodeURIComponent(window.location.href);
+                                }
+                            });
+                        }else {
+                            com.message('error', "系统错误，请联系管理员！");
+                        }
+                    },
+                    error: function(e){
+                        self.readonly(false);
+                        var msg = e.responseText;
+                        if(msg.indexOf("已拒绝为此请求授权") > 0){
+                            com.message('confirm', "请登录后进行答复,是否登录？", function (b) {
+                                if (b) {
+                                    window.location.href = "/login/?ReturnUrl=" + encodeURIComponent(window.location.href);
+                                }
+                            });
+                        }
+                    }
+                });
+            };
+        } 
+        var viewModel=new viewModelAnswer(data)
+        ko.bindingViewModel(viewModel, document.getElementById("answer"));        
+        var formatMsgStatus = function (value) {return $.grep(data.dataSource.msgStatus, function (n) { return n.value ==value })[0].text;};
+       //设置条换rule
+        var jumpLoad=function(){
+            window.location.href = "/login/?ReturnUrl=" + encodeURIComponent(window.location.href);
+        } 
+   </script>
+    }
+<link href="~/Content/law/css/wtdetailed.css" rel="stylesheet" type="text/css" />
+<div class="quest">
+<div class="title">问题（@Model.msgStatus）<input type="hidden" id="EntrustCode" data-bind="value:viewModel.pageData.EntrustCode"/></div>
+<div class="questcon">
+<p class="tt">委托标题：<span>@Model.form.MsgTitle</span></p>
+<p class="name">涉案金额：<span >@Model.form.InvolvedMoney 元</span></p>
+<p class="name">委托费用：<span >０元</span></p><p class="name">发布时间：<span>@Model.form.MsgInDate.ToString("yyyy-MM-dd")</span></p>
+<p class="name area">地区：<span >@Model.form.Address</span></p>
+<p class="name area">审核状态：<span >通过审核 发布人有明确委托律师意向，请诚信且有实力的律师积极接洽</span></p>
+<div class="qcon">案件详情：<div>@Html.Raw(Model.form.MsgContent)</div></div>
+<p class="name area">联系方式：<span > @Model.form.ContactNO</span></p>
+<div class="clear"></div>
+@if (@Model.lawyerLoaded == "已登录") {
+    <div class="answer"><span>律师回复：</span>
+        <textarea id="txtCkeditor" data-bind="value:pageData.form.AnswerContent ,readOnly:readonly" data-options="required:true,missingMessage:'内容为必输项'" class="tar easyui-validatebox"></textarea>
+       <input type="button" class="btn" data-bind="click:readonly()?null:saveClick,linkbuttonDisable:readonly" />
+
+    </div>
+    
+}
+else { 
+    <input type="button" class="wtbtn" />
+    <p class="login">只有律师会员可以接洽案件，请律师<a href="javascript:void(0)" onclick="jumpLoad()">登陆</a></p>
+}
+</div>
+</div>
+
+<div class="quest answer">
+<div class="title">接洽律师</div>
+<ul>
+     @for (var i = 0; i < @Model.answers.Count; i++)
+        {
+            <li>
+                <div class="pic">
+                    <img src="@Model.answers[i].LawyerPic" width="94px"/>
+                </div>
+                <div class="ans">
+                    <p class="ls">@Model.answers[i].ProfessionalTitle ：<a href="/lawyer/show/@Model.answers[i].LawyerCode">@Model.answers[i].LawyerName</a></p>
+                    <div class="phone">@Model.answers[i].ContactNO</div>
+                    <div class="con">@Html.Raw(Model.answers[i].AnswerContent)</div>
+                    <div class="time">回答时间：<span>@Model.answers[i].AnswerDate.ToString("yyyy-MM-dd")</span></div>
+                </div>
+                <div class="clear"></div>
+            </li>
+        }
+</ul>
+</div>
+

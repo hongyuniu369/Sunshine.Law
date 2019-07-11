@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "法律咨询-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+<link href="~/Content/law/css/zxlist.css" rel="stylesheet" type="text/css" />
+@section scripts{
+    <script src="~/Content/js/viewModel/com.viewModel.razorList.js"></script>
+    <script type="text/javascript">
+        //设置列表、分页
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.page));
+        var formatMsgStatus = function (value) {return $.grep(data.dataSource.msgStatus, function (n) { return n.value ==value })[0].text;};
+        var viewModel = function(){ 
+            var self = this;
+            com.viewModel.razorList.apply(this,arguments);
+        };
+        var easyLoaded = function () {
+            //咨询列表
+            viewModel = new viewModel(data);
+            ko.applyBindings(viewModel, document.getElementById("zxlist"));
+            //分类查询
+            var classViewModel = {
+                items: ko.observableArray()
+            };
+            $.ajax({
+                type: 'GET',
+                url: '/api/home/getmsgclass/',
+                async: false,
+                success: function (d) {
+                    var treeData = utils.toTreeData(d, 'ClassCode', 'ParentClassCode', "children");
+                    classViewModel.items(ko.mapping.fromJS(treeData)());
+                }
+            });
+            ko.applyBindings(classViewModel, document.getElementById('msgclass'));
+        };
+        using(['parser', 'pagination'], easyLoaded);
+
+        $(document).ready(function(){
+            $("#more").toggle(function () {
+                $("#cc").slideDown();
+                $("#more").text("收起");
+            }, function () {
+                $("#cc").slideUp();
+                $("#more").text("更多");
+            })
+        });
+    </script>
+}
+<style>
+    div {
+        overflow: hidden;
+    }
+</style>
+<div class="pos">
+    当前位置：<span><a href="/">首页</a>></span><span><a href="/zx">法律咨询</a></span>
+</div>
+<div class="ss">
+    <div class="schcat">
+        <div class="schtop"></div>
+        <div class="schcenter" id="msgclass">
+            <div class="schcon" id="schcon">
+                <!-- ko foreach: items -->
+                <!-- ko if: $index() < 2 -->
+                <div>
+                    <span><a href="javascript:void(0)" data-bind="attr: {'href':'/zx?MsgClass=' + ClassCode() },html:'['+ClassName()+']'"></a></span>
+                    <p>
+                        <!-- ko foreach: children -->
+                        <a href="#" data-bind="attr: {'href':'/zx?MsgClass=' + ClassCode() },html:ClassName()+''&nbsp&nbsp"></a>
+                        <!-- /ko -->
+                    </p>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <div id="cc">
+                    <!-- ko foreach: items -->
+                    <!-- ko if: $index() > 1 -->
+                    <div>
+                        <span><a href="javascript:void(0)" data-bind="attr: {'href':'/zx?MsgClass=' + ClassCode() },html:'['+ClassName()+']'"></a></span>
+                        <p>
+                            <!-- ko foreach: children -->
+                            <a href="#" data-bind="attr: {'href':'/zx?MsgClass=' + ClassCode() },html:ClassName()+''&nbsp&nbsp"></a>
+                            <!-- /ko -->
+                        </p>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="schconbt"></div>
+            <p class="more"><span id="more">更多</span></p>
+        </div>
+        <div class="schbottom"></div>
+    </div>
+    <div class="zxlist" id="zxlist">
+        <div class="tt"><span class="num">编号</span><span class="cls">类别</span><span class="cap">标题</span><span class="time">时间</span><span class="sta">状态</span></div>
+        <div class="list">
+            <ul>
+                @for (var i = 0; i < Model.rows.Count; i++)
+                {<li><span class="num">[@Model.rows[i].AdvisoryCode]</span><span class="cls"><a href="/zx?MsgClass=@Model.rows[i].MsgClass">[@Model.rows[i].ClassName]</a></span><span class="cap"><a href="/zx/show/@Model.rows[i].AdvisoryCode" title="@Model.rows[i].MsgTitle">·@Model.rows[i].MsgTitle</a></span><span class="time">@Model.rows[i].MsgInDate.ToString("yyyy-MM-dd")</span><span class="sta" data-bind="html:formatMsgStatus(@Model.rows[i].MsgStatus)">已解答</span><span class="comt"></span></li>}
+            </ul>
+            <div id="pp"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "找律所-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.list.js"></script>
+
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var viewModel = function(){
+            var self = this;
+            com.viewModel.list.apply(this,arguments);
+        }
+        var easyLoaded = function(){
+            //数据绑定
+            var view = new viewModel(data);
+            ko.applyBindings(view);
+            //样式处理
+            $(".zxcon ul li").not(".sep").hover(function () {
+                $(".zxcon ul li").removeClass("first");
+                $(this).addClass("first");
+
+            }, function () {
+                $(this).removeClass("first");
+
+            })
+        };
+        using(['parser', 'pagination'], easyLoaded);
+
+        $(document).ready(function () {
+        })
+    </script>
+}
+<link href="~/Content/law/css/lslist.css" rel="stylesheet" type="text/css" />
+<div class="pos">
+    当前位置：<span><a href="#">阳光问法</a></span><span>></span><span><a href="#">找律所</a></span>
+</div>
+<div class="tt"></div>
+<div class="zxcon">
+    <ul data-bind="foreach: items">
+        <li data-bind="attr: {'class': $index()<1?'first':''}">
+            <div>
+                <p class="lawyername"><span class="xm"><a data-bind="attr: {'href':'/firm/show/' + FirmCode() },html:FirmName" target="_blank"></a></span></p>
+                <p class="zc" data-bind="html:FirmAddress">石家庄市桥西区</p>
+                <p class="desc" data-bind="html:(FirmDescription().replace(/<[^>]+>/g,'').substring(0,80)+'...<a href=\'/firm/show/' + FirmCode() + '\' target=\'_blank\'>[详细]</a>')">...<a href="#" data-bind="attr: {'href':'/firm-' + FirmCode() }">[详细]</a></p>
+            </div>
+        </li>
+        <li class="sep"></li>
+    </ul>
+    <div id="pp" ></div> 
+</div>

@@ -1,0 +1,5 @@
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Bin\Zephyr.WorkFlow.dll
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Bin\Zephyr.WorkFlow.pdb
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.WorkFlow\obj\Debug\Zephyr.WorkFlow.csprojResolveAssemblyReference.cache
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.WorkFlow\obj\Debug\Zephyr.WorkFlow.dll
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.WorkFlow\obj\Debug\Zephyr.WorkFlow.pdb

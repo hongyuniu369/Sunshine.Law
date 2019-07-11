@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "案件委托";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+<script src="/Content/js/viewModel/com.viewModel.edit.js"></script>
+<script type="text/javascript">
+    var viewModel = function(data){ 
+        var self = this;
+        com.viewModel.edit.apply(self,arguments);
+    } 
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    viewModel=new viewModel(data)
+    ko.bindingViewModel(viewModel);
+</script>
+}
+
+<div class="z-toolbar">
+    <a id="a_save" href="#" plain="true" class="easyui-linkbutton" icon="icon-save" data-bind="click:readonly()?null:saveClick,linkbuttonDisable:readonly" title="保存">保存</a>
+    <a id="a_undo" href="#" plain="true" class="easyui-linkbutton" icon="icon-undo" data-bind="click:readonly()?null:rejectClick,linkbuttonDisable:readonly" title="撤消">撤消</a>
+    <a id="a_refresh" href="#" plain="true" class="easyui-linkbutton"  icon="icon-arrow_refresh"   title="刷新" data-bind="click:refreshClick">刷新</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_other" href="#" class="easyui-splitbutton" data-options="menu:'#divother',iconCls:'icon-application_go'" title="其他">其他</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_first" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_first" data-bind="click:firstClick,linkbuttonEnable:pageData.scrollKeys.firstEnable" title="第一条"></a> 
+    <a id="a_previous" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_previous" data-bind="click:previousClick,linkbuttonEnable:pageData.scrollKeys.previousEnable" title="上一条"></a> 
+    <a id="a_next" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_next" data-bind="click:nextClick,linkbuttonEnable:pageData.scrollKeys.nextEnable" title="下一条"></a> 
+    <a id="a_last" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_last" data-bind="click:lastClick,linkbuttonEnable:pageData.scrollKeys.lastEnable" title="最后一条"></a> 
+</div>
+
+<div id="divother" style="width:100px; display:none;">
+    <div data-options="iconCls:'icon-cross'" data-bind="click:fnIsNew()?null:deleteClick,linkbuttonDisable:true">删除</div>
+    <div data-options="iconCls:'icon-arrow_refresh'" data-bind="click:refreshClick">刷新</div>
+</div>  
+
+
+<div id="master" class="container_12" data-bind="inputwidth:0.9">
+    <div class="grid_1 lbl">EntrustCode</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.EntrustCode ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">MsgTitle</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgTitle ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">MsgSubdescription</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgSubdescription ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">MsgContent</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgContent ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">MsgRequirement</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgRequirement ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">InvolvedMoney</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.InvolvedMoney ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">ActiveTime</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ActiveTime ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">Address</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.Address ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">DetailAddress</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.DetailAddress ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">TrueName</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.TrueName ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">MsgClass</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgClass ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">Keyword</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.Keyword ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">IsInternalReference</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.IsInternalReference ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">ContactNO</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ContactNO ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">Email</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.Email ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">MsgIP</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgIP ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">IgnoreCode</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.IgnoreCode ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">MsgStatus</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgStatus ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">HitCount</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.HitCount ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">IsPublicity</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.IsPublicity ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">IsClassic</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.IsClassic ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">MsgInDate</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgInDate ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">ApproveState</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ApproveState ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">ApprovePerson</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ApprovePerson ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">ApproveDate</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ApproveDate ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">ApproveRemark</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ApproveRemark ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">MsgCheckDate</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgCheckDate ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">ReferenceSource</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.ReferenceSource ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">MsgRemark</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.MsgRemark ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">UserCode</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.UserCode ,readOnly:readonly" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">LawyerCode</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.LawyerCode ,readOnly:readonly" class="z-txt " /></div>
+    <div class="grid_1 lbl">AgreeTime</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:pageData.form.AgreeTime ,readOnly:readonly" class="z-txt " /></div>
+
+    <div class="clear"></div>
+</div>
+
+<div id="tt" class="easyui-tabs">  
+    <div title="tab1"></div>
+</div>

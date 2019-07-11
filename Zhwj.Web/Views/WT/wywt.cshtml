@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "我要委托-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+@section head{
+    <script src="~/Content/js/jquery-plugin/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/js/jquery-plugin/ckeditor/adapters/jquery.js"></script>
+}
+@section scripts{
+    <script src="/Content/law/js/viewModel/wywt.js"></script>
+    <script type="text/javascript">
+        var easyLoaded = function(){
+            //设置联动Address
+            setAddress(viewModel.pageData.form.Address(),'Address');
+            setMsgClass(viewModel.pageData.form.MsgClass(),'MsgClass');
+        };
+
+        using(['validatebox','combobox'], easyLoaded);
+        using('/Content/js/jquery-easyui-1.3.2/jquery.easyui.validator.extend.js');
+        var viewModel = function(data){ 
+            var self = this;
+            com.viewModel.edit.apply(self,arguments);
+            this.dsIsOrNot = [{value:'true', text:'是'},{value:'false', text:'否'}];
+        } 
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        viewModel=new viewModel(data)
+        ko.bindingViewModel(viewModel, document.getElementById('zxcon'));
+
+    $(document).ready(function(){
+        //设置ckeditor}
+        var MsgSubdescription= $('#MsgSubdescription');
+        MsgSubdescription.ckeditor();
+        var MsgSubdescriptionEditor =MsgSubdescription.ckeditor().editor;
+        MsgSubdescriptionEditor.on( 'loaded', function( event) {
+            MsgSubdescriptionEditor.setData( viewModel.pageData.form.MsgSubdescription());
+            MsgSubdescriptionEditor.setReadOnly(viewModel.readonly());
+        } );
+        MsgSubdescriptionEditor.on( 'configLoaded', function() {
+            MsgSubdescriptionEditor.config.toolbar = "Basic";
+        });
+
+        var MsgContent= $('#MsgContent');
+        MsgContent.ckeditor();
+        var MsgContentEditor =MsgContent.ckeditor().editor;
+        MsgContentEditor.on( 'loaded', function( event) {
+            MsgContentEditor.setData( viewModel.pageData.form.MsgContent());
+            MsgContentEditor.setReadOnly(viewModel.readonly());
+        } );
+        MsgContentEditor.on( 'configLoaded', function() {
+            MsgContentEditor.config.toolbar = "Basic";
+        });
+
+        var MsgRequirement= $('#MsgRequirement');
+        MsgRequirement.ckeditor();
+        var MsgRequirementEditor =MsgRequirement.ckeditor().editor;
+        MsgRequirementEditor.on( 'loaded', function( event) {
+            MsgRequirementEditor.setData( viewModel.pageData.form.MsgRequirement());
+            MsgRequirementEditor.setReadOnly(viewModel.readonly());
+        } );          
+        MsgRequirementEditor.on( 'configLoaded', function() {
+            MsgRequirementEditor.config.toolbar = "Basic";
+        });
+        
+        
+        var submit=$("#submit");
+        submit.on('click',function(event){
+            if(MsgSubdescriptionEditor.getData())
+                viewModel.pageData.form.MsgSubdescription(MsgSubdescriptionEditor.getData());
+            if(MsgContentEditor.getData())
+                viewModel.pageData.form.MsgContent(MsgContentEditor.getData());
+            if(MsgRequirementEditor.getData())
+                viewModel.pageData.form.MsgRequirement(MsgRequirementEditor.getData());
+        } );
+    });
+    </script>
+}
+<link href="~/Content/law/css/wt.css" rel="stylesheet" type="text/css" />
+<style>
+   
+    .cke_contents {
+        width: 560px;
+        height: 450px;
+    }
+    .content1 .left .zxcon .cke_reset {
+        margin: 0px;
+    }
+</style>
+<div class="pos">
+    当前位置：<span><a href="#">实事实办</a></span><span>></span><span><a href="#">实事实办</a></span>
+</div>
+<div class="tt"></div>
+<div class="zxcon" id="zxcon">
+    <div class="process"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>案件标题：</div>
+    <div class="grid_3 val">
+        <input type="text" class="captial z-txt  easyui-validatebox" data-bind="value:pageData.form.MsgTitle ,readOnly:readonly" data-options="required:true,validType:['length[6,20]']" /><span>请填写完整标题，如：聘请律师解决交通事故案件[6-20个汉字]</span></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>涉案金额：</div>
+    <div class="grid_3 val">
+        <input type="text" data-bind="datasource:data.dataSource.involvedMoney,comboboxValue:pageData.form.InvolvedMoney ,comboboxReadOnly : readonly" class="z-txt easyui-combobox" data-options="required:true,showblank:true" /><span>请选择您案件涉及的金额！</span></div>
+    <div class="clear"></div>
+     <div class="grid_1 lbl"><span class="red">*</span>选择地区：</div>
+    <div class="grid_3 val">
+        <select class="z-txt" id="Province" name="Province" style="width: 70px;"></select>
+        <select class="z-txt" id="City" name="City" style="width: 85px;"></select>
+        <select class="z-txt" id="District" name="District" style="width: 95px;"></select>
+        <span>请选择您要求律师办案的准确地点！</span></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>问题分类：</div>
+    <div class="grid_3 val">
+       <input id="MsgRootClass" type="text" class="z-txt easyui-combobox" data-bind="comboboxReadOnly: readonly" />
+        <input id="MsgClass" data-options="required:true" type="text" class="z-txt easyui-combobox" data-bind="comboboxReadOnly: readonly" />
+        <span >选择你的问题的分类</span></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>案件简介：</div>
+    <div class="grid_3 val" style="margin-bottom: 0">
+        <textarea id="MsgSubdescription" class="brifintro z-txt  easyui-validatebox" data-bind="value:pageData.form.MsgSubdescription ,readOnly:readonly" data-options="required:true,validType:['length[4,400]']"></textarea></div>
+    <div class="clear"></div>
+    <div class="akms">
+        <span>案件描述请说明案件发生的时间、地点、目前进展、需要什么样的律师及想要律师哪些帮助等。
+此项目将对所有人公开显示，请勿填写当事人姓名等隐私内容。[4-400字]</span>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>案件详情：</div>
+    <div class="grid_3 val" style="margin-bottom: 0">
+        <textarea id="MsgContent" class=" content z-txt  easyui-validatebox" data-bind="value:pageData.form.MsgContent ,readOnly:readonly" data-options="required:true,validType:['length[4,400]']"></textarea></div>
+    <div class="clear"></div>
+    <p class="prompt">
+        <span>尽可能完善地填写：事件发生的时间、地点、详细经过、相关当事人的行为、现事态的发展等。 </span>
+    </p>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>有效时间：</div>
+    <div class="grid_3 val">
+        <select class="sel_year" rel="">
+        </select>年<select style="margin-left: 5px" class="sel_month" rel="">
+        </select>月<select style="margin-left: 5px" class="sel_day" rel="">
+        </select>日<span> （希望在此时间之前得到律师接洽）</span></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>真实姓名：<input type="text" class="z-txt  easyui-validatebox" data-bind="value:pageData.form.TrueName ,readOnly:readonly" data-options="required:true,validType:['length[1,10]']" /><span>可以用“王先生”等称谓</span></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>手机号码：</div>
+    <div class="grid_3 val">
+        <input type="text" class="z-txt easyui-validatebox" data-bind="value:pageData.form.ContactNO ,readOnly:readonly" data-options="required:true,validType:'contactNO'"  /><span>请输入您真实手机号码，以便得到验证码，快速解决您的问题！</span></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：</div>
+    <div class="grid_3 val">
+        <input type="text" class="z-txt easyui-validatebox" data-bind="value:pageData.form.Email ,readOnly:readonly" data-options="required:true,validType:'email'" /></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl"><span class="red">*</span>委托要求：</div>
+    <div class="grid_3 val">
+        <textarea id="MsgRequirement" class=" request z-txt  easyui-validatebox" data-bind="value:pageData.form.MsgRequirement ,readOnly:readonly" data-options="required:true,validType:['length[4,400]']"></textarea></div>
+    <div class="clear"></div>
+    <div class="akms"><span>请填写对律师的要求，比如：想请经验丰富的律师出面解决。</span></div>
+    <div>
+        <input id="submit" type="submit" class="sbt" value="" data-bind="click:readonly()?null:submitClick,enable:!readonly()" style="cursor: pointer" />
+    </div>
+</div>
+<script type="text/javascript" src="~/Content/js/utils/setAddress.js"></script>
+<script>
+    var setMsgClass = function (bindValue, valueField) {
+        $.ajaxSettings.async = false;
+        var rootClass = $('#MsgRootClass').combobox({
+            url: '/api/msg/msgclass/GetValueTextListRoot',
+            method: "Get",
+            queryParams: { IsEnable: '1' },
+            editable: false,
+            onSelect: function (record) {
+                $.get('/api/msg/msgclass/GetValueTextListByPid/' + record.value,{IsEnable:'1'}, function (data) {
+                    msgClass.combobox("clear").combobox('loadData', data);
+                }, 'json');
+                getValue();
+            }
+        });
+
+        var msgClass = $('#MsgClass').combobox({
+            editable: false,
+            onSelect: function (record) {
+                getValue();
+            }
+        });
+
+        var getValue = function () {
+            var selvalue = msgClass.combobox("getValue");
+            viewModel.pageData.form.MsgClass(selvalue);
+        }
+    }
+</script>
+<script type="text/javascript" src="~/Content/js/utils/birthday.js"></script>
+<script>
+    $(function () {
+        var date=new Date()
+        $(".sel_year").attr("rel",date.getFullYear());
+        $(".sel_month").attr("rel",date.getMonth()+1);
+        $(".sel_day").attr("rel",date.getDate());
+        $.ms_DatePicker({
+            YearSelector: ".sel_year",
+            MonthSelector: ".sel_month",
+            DaySelector: ".sel_day"
+        });
+        $.getActiveTime=function(){
+            var year;
+            var month;
+            var day;
+            var activeTime;
+            year=$(".sel_year").val();
+            month=$(".sel_month").val();
+            day=$(".sel_day").val();
+            activeTime=year+'-'+(month<10?"0"+month:month)+'-'+(day<10?"0"+day:day);
+            return activeTime;
+        }
+        viewModel.pageData.form.ActiveTime($.getActiveTime());
+    });
+
+   
+</script>

@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "咨询查询-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_LayoutH5.cshtml";
+}
+<script type="text/javascript">
+    function valid() {
+        if ($('#searchMsg').validator('isFormValid')) {
+            doSearch();
+        }
+    }
+    function doSearch() {
+        var msgname = encodeURIComponent(document.getElementById('msgname').value);
+        var msgnum = encodeURIComponent(document.getElementById('msgnum').value);
+        var btime = encodeURIComponent(document.getElementById('btime').value);
+        var etime = "";
+        if(document.getElementById('etime').value != "")
+            etime = encodeURIComponent(" 到 " + document.getElementById('etime').value);
+        window.location.href = "/H5/list?mt=" + msgname + "&ac=" + msgnum+ "&id=" + btime + etime;
+    }
+</script>
+
+<div id="searchMsg" class="am-form" data-am-validator>
+    <fieldset>
+        <legend>留言查询</legend>
+        <div class="am-form-group">
+            <label for="msgnum">编号：</label>
+            <input type="text" id="msgnum" placeholder="提交留言时返回的留言编号" />
+        </div>
+
+        <div class="am-form-group">
+            <label for="msgname">关键字：</label>
+            <input type="text" id="msgname" placeholder="留言标题中的关键字" />
+        </div>
+
+        <div class="am-form-group">
+            <label for="btime">开始日期：</label>
+            <input type="text" id="btime" placeholder="开始日期" class="am-form-field" data-am-datepicker="{theme: 'danger'}" readonly />
+        </div>
+
+        <div class="am-form-group">
+            <label for="etime">结束日期：</label>
+            <input type="text" id="etime" placeholder="结束日期" class="am-form-field" data-am-datepicker="{theme: 'danger'}" readonly />
+        </div>
+
+        <button class="am-btn am-round am-btn-secondary am-btn-block" type="submit" onclick="valid();return false">提交</button>
+    </fieldset>
+</div>

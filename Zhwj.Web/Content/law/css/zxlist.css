@@ -1,0 +1,111 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body,
+button, input, select, textarea /* for ie */ {
+    font: 12px/1.6 /*字号与行高*/
+	Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /*字体*/
+}
+a{ text-decoration:none; color:#535353}
+a:hover{ color:#d90000}
+/*------------------------------------------------------------------*/
+body{ }
+.top{ padding-top:20px; padding-bottom:5px}
+.top .logo{width:458px; height:60px; float:left}
+.top .rtbtn{width:226px; float:right; margin-right:20px}
+.top .rtbtn ul li{width:50px; float:left; margin-right:20px; display:inline}
+.top .rtbtn ul li a img{ display:block; margin:0 auto}
+
+.wrap{ width:980px; margin:0 auto }
+.main{ width:980px; background:#ffffff}
+.nav{ height:40px; background:url(../images/listnavbg.jpg); line-height:40px; padding-left:25px; border:1px solid #6392d7; border-top-width:2px; clear:both }
+.nav ul li{ float:left; color:#FFFFFF;}
+.nav ul li.sep{width:5px; background:url(../images/zixun_17.jpg) no-repeat center; margin:0 30px; height:40px;}
+.nav ul li.first{background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.nav ul li a{color:#ffffff;font-size:16px; font-family:"微软雅黑"; display:block; width:80px; text-align:center}
+.nav ul li a:hover{ color:#CC3300; background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.pos{ height:50px;line-height:50px; font-size:16px;font-family:"微软雅黑"; color:#1162c9 }
+.pos span{ margin-right:8px; color:#6c6c6c;font-size:12px; font-family:"宋体"}
+.pos span a{ font-size:12px; font-family:"宋体"}
+.content1{ width:980px;margin-top:3px; margin-bottom:10px; }
+.content1 .left{ width:668px;float:left; padding-bottom:50px; display:inline; }
+.content1 .left .ss {border:1px solid #e1e1e1    }
+.schcat{width:639px; margin:15px}
+.schcat .schtop{ height:56px; background:url(../images/zxlist_03.jpg)}
+.schcat .schcenter{border:1px solid #e0e0e0; padding-bottom:10px; border-top:0; border-bottom:0; width:629px; margin-left:3px; background:#f7fbff; padding-top:20px}
+.schcat .schcenter div.schcon{width:602px; border:1px solid #e0e0e0; background:#fff; margin-left:13px; border-bottom:0}
+.schcat .schcenter div.schcon div { padding-top:15px; padding:10px 0;border-bottom:1px dashed #e9e9e9;width:580px; margin-left:5px}
+.schcat .schcenter div.schcon div span{ display:block; width:110px; float:left; text-align:right; margin-right:10px}
+.schcat .schcenter div.schcon div p{width:460px; float:left; line-height:24px}
+.schcat .schcenter div.schcon div p a{ color:#00479b}
+.schcat .schcenter div.schcon div p a.current{ color:#CC3300}
+.schcat .schcenter div.schconbt{ height:13px; background:url(../images/zxlist_08.jpg); width:604px; margin-left:13px}
+.schcat .schcenter p.more{ text-align:center}
+.schcat .schcenter p.more span{ cursor:pointer; color:#CC0000}
+
+.schcat .schbottom{ height:16px; background:url(../images/zxlist_07.jpg)}
+#cc{ display:none; border-bottom:0}
+.zxlist{width:629px; border:1px solid #e0e0e0; margin-left:18px; padding-bottom:20px}
+.zxlist .tt { background:#ededed; height:30px; line-height:30px; width:722px; }
+.zxlist span{ display:block; float:left; height:30px; margin-left:6px; margin-right:6px; display:inline }
+.zxlist .tt span{ text-align:center; color:#242424}
+.zxlist span.num{width:76px;}
+.zxlist span.cls{width:60px;}
+.zxlist span.cap{width:310px; overflow: hidden; text-overflow: ellipsis; *text-overflow:ellipsis; white-space: nowrap;}
+.zxlist span.time{width:67px;}
+.zxlist span.sta{width:50px;}
+.zxlist ul{padding-top:15px; }
+.zxlist  ul li{ height:32px; line-height:32px; width:722px;margin:0px }
+.zxlist ul li.last{ border-bottom:0}
+.zxlist ul li span{ text-align:center; font-size:14px; color:#535353; font-size:12px}
+.zxlist ul li span.cap{ text-align:left}
+.zxlist ul li span.cap a{ font-size:14px; }
+.zxlist ul li span.cls a{ font-size:12px; color:#1666af  }
+.zxlist ul li span.cls a:hover{color:#dc3900}
+.zxlist ul li span.time{ color:#1666af }
+.zxlist ul li span.comt{ background:url(../images/comt.jpg) no-repeat center; cursor:pointer}
+
+strong{ color:#ff0000}
+table { 
+}
+.pagination { margin-top:20px
+}
+    .pagination table tr td span {
+        display:block; height:30px; line-height:30px
+    }
+.pagination td {
+    border: 0 none; vertical-align:middle;height:40px; line-height:40px;
+}
+a.l-btn-disabled, a.l-btn-disabled:hover {
+    margin-top:15px;
+}
+a.l-btn {
+    margin-top:15px
+}
+.pagination-info {
+    float: right;
+    font-size: 12px;
+    height: 50px;
+    line-height: 50px;
+    margin:0 10px 0 0;
+    padding: 0;
+    
+}
+.right{width:285px; float:right; margin-top:50px}
+.right .zxbtn{width:283px; height:130px; border:1px solid #e2e2e2; border-top-width:5px; margin-bottom:10px}
+.right .zxbtn a{ display:block; width:249px; height:46px; margin:13px 0 0 15px}
+.right .zxbtn a.zx{ background:url(../images/zixun_32.jpg)}
+.right .zxbtn a.wt{ background:url(../images/zixun_36.jpg)}
+.right .cj{ margin-bottom:10px; border:1px solid #e1e1e1; padding-bottom:10px; background:#fcfcfc;border-top-width:5px;}
+.right .cj .tt{ height:38px; line-height:38px; background:url(../images/zixun_41.jpg) 0 bottom no-repeat;}
+.right .cj .tt .rmzx{ display:block; float:left; margin-left:8px;}
+.right .cj .tt .more{ display:block; float:right; margin-right:10px}
+.right .cj .tt .rmzx a{ font-size:16px; font-family:"微软雅黑"; color:#d22800}
+.right .cj ul{ padding-top:8px; padding-left:15px; }
+.right .cj ul li{ line-height:32px; height:32px; background:url(../images/wenfa_59.png) no-repeat 0px center; padding-left:12px; margin-left:0px; border-bottom:1px dashed #cecece; width:235px;}
+.right .cj ul li.first{ border-bottom:0}
+.right .cj ul li a{ font-size:12px; } 
+.clear{ clear:both}
+
+.fk{ clear:both; padding-bottom:10px;}
+.fk p{ color:#8b8b8b; text-align:center; height:24px; line-height:24px}
+.fk p a{ color:#8b8b8b; margin:0 8px}

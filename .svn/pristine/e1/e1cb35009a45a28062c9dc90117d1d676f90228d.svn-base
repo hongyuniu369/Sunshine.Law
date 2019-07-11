@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "河北医科大学教务处";
+    Layout = "~/Views/Shared/_LayoutJwc.cshtml";
+}
+@section head{
+    <link href="~/content/jwc/css/list.css" type="text/css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Content/js/viewModel/com.viewModel.list.js"></script>
+
+    <script type="text/javascript">
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        var viewModel = function(){
+            var self = this;
+            com.viewModel.list.apply(this,arguments);
+        }
+        var easyLoaded = function(){
+            //设置查询参数
+            var title = utils.getRequest("title", window.location.href);
+            if(title){
+                data.form.Title = decodeURIComponent(title);
+            }
+            //数据绑定
+            var view = new viewModel(data);
+            ko.applyBindings(view, document.getElementById('left'));
+            if(view.dataSource.newsClass)
+                ko.applyBindings(view.dataSource.newsClass, document.getElementById('position'));
+        };
+        using(['validatebox','combotree','numberspinner','combobox','pagination'], easyLoaded);
+
+        $(document).ready(function () {
+        })
+    </script>
+}
+<div class="wrap">
+    <div class="w1100">
+        <img src="~/content/jwc/images/b1.jpg" width="1100" height="130" />
+    </div>
+    <div class="w1100">
+        <div class="position" id="position"><span>当前位置：</span><a href="/">首页</a>><a href="#" data-bind="attr: {'href':'/list-' + ClassCode },html:ClassName"></a>><a>列表</a> </div>
+        <div class="left" id="left">
+            <div class="conlist">
+                <ul data-bind="foreach: items">
+                    <li><a href="#" target="_blank" data-bind="attr: {'href':'/show-' + NewsCode() , 'title':Title}, html:Title().length>42?Title().substring(0,42)+'...':Title()"></a><span data-bind="html:com.formatDate(SignedTime())"></span></li>
+                </ul>
+                <div id="pp" style="margin: 12px;"></div>
+            </div>
+        </div>
+        <div class="right">
+            @Html.Partial("_PartialJwcRight")
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

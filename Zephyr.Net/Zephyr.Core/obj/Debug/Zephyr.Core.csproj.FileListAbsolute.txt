@@ -1,0 +1,5 @@
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Core\obj\Debug\Zephyr.Core.csprojResolveAssemblyReference.cache
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Bin\Zephyr.Core.dll
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Bin\Zephyr.Core.pdb
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Core\obj\Debug\Zephyr.Core.dll
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Core\obj\Debug\Zephyr.Core.pdb

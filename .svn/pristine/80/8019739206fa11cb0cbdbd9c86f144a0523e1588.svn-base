@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.locale = "zh_CN";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="keywords" content="河北新闻网,阳光理政" />
+    <meta name="description" content="河北新闻网阳光理政投诉平台" />
+    <link rel="icon" type="image/ico" href="~/Content/Images/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit" />
+
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="icon" sizes="192x192" href="~/Content/law/h5/assets/i/app-icon72x72@2x.png" />
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="apple-touch-icon-precomposed" href="~/Content/law/h5/assets/i/app-icon72x72@2x.png" />
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="~/Content/law/h5/assets/i/app-icon72x72@2x.png" />
+    <meta name="msapplication-TileColor" content="#0e90d2" />
+
+    <link rel="stylesheet" href="~/Content/law/h5/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="~/Content/law/h5/assets/css/app.css" />
+    <script src="~/Content/law/h5/assets/js/jquery.min.js"></script>
+    @RenderSection("head", required: false)
+</head>
+<body>
+     <form id="form1" runat="server">
+        <!-- Header -->
+        <header data-am-widget="header" class="am-header header-default am-no-layout">
+            <div class="am-header-left am-header-nav">
+                <a href="javascript:history.go(-1);" class="">
+                    <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;"
+                        alt="" />
+                </a>
+            </div>
+            <div class="header-logo">
+                <img src="~/Content/law/h5/images/logo.gif">
+            </div>
+        </header>
+        <!-- Header End -->
+        <!-- Menu -->
+        <nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1" data-am-menu-offcanvas>
+            <a href="javascript: void(0)" class="am-menu-toggle">
+                <i class="am-menu-toggle-icon am-icon-bars"></i>
+            </a>
+            <div class="am-offcanvas">
+                <div class="am-offcanvas-bar">
+                    <ul class="am-menu-nav sm-block-grid-1">
+                        <li class="">
+                            <a href="http://tousu.hebnews.cn/node_117284.htm">回到首页<span class="am-icon-home am-icon-sm"></span></a>
+                        </li>
+                        <li class="">
+                            <a href="/h5/wyzx">我要咨询<span class="am-icon-users"></span></a>
+                        </li>
+                        <li class="">
+                            <a href="/h5/list">全部咨询<span class="am-icon-newspaper-o"></span></a>
+                        </li>
+                        <li class="">
+                            <a href="/h5/query">咨询查询<span class="am-icon-search"></span></a>
+                        </li>
+                        <li class="">
+                            <a href="/h5/lawyer">律师团队<span class="am-icon-heart"></span></a>
+                        </li>
+                        <li class="">
+                            <a href="/h5/firm">加盟律所<span class="am-icon-indent"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Menu End -->
+        <!-- Content -->
+       @RenderBody()
+        <!-- Content End -->
+        <div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+            <a href="#top" title="">
+                <i class="am-gotop-icon am-icon-hand-o-up"></i>
+            </a>
+        </div>
+        <footer class="footer">
+            <div class="am-container">
+                <p>© 2016 . 阳光理政</p>
+            </div>
+        </footer>
+        <br />
+        <br />
+        <div data-am-widget="navbar" class="am-navbar am-cf navbar-default  am-no-layout" id="">
+            <ul class="am-navbar-nav am-cf am-avg-sm-4">
+                <li>
+                    <a href="http://tousu.hebnews.cn/node_117284.htm">
+                        <span class="am-icon-home"></span>
+                        <span class="am-navbar-label">回到首页</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/h5/wyzx">
+                        <span class="am-icon-users"></span>
+                        <span class="am-navbar-label">我要咨询</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/h5/list">
+                        <span class="am-icon-newspaper-o"></span>
+                        <span class="am-navbar-label">全部咨询</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/h5/query">
+                        <span class="am-icon-search"></span>
+                        <span class="am-navbar-label">咨询查询</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <!--<![endif]-->
+    <!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="~/Content/law/h5/assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+    <script src="~/Content/law/h5/assets/js/amazeui.min.js"></script>
+        @RenderSection("scripts", required: false)
+</body>
+</html>

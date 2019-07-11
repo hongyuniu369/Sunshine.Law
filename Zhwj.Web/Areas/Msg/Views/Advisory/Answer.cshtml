@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "咨询答复";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section head{
+    <script src="~/Content/js/jquery-plugin/ckeditor/ckeditor.js"></script>
+    <link href="~/Content/js/jquery-plugin/ckeditor/contents.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery-plugin/ckeditor/adapters/jquery.js"></script>
+    <script src="~/Content/js/jquery-plugin/ckfinder/ckfinder.js"></script>
+}
+
+@section scripts{
+    <script src="/Content/js/viewModel/com.viewModel.edit.js"></script>
+    <script type="text/javascript">
+        var editor;
+        var viewModel = function(data){ 
+            var self = this;
+            com.viewModel.edit.apply(self,arguments);
+
+            this.saveClickB = function(){
+                if(editor.getData())
+                    viewModel.pageData.form.AnswerContent(editor.getData());
+                self.saveClick();
+            };
+            this.dsBit = [{value:true, text:'是'},{value:false, text:'否'}];
+        } 
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        viewModel=new viewModel(data)
+        ko.bindingViewModel(viewModel);
+
+        CKEDITOR.on( 'instanceCreated', function( event ) {
+            //$("#divCKEditor").html(viewModel.pageData.form.AnswerContent());
+            editor = event.editor, element = editor.element;
+            editor.on( 'blur', function( event) {
+                if(editor.getData())
+                    viewModel.pageData.form.AnswerContent(editor.getData());
+            } );
+            editor.on( 'configLoaded', function() {
+                editor.config.toolbar = "Basic";
+                //设置只读
+                editor.setReadOnly(viewModel.readonly());
+            });
+        });    
+    </script>
+}
+
+<div class="z-toolbar">
+    <a id="a_save" href="#" plain="true" class="easyui-linkbutton" icon="icon-save" data-bind="click:readonly()?null:saveClickB,linkbuttonDisable:readonly" title="保存">保存</a>
+    <a id="a_undo" href="#" plain="true" class="easyui-linkbutton" icon="icon-undo" data-bind="click:readonly()?null:rejectClick,linkbuttonDisable:readonly" title="撤消">撤消</a>
+    <a id="a_refresh" href="#" plain="true" class="easyui-linkbutton" icon="icon-arrow_refresh" title="刷新" data-bind="click:refreshClick">刷新</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_other" href="#" class="easyui-splitbutton" data-options="menu:'#divother',iconCls:'icon-application_go'" title="其他">其他</a>
+    <div class="datagrid-btn-separator"></div>
+    <a id="a_first" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_first" data-bind="click:firstClick,linkbuttonEnable:pageData.scrollKeys.firstEnable" title="第一条"></a>
+    <a id="a_previous" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_previous" data-bind="click:previousClick,linkbuttonEnable:pageData.scrollKeys.previousEnable" title="上一条"></a>
+    <a id="a_next" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_next" data-bind="click:nextClick,linkbuttonEnable:pageData.scrollKeys.nextEnable" title="下一条"></a>
+    <a id="a_last" href="#" plain="true" class="easyui-linkbutton" icon="icon-resultset_last" data-bind="click:lastClick,linkbuttonEnable:pageData.scrollKeys.lastEnable" title="最后一条"></a>
+</div>
+
+<div id="divother" style="width: 100px; display: none;">
+    <div data-options="iconCls:'icon-arrow_refresh'" data-bind="click:refreshClick">刷新</div>
+</div>
+
+
+<div id="master" class="container_12" data-bind="inputwidth:0.9">
+    <div class="grid_1 lbl">咨询编号</div>
+    <div class="grid_3 val" data-bind="inputwidth:0.5"><input type="text" data-bind="value:dataSource.advisory.AdvisoryCode ,readOnly : true" class="z-txt easyui-validatebox" data-options="required:true"/></div>
+    <div class="grid_1 lbl">咨询类别</div>
+    <div class="grid_3 val"><input type="text" data-bind="value:dataSource.advisory.ClassName ,readOnly : true" class="z-txt easyui-validatebox" data-options="required:true"/></div>
+    <div class="grid_1 lbl">咨询日期</div>
+    <div class="grid_3 val"><input type="text" data-bind="dateboxValue:dataSource.advisory.MsgInDate ,dateboxReadOnly : true" class="z-txt easyui-datebox" /></div>
+
+    <div class="clear"></div>
+
+    <div class="grid_1 lbl">咨询标题</div>
+    <div class="grid_7 val" data-bind="inputwidth:0.96"><input type="text" data-bind="value:dataSource.advisory.MsgTitle ,readOnly:true" class="z-txt easyui-validatebox"data-options="required:true, validType:['length[6,64]']" /></div>
+    <div class="grid_1 lbl" data-bind="style:{display:dataSource.advisory.PhoneIsOpen?'':'none'}">联系电话</div>
+    <div class="grid_3 val" data-bind="style:{display:dataSource.advisory.PhoneIsOpen?'':'none'}"><input type="text" data-bind="value:dataSource.advisory.ContactNO ,readOnly:true" class="z-txt easyui-validatebox" data-options="required:true,validType:['contactNO']" /></div>
+
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">咨询内容</div>
+    <div class="grid_11 val" style="height: 240px;">
+        <div class="grid_12 z-txt" style="margin:0;height: 240px; text-indent:2em; font-size:13px;" data-bind="html:dataSource.advisory.MsgContent"></div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="grid_1 lbl">保密</div>
+    <div class="grid_3 val"><input type="text" data-bind="datasource:dsBit,comboboxValue:pageData.form.IsSecret ,comboboxReadOnly : readonly" data-options="required:true" class="z-txt easyui-combobox" /></div>
+
+    <div class="clear"></div>
+
+    <div class="grid_1 lbl">答复内容</div>
+    <div class="grid_11 val" style="min-height: 240px;">
+        <div class="grid_12 z-txt" data-bind="html:pageData.form.AnswerContent" style="margin:0;height: 240px;" contenteditable="true" id="divCKEditor"></div>
+        @*<textarea id="txtCkeditor" data-bind="value:pageData.form.AnswerContent ,readOnly:readonly" data-options="required:true,missingMessage:'内容为必输项'" class="z-txt grid_11 easyui-validatebox" style="height:240px;" ></textarea>*@
+    </div>
+
+    <div class="clear"></div>
+</div>

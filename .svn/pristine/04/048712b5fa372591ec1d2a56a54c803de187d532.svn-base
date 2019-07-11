@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "律师资料-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_LayoutWap.cshtml";
+}
+
+<link href="~/Content/law/css/lawyerdetailed.css" rel="stylesheet" type="text/css" />
+<style>
+    .zxcon {
+        margin: 0px 6px 0 6px;
+        border-style:none;
+        padding: 0px;
+    }
+    .zxcon .title {
+        background-repeat:no-repeat;
+    }
+    .zxcon,.zxcon .title,.zxcon .title1,.zxcon .desc,.zxcon .lawyerdesc,.zxcon .lawyerdesc {
+        width: auto;
+    }
+.zxcon .desc {
+    display:normal;
+    float: left;
+    margin-left: 6px;
+    width: auto;
+}</style>
+
+<div class="tittle">
+    <a href="/wap">首页</a> >> 律师资料
+</div>
+<div class="zxcon">
+    <div class="title">律师基本资料</div>
+    <div>
+        <div class="lawyerimg">
+            <img src="@Model.Lawyer.LawyerPic" /></div>
+        <div class="desc">
+            <p>律师姓名：<span>@Model.Lawyer.LawyerName</span></p>
+            <p>执业证号：<span>@Model.Lawyer.LicenseNumber</span></p>
+            <p>执业机构：<span>@Model.Lawyer.FirmName</span></p>
+            <p>电子邮件：<span>@Model.Lawyer.Email</span></p>
+            <p>手机：<span>@Model.Lawyer.MobilePhone</span></p>
+            <p>详细地址：<span>@Model.Lawyer.DetailAddress</span></p>
+            <div>业务专长：<span>@Model.Lawyer.MsgClasses</span></div>
+            <p>职称：<span>@Model.Lawyer.ProfessionalTitle</span></p>
+            <div class="zxls"><a href="/wap/wyzx/@Model.Lawyer.LawyerCode">咨询律师</a></div>
+        </div>
+    </div>
+    <div class="title title1">律师简介</div>
+    <div class="lawyerdesc">
+        @Html.Raw(Model.Lawyer.LawyerDescription)
+    </div>
+    <div class="title title1">询问我的问题</div>
+    <ul>
+        @for (var i = 0; i < Model.Advisorys.Count; i++)
+        {<li><a href="/wap/show/@Model.Advisorys[i].AdvisoryCode">@Model.Advisorys[i].MsgTitle</a><span>@Model.Advisorys[i].MsgInDate.ToString("yyyy-MM-dd")</span></li>}
+    </ul>
+</div>

@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_LayoutWap.cshtml";
+}
+
+@section head{
+}
+
+<div class="main">
+    <div class="f_index clearfix">
+        <a class="f_index_button ts1" href="/wap/wyzx">我要咨询</a>
+        <ul class="clearfix">
+            <li class="fl"><a href="/wap/query"
+                class="c_button_search" title="咨询查询">咨询查询</a></li>
+            <li class="fr"><a href="/wap/list"
+                class="c_button_list" title="咨询列表">咨询列表</a></li>
+        </ul>
+        <ul class="clearfix">
+            <li class="fl"><a href="/wap/firm"
+                class="c_button_over" title="律所列表">律所列表</a></li>
+            <li class="fr"><a href="/wap/lawyer"
+                class="c_button_smail" title="律师团队">律师团队</a></li>
+        </ul>
+    </div>
+</div>

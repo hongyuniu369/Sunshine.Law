@@ -1,0 +1,34 @@
+
+.boxl{background-color:#f5f5f5; border:1px solid #a5a5a5; margin:0 auto; margin-top:30px}
+.tittle{ background:url(../../images/cpt/ico2.jpg) no-repeat 0 50%; height:30px; line-height:30px; margin:15px}
+.tittle h3{ color:#313131; font-size:18px;font-family:"微软雅黑";  padding-left:20px; }
+.con{background-color:#ffffff; border:1px solid #d0d0d0; margin:0 auto; margin-bottom:20px }
+.con h3{ font-size:16px; color:#9a361c;font-family:"微软雅黑"; text-align:center; line-height:30px; margin-top:10px}
+.con p{ margin-right:10px}
+.con ul{ float:left;}
+.con li{ line-height:40px; margin-left:20px}
+.con li h3{ float:left; font-size:16px; color:#9a361c;font-family:"微软雅黑";}
+.con li p { font-size:16px; color:#313131;font-family:"微软雅黑";}
+.con li span { font-size:16px; color:#313131;font-family:"微软雅黑"; margin-right:90px}
+
+.con p{font-size:16px; color:#313131;font-family:"微软雅黑";line-height:40px; margin-left:20px}
+.liuyan{margin:0 auto; margin-top:50px}
+.liuyan p{ float:left; font-size:16px; color:#313131;font-family:"微软雅黑";}
+.name{}
+.lybox{ margin-top:10px}
+.button{background: url("img/tijiao.png") no-repeat scroll 0 0 / cover rgba(0, 0, 0, 0);
+    border: 0 none;
+    height: 48px;
+    width: 100px;
+     text-indent: -999px;
+     cursor:pointer;}
+.beizhu{margin:20px;}
+.beizhu p{float:left; font-size:12px; color:#313131;font-family:"微软雅黑"; line-height:24px}
+.table{ margin-left:10px; margin-top:20px; margin-bottom:25px}
+.table img{ float:left; margin:5px}
+.table h2{font-size:16px; color:#313131;font-family:"微软雅黑"; float:left; margin-right:10px; margin-left:10px}
+.table p{ font-size:11px; color:#fe0104; padding-left:10px; height:20px; line-height:20px}
+.table h3{font-size:14px; color:#313131;font-family:"微软雅黑"; text-indent:1em; line-height:15px; height:15px}
+.table label{ margin-right:10px}
+.legend{ margin-top:30px}
+.fieldset flash{ overflow:auto}

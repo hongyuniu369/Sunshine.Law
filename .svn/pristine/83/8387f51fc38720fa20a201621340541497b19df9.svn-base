@@ -1,0 +1,38 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body{ letter-spacing:0 }
+body, button, input, select, textarea {
+    font: 12px/1.6 Tahoma,Helvetica,Arial,"宋体",sans-serif;
+}
+.top{ padding-top:20px; padding-bottom:5px}
+.top .logo{width:458px; height:60px; float:left}
+.top .rtbtn{width:226px; float:right; margin-right:20px}
+.top .rtbtn ul li{width:50px; float:left; margin-right:20px; display:inline}
+.top .rtbtn ul li a img{ display:block; margin:0 auto}
+
+.wrap{ width:980px; margin:0 auto }
+.main{ width:980px; background:#ffffff}
+.nav{ height:40px; background:url(../images/listnavbg.jpg); line-height:40px; padding-left:25px; border:1px solid #6392d7; border-top-width:2px; clear:both }
+.nav ul li{ float:left; color:#FFFFFF;}
+.nav ul li.sep{width:5px; background:url(../images/zixun_17.jpg) no-repeat center; margin:0 30px; height:40px;}
+.nav ul li.first{background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.nav ul li a{color:#ffffff;font-size:16px; font-family:"微软雅黑"; display:block; width:80px; text-align:center}
+.nav ul li a:hover{ color:#CC3300; background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.pos{ height:50px;line-height:50px; font-size:16px;font-family:"微软雅黑"; color:#1162c9 }
+.pos span{ margin-right:8px; color:#6c6c6c}
+.pos span a{ font-size:14px; font-family:"宋体"}
+.content1 .tt {
+    height:50px; margin-top:20px; font-size:20px; font-family:"微软雅黑"; color:#CC3300; line-height:50px; border-bottom:1px dashed #c2c2c2; margin-bottom:20px;
+}
+.content1 .left {
+    width:500px; margin-left:300px
+}
+.content1 .left .grid_1 ,.content1 .left .grid_3  {
+    font-size:14px; color:#2d2d2d; height:30px; line-height:30px
+
+}
+.content1 .left .grid_3 input {     }
+.content1 .left .mem { height:30px; line-height:30px; color:#888888; margin-left:15px;margin-top:15px  }
+.content1 .left .mem input {margin-right:5px; display:block; float:left; margin-top:8px}
+.content1 .left .mem span { display:block;float:left    }
+.content1 .left .btn{margin-left:25px; display:block; width:165px; margin-top:30px;margin-bottom:30px; cursor:pointer; height:45px; background:url(../images/login_03.png); border:0}

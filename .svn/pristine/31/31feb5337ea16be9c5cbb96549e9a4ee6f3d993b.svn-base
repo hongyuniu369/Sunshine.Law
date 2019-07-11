@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "河北医科大学教务处";
+    Layout = "~/Views/Shared/_LayoutJwc.cshtml";
+}
+@section head{
+    <link href="~/content/jwc/css/list.css" type="text/css" rel="stylesheet" />
+}
+@section scripts{
+@*    <script src="~/Content/Jwc/viewModel/show.js"></script>*@
+<script type="text/javascript">
+@*    var viewModel = function(data){
+        var self = this;
+        show.viewModel.apply(self,arguments);
+    } 
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    viewModel=new viewModel(data)
+    ko.applyBindings(viewModel, document.getElementById("left"));
+    ko.applyBindings(viewModel.newsClass, document.getElementById('position'));*@
+</script>
+}
+
+<div class="wrap">
+    <div class="w1100">
+        <img src="~/content/jwc/images/b1.jpg" width="1100" height="130" />
+    </div>
+    <div class="w1100">
+        <div class="position" id="position"><span>当前位置：</span><a href="/">首页</a>><a href="/list-@Model.newsClass.ClassCode">@Model.newsClass.ClassName</a> </div>
+        <div class="left" id="left">
+            <div class="content">
+                <p class="title">@Model.news.Title</p>
+                <div class="ft">作者：<span>@Model.news.UserName</span>发布日期：<span>@Model.news.SignedTime.ToString("yyyy-MM-dd")</span>浏览次数：<span>@Model.news.OnClick</span></div>
+                <div class="cont"> @Html.Raw(@Model.news.NewsContent)</div>
+            </div>
+        </div>
+        <div class="right">
+            @Html.Partial("_PartialJwcRight")
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

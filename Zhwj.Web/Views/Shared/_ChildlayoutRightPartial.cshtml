@@ -1,0 +1,28 @@
+﻿
+<script>
+    $(document).ready(function () {
+        var rmzxViewModel = {
+            items: ko.observableArray()
+        };
+        $.ajax({
+            type: 'GET',
+            url: '/api/zx/getrmzx/',
+            async: false,
+            success: function (d) {
+                rmzxViewModel.items(ko.mapping.fromJS(d)());
+            }
+        });
+        ko.applyBindings(rmzxViewModel, document.getElementById('rmzx'));
+    });
+</script>
+<div class="zxbtn">
+    <a href="/zx/wyzx/" class="zx"></a>
+    <a href="/wt/wywt/"  class="wt"></a>
+</div>
+<div class="cj" id="rmzx">
+    <div class="tt"><span class="rmzx"><a href="#">热门咨询</a></span><span class="more"><a href="/zx/list/">更多</a></span></div>
+    <ul data-bind="foreach: items">
+        <li class="css: {first:$index() == $root.items().length-1}"><a href="#" target="_blank" data-bind="attr: {'href':'/zx/show/' + AdvisoryCode(),'title':MsgTitle },html:MsgTitle().length>19?MsgTitle().substring(0,18)+'...':MsgTitle()"></a></li>
+    </ul>
+</div>
+<iframe src="http://tousu.hebnews.cn/node_108044.htm" frame-border="0" width="285" height="550"></iframe>

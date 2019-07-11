@@ -1,0 +1,6 @@
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Bin\Zephyr.Utils.dll
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Bin\Zephyr.Utils.pdb
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Utils\obj\Debug\Zephyr.Utils.Document.Excel.NPOI.Resource1.resources
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Utils\obj\Debug\Zephyr.Utils.csproj.GenerateResource.Cache
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Utils\obj\Debug\Zephyr.Utils.dll
+E:\Developing Projects\Projects\Sunshine.Law\Zephyr.Net\Zephyr.Utils\obj\Debug\Zephyr.Utils.pdb

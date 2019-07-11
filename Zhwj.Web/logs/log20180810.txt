@@ -1,0 +1,64 @@
+2018-08-10 11:01:14,861 [6472] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 11:01:17,101 [6472] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 11:01:17,231 [6472] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 11:01:17,581 [6472] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 11:01:17,591 [6472] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 11:01:17,781 [6472] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 11:01:17,781 [6472] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 11:01:17,951 [6472] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 11:01:18,371 [7112] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-10 11:01:18,381 [7112] DEBUG Law - select top 6 A.*,C.ClassName from msg_advisory as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus =  '5' order by A.ApproveDate Desc
+2018-08-10 11:01:19,141 [7112] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-10 11:01:19,141 [7112] DEBUG Law - select top 6 A.*,C.ClassName from msg_advisory as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus >= '30' order by A.ApproveDate Desc
+2018-08-10 11:01:19,181 [7112] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-10 11:01:19,181 [7112] DEBUG Law - select top 6 A.*,C.ClassName from msg_entrust as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus =  '5' order by A.ApproveDate Desc
+2018-08-10 11:01:19,271 [7112] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-10 11:01:19,271 [7112] DEBUG Law - select A.*,C.ClassName,L.LawyerName from msg_entrust as A left outer join msg_class as C on A.MsgClass=C.ClassCode left outer join law_lawyer as L on A.LawyerCode=L.LawyerCode where  MsgStatus >= '30'
+2018-08-10 11:01:19,311 [7112] DEBUG Servicelaw_lawyer - 获取动态列表
+2018-08-10 11:01:19,311 [7112] DEBUG Law - select top 7 law_lawyer.* from law_lawyer where  LawyerStatus =  '1' order by LawyerOrder
+2018-08-10 11:01:19,401 [7112] DEBUG Servicelaw_lawyer - 获取动态列表
+2018-08-10 11:01:19,401 [7112] DEBUG Law - select top 8 * from v_lawyerScore where  LawyerStatus =  '1' order by TotalScore desc
+2018-08-10 11:01:19,461 [7112] DEBUG Servicelaw_firm - 获取动态列表
+2018-08-10 11:01:19,461 [7112] DEBUG Law - select top 3 law_firm.* from law_firm where  FirmStatus =  '1' order by FirmOrder
+2018-08-10 11:01:23,881 [7200] DEBUG Servicemsg_class - 获取动态列表
+2018-08-10 11:01:23,882 [7200] DEBUG Law - select msg_class.* from msg_class where  IsEnable =  '1'
+2018-08-10 15:36:19,557 [7856] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:19,962 [7856] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:20,009 [7856] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:20,040 [7856] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:20,056 [7856] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:20,056 [7856] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:20,072 [7856] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:20,181 [7856] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:20,508 [8416] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-10 15:36:20,524 [8416] DEBUG Law - select top 6 A.*,C.ClassName from msg_advisory as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus =  '5' order by A.ApproveDate Desc
+2018-08-10 15:36:21,117 [8416] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-10 15:36:21,117 [8416] DEBUG Law - select top 6 A.*,C.ClassName from msg_advisory as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus >= '30' order by A.ApproveDate Desc
+2018-08-10 15:36:21,182 [8416] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-10 15:36:21,182 [8416] DEBUG Law - select top 6 A.*,C.ClassName from msg_entrust as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus =  '5' order by A.ApproveDate Desc
+2018-08-10 15:36:21,306 [8416] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-10 15:36:21,306 [8416] DEBUG Law - select A.*,C.ClassName,L.LawyerName from msg_entrust as A left outer join msg_class as C on A.MsgClass=C.ClassCode left outer join law_lawyer as L on A.LawyerCode=L.LawyerCode where  MsgStatus >= '30'
+2018-08-10 15:36:21,353 [8416] DEBUG Servicelaw_lawyer - 获取动态列表
+2018-08-10 15:36:21,353 [8416] DEBUG Law - select top 7 law_lawyer.* from law_lawyer where  LawyerStatus =  '1' order by LawyerOrder
+2018-08-10 15:36:21,384 [8416] DEBUG Servicelaw_lawyer - 获取动态列表
+2018-08-10 15:36:21,384 [8416] DEBUG Law - select top 8 * from v_lawyerScore where  LawyerStatus =  '1' order by TotalScore desc
+2018-08-10 15:36:21,634 [8416] DEBUG Servicelaw_firm - 获取动态列表
+2018-08-10 15:36:21,634 [8416] DEBUG Law - select top 3 law_firm.* from law_firm where  FirmStatus =  '1' order by FirmOrder
+2018-08-10 15:36:35,028 [7856] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:35,075 [7856] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:35,090 [7856] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:35,090 [7856] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:35,090 [7856] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:35,090 [7856] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:35,106 [7856] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:35,106 [7856] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 15:36:35,439 [8416] DEBUG Servicemsg_class - 获取动态列表
+2018-08-10 15:36:35,439 [8416] DEBUG Law - select msg_class.* from msg_class where  IsEnable =  '1'
+2018-08-10 16:16:08,353 [3288] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 16:16:08,388 [3288] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 16:16:08,392 [3288] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 16:16:08,392 [3288] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 16:16:08,401 [3288] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 16:16:08,401 [3288] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 16:16:08,406 [3288] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-10 16:16:08,477 [3288] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')

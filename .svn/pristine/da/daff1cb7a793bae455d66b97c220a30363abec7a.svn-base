@@ -1,0 +1,67 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body,
+button, input, select, textarea /* for ie */ {
+    font: 12px/1.6 /*字号与行高*/
+	Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /*字体*/
+}
+a{ text-decoration:none; color:#535353}
+a:hover{ color:#d90000}
+/*------------------------------------------------------------------*/
+body{ }
+.top{ padding-top:20px; padding-bottom:5px}
+.top .logo{width:458px; height:60px; float:left}
+.top .rtbtn{width:226px; float:right; margin-right:20px}
+.top .rtbtn ul li{width:50px; float:left; margin-right:20px; display:inline}
+.top .rtbtn ul li a img{ display:block; margin:0 auto}
+.grid_1, .grid_3 {margin:0;}
+.lbl {
+    color: #353535;
+}
+.wrap{ width:980px; margin:0 auto }
+.main{ width:980px; background:#ffffff}
+.nav{ height:40px;background:url(../images/listnavbg.jpg); line-height:40px; padding-left:25px; border:1px solid #6392d7; border-top-width:2px; clear:both }
+.nav ul li{ float:left; color:#FFFFFF;}
+.nav ul li.sep{width:5px; background:url(../images/zixun_17.jpg) no-repeat center; margin:0 30px; height:40px;}
+.nav ul li.first{background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.nav ul li a{color:#ffffff;font-size:16px; font-family:"微软雅黑"; display:block; width:80px; text-align:center}
+.nav ul li a:hover{ color:#CC3300; background:url(../images/zixun_20.jpg) no-repeat center bottom;}
+.pos{ height:50px;line-height:50px; font-size:16px;font-family:"微软雅黑"; color:#1162c9 }
+.pos span{ margin-right:8px; color:#6c6c6c;font-family:"宋体"; font-size:12px }
+.pos span a{ font-size:12px; font-family:"宋体"; margin-right:5px}
+.content1{ width:980px;margin-top:3px; margin-bottom:10px; }
+.content1 .left{ width:670px;float:left; display:inline;}
+.tt{ height:46px; background:url(../images/xixun-08.jpg); }
+.zxcon{width:644px; padding-left:24px; border:1px solid #c8c8c8; border-top:0; padding-top:35px; padding-bottom:30px }
+.zxcon div{ font-size:14px; margin-bottom:8px}
+.zxcon div select{ margin-right:15px}
+.zxcon div .captial{ width:320px}
+.zxcon div .content{ width:536px; height:360px; vertical-align:top}
+.zxcon div.desc{ width:566px; height:30px; float:right}
+.zxcon p{ margin-bottom:15px; margin-left:100px}
+.zxcon .username{ margin-top:30px}
+.zxcon span{ color:#aaaaaa; font-size:12px;}
+.zxcon .sbt{ display:block; width:143px; height:43px; background:url(../images/zixun_52.jpg); border:0; margin:20px auto 10px}
+
+
+
+
+.right{width:285px; float:right; margin-top:50px;}
+.right .zxbtn{width:283px; height:130px; border:1px solid #e2e2e2; border-top-width:5px; margin-bottom:10px}
+.right .zxbtn a{ display:block; width:249px; height:46px; margin:13px 0 0 15px}
+.right .zxbtn a.zx{ background:url(../images/zixun_32.jpg)}
+.right .zxbtn a.wt{ background:url(../images/zixun_36.jpg)}
+.right .cj{ margin-bottom:10px; border:1px solid #e1e1e1; padding-bottom:10px; background:#fcfcfc}
+.right .cj .tt{ height:38px; line-height:38px; background:url(../images/zixun_41.jpg) 0 bottom no-repeat;}
+.right .cj .tt .rmzx{ display:block; float:left; margin-left:8px;}
+.right .cj .tt .more{ display:block; float:right; margin-right:10px}
+.right .cj .tt .rmzx a{ font-size:16px; font-family:"微软雅黑"; color:#d22800}
+.right .cj ul{ padding-top:8px; padding-left:15px; }
+.right .cj ul li{ line-height:32px; height:32px; background:url(../images/wenfa_59.png) no-repeat 0px center; padding-left:12px; margin-left:0px; border-bottom:1px dashed #cecece; width:235px;}
+.right .cj ul li.first{ border-bottom:0}
+.right .cj ul li a{ font-size:12px; } 
+.clear{ clear:both}
+
+.fk{ clear:both; padding-bottom:10px;}
+.fk p{ color:#8b8b8b; text-align:center; height:24px; line-height:24px}
+.fk p a{ color:#8b8b8b; margin:0 8px}

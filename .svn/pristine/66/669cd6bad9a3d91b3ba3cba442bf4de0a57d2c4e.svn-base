@@ -1,0 +1,383 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>河北新闻网阳光问法</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="keywords" content="" />
+    <meta http-equiv="description" content="河北网上法律咨询服务平台阳光问法是“阳光理政”平台的精细化分平台，与网民进行线上互动，在网上开辟普法、用法的新平台，为网民提供免费的法律咨询服务，平台开设了《发布咨询》、《案件委托》、《找律师》、《找律所》等，河北20家律师事务所，45名优秀律师入驻本平台。" />
+    <link href="~/content/law/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="http://www.hebnews.cn/css/base_news.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/law/css/index.css" type="text/css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-1.8.1.min.js" type="text/javascript"></script>
+    <script src="/Content/js/core/json2.min.js"></script>
+    <script src="/Content/js/core/utils.js"></script>
+    <script src="/Content/js/core/common.js"></script> 
+    <script src="/Content/js/core/knockout-2.2.1.js"></script>
+    <script src="/Content/js/core/knockout.mapping-2.4.1.js"></script>
+    <script type="text/javascript" src="~/Content/law/js/jquery.KinSlideshow-1.2.1.min.js"></script>
+    <script src="/Content/law/js/viewModel/indexLogin.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //分类查询
+            var classViewModel = {
+                items: ko.observableArray()
+            };
+            $.ajax({
+                type: 'GET',
+                url: '/api/home/getmsgclass/',
+                async: false,
+
+                success: function (d) {
+                    var treeData = utils.toTreeData(d, 'ClassCode', 'ParentClassCode', "children");
+                    classViewModel.items(ko.mapping.fromJS(treeData)());
+                }
+            });
+            //alert(classViewModel.items().length);
+            ko.applyBindings(classViewModel, document.getElementById('msgclass'));
+
+            //$("#KinSlideshow a").each(function (index, domEle) {
+            //    $aa = $(this).next("span").text();
+            //    $(domEle).find("img").attr("alt", $aa);
+            //});
+            //$("#KinSlideshow").KinSlideshow({
+            //    moveStyle: "down",
+            //    intervalTime: 8,
+            //    mouseEvent: "mouseover",
+            //    titleFont: { TitleFont_size: 14, TitleFont_color: "#ffffff" }
+            //});
+        })
+    </script>
+
+</head>
+<body>
+    <div class="top0" id="header">
+        <div class="toptext">
+            <cite><a href="http://www.hebnews.cn/">首页</a> | <a href="http://hebei.hebnews.cn/"
+                target="_blank">河北</a> | <a href="http://gov.hebnews.cn/" target="_blank">政务</a>
+                | <a href="http://comment.hebnews.cn/" target="_blank">时评</a> | <a href="http://world.hebnews.cn/">国内国际</a> | <a href="http://hebei.hebnews.cn/node_116.htm" target="_blank">原创</a>
+                | <a href="http://bbs.hebnews.cn/" target="_blank">论坛</a> | <a href="http://v.hebnews.cn/"
+                    target="_blank">视频</a> | <a href="http://ent.hebnews.cn/" target="_blank">娱乐</a>
+                | <a href="http://news.hebnews.cn" target="_blank">热点</a> | <a href="http://finance.hebnews.cn/"
+                    target="_blank">财经</a> | <a href="http://good.hebnews.cn/" target="_blank">好人墙</a>
+                | <a href="http://lishi.hebnews.cn/" target="_blank">历史</a> | <a href="http://zhuanti.hebnews.cn/"
+                    target="_blank">专题</a> | <a href="http://bbs.hebnews.cn/smbk/" target="_blank">博客</a>
+                | <a href="http://photo.hebnews.cn/" target="_blank">图库</a> | <a href="http://house.hebnews.cn/"
+                    target="_blank">房产</a> | <a href="http://auto.hebnews.cn/" target="_blank">汽车</a>
+                | <a href="http://edu.hebnews.cn/" target="_blank">教育</a> | <a href="http://tousu.hebnews.cn"
+                    target="_blank">投诉</a></cite><img src="~/Content/law/images/heblogo.jpg" />
+        </div>
+    </div>
+    <!--banner开始-->
+    <div class="banner"></div>
+    <!--banner结束-->
+    <!--导航开始-->
+    <div class="nav">
+        <div class="navcon">
+            <a href="/" class="first" target="_blank">首页</a>
+            <span></span>
+            <a href="http://tousu.hebnews.cn/node_107987.htm" target="_blank">问法聚焦</a><span></span>
+            <a href="/zx" target="_blank">法律咨询</a><span></span>
+            @*<a href="/wt" target="_blank">案件委托</a><span></span>*@
+            <a href="/lawyer" target="_blank">找律师</a><span></span>
+            <a href="http://tousu.hebnews.cn/node_107988.htm" target="_blank">法制报道</a><span></span>
+            <a href="http://tousu.hebnews.cn/node_107991.htm" target="_blank">司法动态</a>
+        </div>
+    </div>
+    <!--导航结束-->
+    <div class="main">
+        <!--新闻区开始-->
+        <div class="news">
+            <div style="width:768px; float:left"><iframe src="http://tousu.hebnews.cn/node_108042.htm" width="768" height="298" frameborder="0"></iframe></div>
+            <div class="right">
+                <div class="login" id="loginForm">
+                    <div id="con1">
+                        <ul id="tags">
+                            <li class="selectTag"><a onclick="selectTag('tagContent0',this)"
+                                href="javascript:void(0)">用户登录</a> </li>
+                            <li><a onclick="selectTag('tagContent1',this)"
+                                href="javascript:void(0)">律师登录</a> </li>
+                        </ul>
+                        <div id="tagContent">
+                            <div class="tagContent selectTag" id="tagContent0">
+                                <div><span class="yhm">用户名：</span><input type="text" class="txt" name="usercode1" id="usercode1"/></div>
+                                <div><span class="yhm">密&nbsp;&nbsp;码：</span><input type="password" class="txt" name="password1" id="password1" /></div>
+                                <div class="bt">
+                                    <input type="button" class="btn" name="btn1"  data-bind="click:function(){login(1)}"/><a href="/law/register">注册</a></div>
+                            </div>
+                            <div class="tagContent" id="tagContent1">
+                                <div><span class="yhm">用户名：</span><input type="text" class="txt" name="usercode2" id="usercode2"/></div>
+                                <div><span class="yhm">密&nbsp;&nbsp;码：</span><input type="password" class="txt" name="password2" id="password2"/></div>
+                                <div class="bt">
+                                    <input type="button" class="btn" name="btn2" data-bind="click:function(){login(2)}"/></div>
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        function selectTag(showContent, selfObj) {
+                            // 操作标签
+                            var tag = document.getElementById("tags").getElementsByTagName("li");
+                            var taglength = tag.length;
+                            for (i = 0; i < taglength; i++) {
+                                tag[i].className = "";
+                            }
+                            selfObj.parentNode.className = "selectTag";
+                            // 操作内容
+                            for (i = 0; j = document.getElementById("tagContent" + i) ; i++) {
+                                j.style.display = "none";
+                            }
+                            document.getElementById(showContent).style.display = "block";
+                        }
+                    </script>
+
+                </div>
+            </div>
+            <div class="fabu">
+                <a href="/zx/wyzx/" class="fbzx" target="_blank"></a>
+                <a href="/wt/wywt/" class="fbwt" target="_blank"></a>
+            </div>
+        </div>
+        <!--新闻区结束-->
+        @*<div class="ad">
+            <img src="~/Content/law/images/ad.jpg" /></div>*@
+        <!--法律咨询开始-->
+        <div class="zxq">
+            <!--法律咨询开始-->
+            <div class="flzx">
+                <div id="con2">
+                    <a href="/zx/wyzx/" class="wyzx" target="_blank">我要咨询</a>
+                    <ul id="tagsn">
+                        <li class="selectTagn"><a onmouseover="selectTagn('tagContentm0',this)"
+                            href="zx?MsgStatusGreater=30" target="_blank">已解决法律咨询</a> </li>
+                        <li><a onmouseover="selectTagn('tagContentm1',this)"
+                            href="zx?MsgStatus=5" target="_blank">最新法律咨询</a> </li>
+                    </ul>
+                    <div id="tagContentn">
+                        <div class="tt"><span class="num">编号</span><span class="cls">类别</span><span class="cap">标题</span><span class="time">时间</span><span class="sta">状态</span><span class="comt">评论</span></div>
+                        <div class="tagContentn selectTagn" id="tagContentm0">
+                           <ul>
+                            @for (var i = 0; i < Model.yjjzx.Count; i++)
+                            {
+                                <li><span class="num">[@Model.yjjzx[i].AdvisoryCode]</span><span class="cls"><a href="/zx?MsgClass=@Model.yjjzx[i].MsgClass" target="_blank">[@Model.yjjzx[i].ClassName]</a></span><span class="cap"><a href="/zx/show/@Model.yjjzx[i].AdvisoryCode" target="_blank">·@Model.yjjzx[i].MsgTitle</a></span><span class="time">@Model.yjjzx[i].ApproveDate.ToString("yyyy-MM-dd")</span><span class="sta">@(Enum.GetName(typeof(Zephyr.Areas.Msg.Common.MsgEnum.AdvisoryStatus), Convert.ToInt32(Model.yjjzx[i].MsgStatus)))</span><span class="comt"></span></li>
+                            }
+                           </ul>
+                        </div>
+                        <div class="tagContentn" id="tagContentm1">
+                           <ul>
+                            @for (var i = 0; i < Model.zxzx.Count; i++)
+                            {
+                                <li><span class="num">[@Model.zxzx[i].AdvisoryCode]</span><span class="cls"><a href="/zx?MsgClass=@Model.zxzx[i].MsgClass" target="_blank">[@Model.zxzx[i].ClassName]</a></span><span class="cap"><a href="/zx/show/@Model.zxzx[i].AdvisoryCode" target="_blank">·@Model.zxzx[i].MsgTitle</a></span><span class="time">@Model.zxzx[i].ApproveDate.ToString("yyyy-MM-dd")</span><span class="sta">@(Enum.GetName(typeof(Zephyr.Areas.Msg.Common.MsgEnum.AdvisoryStatus), Convert.ToInt32(Model.zxzx[i].MsgStatus)))</span><a href="/zx/comment/@Model.zxzx[i].AdvisoryCode" target="_blank"><span class="comt"></span></a></li>
+                            }
+                           </ul>
+                        </div>
+                    </div>
+                    <div class="sch">
+                        <div class="schtt">法律咨询查询</div>
+                        <div class="schcon">标题：<input id="msgTitle" type="text" />编号：<input id="advisoryCode" type="text" /></div>
+                        <div class="schbtn">
+                            <input id="btnAdvisory" type="button" class="btn" /></div>
+                    </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $("#btnAdvisory").bind("click", function () {
+                            var title = $("#msgTitle").val();
+                            var code = $("#advisoryCode").val();
+                            window.open("/zx?MsgTitle=" + encodeURIComponent(title) + "&AdvisoryCode=" + encodeURIComponent(code));
+                        });
+                    });
+                </script>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function selectTagn(showContentn, selfObj) {
+                    // 操作标签
+                    var tagn = document.getElementById("tagsn").getElementsByTagName("li");
+                    var taglength = tagn.length;
+                    for (i = 0; i < taglength; i++) {
+                        tagn[i].className = "";
+                    }
+                    selfObj.parentNode.className = "selectTagn";
+                    // 操作内容
+                    for (i = 0; j = document.getElementById("tagContentm" + i) ; i++) {
+                        j.style.display = "none";
+                    }
+                    document.getElementById(showContentn).style.display = "block";
+                }
+            </script>
+            <!--法律咨询结束-->
+            <div class="zls">
+                <div class="tt"><span>问法律师</span><a href="/lawyer/" target="_blank">更多</a></div>
+            @for (var i = 0; i < (Model.lawyer.Count>2?2:Model.lawyer.Count); i++)
+            {
+               <div class="per">
+                    <a href="/lawyer/show/@Model.lawyer[i].LawyerCode" target="_blank">
+                        <img src="@Model.lawyer[i].LawyerPic" /></a>
+                    <p><a href="/lawyer/show/@Model.lawyer[i].LawyerCode" target="_blank">@Model.lawyer[i].LawyerName</a></p>
+                </div>
+            }
+                <ul>
+            @for (var i = 2; i < Model.lawyer.Count; i++)
+            {
+                <li class="@((i==Model.lawyer.Count-1)?"last":"")"><a href="/lawyer/show/@Model.lawyer[i].LawyerCode" target="_blank">@Model.lawyer[i].LawyerName</a><span>@Model.lawyer[i].Address</span><a href="/zx/wyzx/@Model.lawyer[i].LawyerCode" class="zx" target="_blank">咨询</a></li>
+            }
+                </ul>
+            </div>
+        </div>
+        <!--法律咨询区结束-->
+        <!--案件委托开始-->
+        <div class="zxq wtq">
+            <!--委托显示开始-->
+            @*<div class="flzx">
+                <div id="con3">
+                    <a href="/wt/wywt/" class="wyzx" target="_blank">我要委托</a>
+                    <ul id="tagsw">
+                        <li class="selectTagw"><a onclick="selectTagw('tagContentw0',this)"
+                            href="javascript:void(0)">最新案件委托</a> </li>
+                        <li><a onclick="selectTagw('tagContentw1',this)"
+                            href="javascript:void(0)">成功案例</a> </li>
+                    </ul>
+                    <div id="tagContentw">
+                        <div class="tagContentw selectTagw" id="tagContentw0">
+                            <div class="tt"><span class="num">编号</span><span class="cls">类别</span><span class="cap">标题</span><span class="time">时间</span><span class="money">涉案金额</span></div>
+                            <ul>
+                            @for (var i = 0; i < Model.zxwt.Count; i++)
+                            {
+                                <li><span class="@((i == Model.zxwt.Count - 1) ? "last" : "num")">[@Model.zxwt[i].EntrustCode]</span><span class="cls"><a href="/wt/index/?MsgClass=@Model.zxwt[i].MsgClass" target="_blank">[@Model.zxwt[i].ClassName]</a></span><span class="cap"><a href="/wt/show/@Model.zxwt[i].EntrustCode" target="_blank">·@Model.zxwt[i].MsgTitle</a></span><span class="time">@Model.zxwt[i].ApproveDate.ToString("yyyy-MM-dd")</span><span class="money">@Model.zxwt[i].InvolvedMoney</span></li>
+                            }
+                            </ul>
+                        </div>
+                        <div class="tagContentw" id="tagContentw1">
+                            <div class="tt"><span class="num">编号</span><span class="cls">类别</span><span class="cap">标题</span><span class="lawyer">接案律师</span></div>
+                            <ul>
+                            @for (var i = 0; i < Model.cgal.Count; i++)
+                            {
+                                <li><span class="@((i == Model.cgal.Count - 1) ? "last" : "num")">[@Model.cgal[i].EntrustCode]</span><span class="cls"><a href="/wt/index/?MsgClass=@Model.cgal[i].MsgClass">[@Model.cgal[i].ClassName]</a></span><span class="cap"><a href="/wt/show/@Model.cgal[i].EntrustCode" target="_blank">·@Model.cgal[i].MsgTitle</a></span><span class="lawyer">@Model.cgal[i].LawyerName</span></li>
+                            }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sch">
+                        <div class="schtt">案件委托查询</div>
+                        <div class="schcon">标题：<input id="entrustTitle" type="text" />编号：<input id="entrustCode" type="text" /></div>
+                        <div class="schbtn">
+                            <input type="button" class="btn" id="btnEntrust" /></div>
+                    </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $("#btnEntrust").bind("click", function () {
+                            var title = $("#entrustTitle").val();
+                            var code = $("#entrustCode").val();
+                            window.open("/wt/index?MsgTitle=" + encodeURIComponent(title) + "&EntrustCode=" + encodeURIComponent(code));
+                        });
+                    });
+                </script>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function selectTagw(showContentw, selfObj) {
+                    // 操作标签	
+                    var tagw = document.getElementById("tagsw").getElementsByTagName("li");
+                    var taglength = tagw.length;
+                    for (i = 0; i < taglength; i++) {
+                        tagw[i].className = "";
+                    }
+                    selfObj.parentNode.className = "selectTagw";
+                    // 操作内容
+                    for (i = 0; j = document.getElementById("tagContentw" + i) ; i++) {
+                        j.style.display = "none";
+                    }
+                    document.getElementById(showContentw).style.display = "block";
+                }
+            </script>*@
+            <!--委托显示结束-->
+             <!--按专长找律师开始-->
+        <div class="zxq wtq zczls">
+            <div class="zlscon" id="msgclass">
+                <div class="cap"></div>
+                <ul>
+                <!-- ko foreach: items -->
+                    <li data-bind="css: {last:$index() == $root.items().length-1}"><span class="sep">[<a href="javascript:void(0)" data-bind="attr: {'href':'/lawyer/?MsgClass=' + ClassCode() },html:ClassName" target="_blank"></a>]</span><span class="lb">
+                    <!-- ko foreach: children -->
+                    <!-- ko if: $index() < 5 -->
+                        <a href="#" data-bind="attr: {'href':'/lawyer/?MsgClass=' + ClassCode() },html:ClassName()" target="_blank"></a>
+                    <!-- ko if: $index() < 4 -->
+                        、
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    </span><span class="more"><a data-bind="attr: {'href':'/lawyer/?MsgClass=' + ClassCode() }" target="_blank">更多>></a></span></li>
+                <!-- /ko -->
+                </ul>
+            </div>
+           
+        </div>
+        <!--按专长找律师结束-->
+            <div class="zls lsmlb">
+                <div class="tt"><a style="float:none;" href="/lawyer/" target="_blank"><span>律师魅力积分榜</span></a><a href="/lawyer/" target="_blank">更多</a></div>
+                <ul>
+                @for (var i = 0; i < Model.llmlb.Count; i++)
+                {
+                    <li><span class="@(i<2?"pre":"")">@(i+1)</span><a href="/lawyer/show/@Model.llmlb[i].LawyerCode" target="_blank">@Model.llmlb[i].LawyerName</a><a>@Model.llmlb[i].TotalScore</a><a href="/zx/wyzx/@Model.llmlb[i].LawyerCode" class="" target="_blank">咨询</a></li>
+                }
+                </ul>
+            </div>
+        </div>
+        <!--案件委托结束-->
+       @* <div class="ad">
+            <img src="~/Content/law/images/ad.jpg" /></div>*@
+        <div style="width:752px; float:left">
+      
+        <!--法制报道开始-->
+        <div class="fznews">
+            <iframe src="http://tousu.hebnews.cn/node_111642.htm" width="752" height="267" frameborder="0"></iframe>
+           
+        </div>
+        <!--法制报道结束-->
+        </div>
+         <div class="zls lsmlb zlsuo ">
+                <div class="tt"><span>问法律所</span><a href="/firm/" target="_blank">更多</a></div>
+            @for (var i = 0; i < Model.firm.Count; i++)
+            {
+                <div class="lsuo"><a href="/firm/show/@Model.firm[i].FirmCode" target="_blank">
+                    <img src="@Model.firm[i].FirmLogo" /></a>
+                    <div class="rtt">
+                    <div class="tname"  ><a href="/firm/show/@Model.firm[i].FirmCode" class="zx" target="_blank">@Model.firm[i].FirmName</a></div>
+                    <div>@Model.firm[i].FirmAddress</div>
+                    </div>
+                </div>
+            }
+            </div>
+    </div>
+    <div class="footlist" style="MARGIN-TOP: 10px">
+        <ul>
+            <li><a target="_blank" rel="nofollow" href="http://help.hebnews.cn/index.html">关于我们</a>| </li>
+            <li><a target="_blank" rel="nofollow" href="http://help.hebnews.cn/bqsm.html">版权声明</a>| </li>
+            <li><a target="_blank" rel="nofollow" href="http://help.hebnews.cn/fwtk.html">服务条款</a>| </li>
+            <li><a target="_blank" rel="nofollow" href="http://dynamic.hebnews.cn/node_7660.htm">广告业务</a>| </li>
+            <li><a target="_blank" rel="nofollow" href="http://help.hebnews.cn/sxsq.html">实习申请</a>| </li>
+            <li><a target="_blank" rel="nofollow" href="http://help.hebnews.cn/wstg.html">网上投稿</a>| </li>
+            <li><a target="_blank" rel="nofollow" href="http://help.hebnews.cn/xwrx.html">新闻热线</a>| </li>
+            <li><a target="_blank" href="http://www.hebnews.cn/sitemap.htm">网站地图</a> </li>
+        </ul>
+    </div>
+    <div class="foottxt">
+        <li>河北新闻网版权所有 本站点信息未经允许不得复制或镜像 </li>
+        <li>法律顾问：<a target="_blank" rel="nofollow" href="http://zhuanti.hebnews.cn/2012/node_41101.htm" title="">河北球衡律师事务所</a> <a target="_blank" rel="nofollow" href="http://zhuanti.hebnews.cn/2012/node_41103.htm" title="">杨建国</a> </li>
+        <li class="res_footer"><a target="_blank" href="http://www.hebnews.cn/">www.hebnews.cn</a> copyright &copy; 2000 - 2015 </li>
+        <li>新闻热线:0311-67562054 广告热线:0311-67562966 新闻投诉:0311-67562994 </li>
+        <li>冀ICP备 09047539号-1 | 互联网新闻信息服务许可证编号:1312006002 </li>
+        <li>广播电视节目制作经营许可证（冀）字第101号|信息网络传播视听节目许可证0311618号 </li>
+        <li style="HEIGHT: 54px"><a target="_blank" rel="nofollow" href="http://hbjubao.hebei.com.cn/" title="河北互联网违法和不良信息举报">
+            <img src="~/Content/law/images/f8b156a3fa6615f4a1861d.jpg" id="5489252"></a> <a target="_blank" rel="nofollow" href="http://www.miibeian.gov.cn/" title="经营性网站备案信息">
+                <img src="~/Content/law/images/001aa0c3d91f119fcd371f.gif" id="5067222"></a> <a target="_blank" rel="nofollow" href="http://net.china.com.cn/" title="不良信息举报中心">
+                    <img src="~/Content/law/images/001aa0c3d91f119fcd3720.gif" id="5067223"></a> <a target="_blank" rel="nofollow" href="http://press.gapp.gov.cn/" title="新闻记者证管核系统">
+                        <img src="~/Content/law/images/001aa0c3d91f119fcd3721.gif" id="5067224"></a> </li>
+    </div>
+    </div>
+
+</body>
+</html>

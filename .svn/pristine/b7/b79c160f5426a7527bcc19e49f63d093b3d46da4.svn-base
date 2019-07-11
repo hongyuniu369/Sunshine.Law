@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Comment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+<script src="/Content/js/viewModel/com.viewModel.searchEdit.js"></script>
+<script type="text/javascript">
+    using(['datebox','numberbox']);
+    var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    var viewModel = function(){ 
+        var self = this;
+        com.viewModel.searchEdit.apply(this,arguments);
+        this.grid.OnAfterCreateEditor = function (editors) {
+            if (editors[self.setting.idField]) com.readOnlyHandler('input')(editors[self.setting.idField].target, true);
+            com.readOnlyHandler('input')(editors['MasterValue'].target, true);
+        };
+    };
+    viewModel = new viewModel(data);
+    ko.bindingViewModel(viewModel);
+    var formatMasterValue = function (value,row) {return row.MsgTitle;};
+</script>
+}
+<div class="z-toolbar">
+    @Html.RenderMenue()
+</div>
+
+<div class="container_12" style="position:relative;">
+    <div class="grid_1 lbl">编号</div>
+    <div class="grid_2 val"><input type="text" data-bind="value:form.CommentCode" data-options="url:'/api/msg/comment/getcommentcode'" class="z-txt easyui-autocomplete" /></div>
+    <div class="grid_1 lbl">主体</div>
+    <div class="grid_2 val"><input type="text" data-bind="value:form.MasterValue" class="z-txt " /></div>
+    <div class="grid_1 lbl">评论内容</div>
+    <div class="grid_2 val"><input type="text" data-bind="value:form.CommentContent" class="z-txt " /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="grid_1 lbl">评论人</div>
+    <div class="grid_2 val"><input type="text" data-bind="value:form.CommentorName" class="z-txt " /></div>
+    <div class="grid_1 lbl">评论日期</div>
+    <div class="grid_2 val"><input type="text" data-bind="value:form.CommentDate" class="z-txt easyui-daterange" /></div>
+    <div class="grid_1 lbl">审核</div>
+    <div class="grid_2 val"><input type="text" data-bind="datasource:dataSource.dsAudit,comboboxValue:form.ApproveState" data-options="showblank:true" class="z-txt easyui-combobox" /></div>
+
+    <div class="clear"></div>
+
+    <div class="prefix_9" style="position:absolute;top:5px;height:0;">  
+        <a id="a_search" href="#" class="buttonHuge button-blue" data-bind="click:searchClick" style="margin:0 15px;">查询</a> 
+        <a id="a_reset"  href="#" class="buttonHuge button-blue" data-bind="click:clearClick">清空</a>
+    </div>
+</div>
+
+<table data-bind="datagrid:grid" style="display:none">
+    <thead>  
+        <tr>  
+            <th field="CommentCode"	sortable="true"	align="left"	width="95" editor="text" >编号</th>
+            <th field="MasterValue"		sortable="false"	align="left"	width="260" editor="text" formatter="formatMasterValue" edit="false">咨询标题</th>
+            <th field="CommentContent"		sortable="false"	align="left"	width="320" editor="text" >评论内容</th>
+            <th field="CommentorName"		sortable="false"	align="left"	width="80" editor="text" >评论人</th>
+            <th field="CommentDate"		sortable="true"	align="center"	width="120" editor="datebox" formatter="com.formatTime">评论日期</th>
+            <th field="PraiseCount"		sortable="true"	align="right"	width="80" editor="{type: 'numberbox',options:{min: 0}}" >点赞数</th>
+            <th field="ApproveState"		sortable="true"	align="center"	width="80" editor="{type:'combobox',options:{data:viewModel.dataSource.dsAudit}}" formatter="com.formatAudit" >审核</th>
+            <th field="CommentOrder"		sortable="true"	align="right"	width="80" editor="{type: 'numberbox',options:{min: 0}}" >排序</th>
+        </tr>                            
+    </thead>      
+</table> 

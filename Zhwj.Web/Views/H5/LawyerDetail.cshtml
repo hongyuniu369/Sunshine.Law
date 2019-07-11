@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "律师资料-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_LayoutH5.cshtml";
+}
+
+<div data-am-widget="list_news" class="am-list-news am-list-news-default am-no-layout">
+    <!--列表标题-->
+    <div class="am-list-news-hd list-news-hd am-cf">
+        <h2>@Model.Lawyer.LawyerName</h2>
+    </div>
+</div>
+<section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
+    <dl class="am-accordion-item am-active">
+        <dt class="am-accordion-title">律师基本资料
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+            <div class="am-accordion-content">
+                <figure data-am-widget="figure" class="am am-figure am-figure-default " data-am-figure="{  pureview: 'true' }">
+                    <img src="@Model.Lawyer.LawyerPic.Replace("/images/", "/thumbs/images/")" data-rel="@Model.Lawyer.LawyerPic" alt="@Model.Lawyer.LawyerName" />
+                    <figcaption class="am-figure-capition-btm">律师姓名：<span>@Model.Lawyer.LawyerName</span></figcaption>
+                </figure>
+                <p>执业证号：<span>@Model.Lawyer.LicenseNumber</span></p>
+                <p>执业机构：<span>@Model.Lawyer.FirmName</span></p>
+                <p>电子邮件：<span>@Model.Lawyer.Email</span></p>
+                <p>手机：<span>@Model.Lawyer.MobilePhone</span></p>
+                <p>详细地址：<span>@Model.Lawyer.DetailAddress</span></p>
+                <div>业务专长：<span>@Model.Lawyer.MsgClasses</span></div>
+                <p>职称：<span>@Model.Lawyer.ProfessionalTitle</span></p>
+                <a class="am-btn am-btn-success" href="/h5/wyzx/@Model.Lawyer.LawyerCode">咨询律师</a>
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item am-active">
+        <dt class="am-accordion-title">律师简介
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+            <div class="am-accordion-content">
+                @Html.Raw(Model.Lawyer.LawyerDescription)
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item am-active">
+        <dt class="am-accordion-title">询问我的问题
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                <div class="am-list-news-bd">
+                    <ul class="am-list">
+                        @for (var i = 0; i < Model.Advisorys.Count; i++)
+                        {
+                            <li class="am-g am-list-item-dated">
+                                <a class="am-list-item-hd " href="/h5/show/@Model.Advisorys[i].AdvisoryCode" title="@Model.Advisorys[i].MsgTitle">@Model.Advisorys[i].MsgTitle</a>
+                                <span class="am-list-date">@Model.Advisorys[i].MsgInDate.ToString("yy-MM-dd")</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </dd>
+    </dl>
+</section>

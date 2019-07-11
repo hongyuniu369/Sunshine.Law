@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "我要咨询-阳光问法-河北新闻网";
+    Layout = "~/Views/Shared/_Childlayout.cshtml";
+}
+@section head{
+    <script src="~/Content/js/jquery-plugin/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/js/jquery-plugin/ckeditor/adapters/jquery.js"></script>
+}
+@section scripts{
+    <script src="/Content/law/js/viewModel/wyzx.js"></script>
+    <script type="text/javascript">
+        var easyLoaded = function(){
+            //设置联动Address
+            setAddress(viewModel.pageData.form.Address(),'Address');
+            setMsgClass(viewModel.pageData.form.MsgClass(),'Address');
+        };
+
+        using(['validatebox','combobox'], easyLoaded);
+        using('/Content/js/jquery-easyui-1.3.2/jquery.easyui.validator.extend.js');
+        var viewModel = function(data){ 
+            var self = this;
+            com.viewModel.edit.apply(self,arguments);
+            this.dsIsOrNot = [{value:'true', text:'是'},{value:'false', text:'否'}];
+        } 
+        var data = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    viewModel=new viewModel(data)
+    ko.bindingViewModel(viewModel, document.getElementById('zxcon'));
+
+    $(document).ready(function(){
+        //设置ckeditor
+        $('#txtCkeditor').ckeditor();
+        var editor = $('#txtCkeditor').ckeditor().editor;
+        editor.on( 'blur', function( event) {
+            if(editor.getData())
+                viewModel.pageData.form.MsgContent(editor.getData());
+        } );
+        editor.on( 'loaded', function( event) {
+            editor.setData( viewModel.pageData.form.MsgContent());
+            editor.setReadOnly(viewModel.readonly());
+        } );
+        editor.on( 'configLoaded', function() {
+            editor.config.toolbar = "Basic";
+        });
+    });
+    </script>
+}
+<link href="~/Content/law/css/zx.css" rel="stylesheet" type="text/css" />
+<style>
+    .cke_contents {
+        width: 560px;
+        height: 450px;
+    }
+
+    .content1 .left .zxcon .cke_reset {
+        margin: 0px;
+    }
+</style>
+<div class="pos">
+    当前位置：<span><a href="/">首页</a>></span><span>我要咨询</span>
+</div>
+<div class="tt"></div>
+<div class="zxcon" id="zxcon">
+    <div class="grid_1 lbl">案件标题：</div>
+    <div class="grid_3 val">
+        <input type="text" data-bind="value:pageData.form.MsgTitle ,readOnly:readonly" class="captial z-txt  easyui-validatebox" data-options="required:true,validType:['length[6,64]']" />
+    </div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl">案件内容：</div>
+    <div class="grid_3 val" style="margin-bottom: 0;min-height:260px;">
+        <textarea id="txtCkeditor" class="z-txt  easyui-validatebox" data-bind="value:pageData.form.MsgContent ,readOnly:readonly" data-options="required:true,validType:['length[10,1000]']"></textarea>
+    </div>
+    <div class="clear"></div>
+    <div class="desc">
+        <span>* 问题越详细，回答越精确。此项目将对所有人公开显示，请勿填写当事人姓名等隐私内容[10-500字]</span>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl">所在地区： </div>
+    <div class="grid_3 val">
+        <select class="z-txt" id="Province" name="Province" style="width: 70px;"></select>
+        <select class="z-txt" id="City" name="City" style="width: 85px;"></select>
+        <select class="z-txt" id="District" name="District" style="width: 95px;"></select>
+    </div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl">是否公开：</div>
+    <div class="grid_3 val">
+        <input type="text" data-bind="datasource:dsIsOrNot, comboboxValue: pageData.form.IsOpen ,comboboxReadOnly: readonly" class="z-txt easyui-combobox" data-options="required:true,panelHeight:'auto'" /></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl">联系电话：</div>
+    <div class="grid_3 val">
+        <input type="text" data-bind="value:pageData.form.ContactNO ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="required:true,validType:['contactNO']" /></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl">电子邮箱：</div>
+    <div class="grid_3 val">
+        <input type="text" data-bind="value:pageData.form.Email ,readOnly:readonly" class="z-txt easyui-validatebox" data-options="validType:['email']" /></div>
+    <div class="clear"></div>
+    <div class="grid_1 lbl">
+        问题分类：
+    </div>
+    <div class="grid_3 val">
+        <input id="MsgRootClass" type="text" class="z-txt easyui-combobox" data-bind="comboboxReadOnly: readonly" />
+        <input id="MsgClass" data-options="required:true" type="text" class="z-txt easyui-combobox" data-bind="comboboxReadOnly: readonly" />
+    </div>
+    <div class="clear"></div>
+    <div class="username">用户帐号：<input type="text" class="z-txt" data-bind="value:user.usercode,readOnly: readonly" /><span>普通用户可不填。注册用户请登录，注册用户可以获得个人管理中心。</span></div>
+    <div>用户密码：<input type="password" class="z-txt" data-bind="value:user.password,readOnly: readonly" /></div>
+    <div>
+        <input type="submit" class="sbt" value="" data-bind="click:readonly()?null:submitClick,enable:!readonly()" style="cursor: pointer" />
+    </div>
+</div>
+<script type="text/javascript" src="~/Content/js/utils/setAddress.js"></script>
+<script>
+    var setMsgClass = function (bindValue, valueField) {
+        $.ajaxSettings.async = false;
+        var rootClass = $('#MsgRootClass').combobox({
+            url: '/api/msg/msgclass/GetValueTextListRoot',
+            method: "Get",
+            queryParams: { IsEnable: '1' },
+            editable: false,
+            onSelect: function (record) {
+                $.get('/api/msg/msgclass/GetValueTextListByPid/' + record.value,{IsEnable:'1'}, function (data) {
+                    msgClass.combobox("clear").combobox('loadData', data);
+                }, 'json');
+                getValue();
+            }
+        });
+
+        var msgClass = $('#MsgClass').combobox({
+            editable: false,
+            onSelect: function (record) {
+                getValue();
+            }
+        });
+
+        var getValue = function () {
+            var selvalue = msgClass.combobox("getValue");
+            viewModel.pageData.form.MsgClass(selvalue);
+        }
+    }
+</script>

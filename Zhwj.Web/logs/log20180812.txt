@@ -1,0 +1,249 @@
+2018-08-12 16:23:07,898 [7888] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:23:08,065 [7888] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:23:08,095 [7888] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:23:08,095 [7888] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:23:08,119 [7888] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:23:08,119 [7888] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:23:08,122 [7888] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:23:08,252 [7888] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:23:08,781 [6232] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-12 16:23:08,790 [6232] DEBUG Law - select top 6 A.*,C.ClassName from msg_advisory as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus =  '5' order by A.ApproveDate Desc
+2018-08-12 16:23:09,575 [6232] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-12 16:23:09,575 [6232] DEBUG Law - select top 6 A.*,C.ClassName from msg_advisory as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus >= '30' order by A.ApproveDate Desc
+2018-08-12 16:23:09,632 [6232] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-12 16:23:09,632 [6232] DEBUG Law - select top 6 A.*,C.ClassName from msg_entrust as A left outer join msg_class as C on A.MsgClass=C.ClassCode where  MsgStatus =  '5' order by A.ApproveDate Desc
+2018-08-12 16:23:09,649 [6232] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-12 16:23:09,649 [6232] DEBUG Law - select A.*,C.ClassName,L.LawyerName from msg_entrust as A left outer join msg_class as C on A.MsgClass=C.ClassCode left outer join law_lawyer as L on A.LawyerCode=L.LawyerCode where  MsgStatus >= '30'
+2018-08-12 16:23:09,654 [6232] DEBUG Servicelaw_lawyer - 获取动态列表
+2018-08-12 16:23:09,654 [6232] DEBUG Law - select top 7 law_lawyer.* from law_lawyer where  LawyerStatus =  '1' order by LawyerOrder
+2018-08-12 16:23:09,698 [6232] DEBUG Servicelaw_lawyer - 获取动态列表
+2018-08-12 16:23:09,698 [6232] DEBUG Law - select top 8 * from v_lawyerScore where  LawyerStatus =  '1' order by TotalScore desc
+2018-08-12 16:23:09,849 [6232] DEBUG Servicelaw_firm - 获取动态列表
+2018-08-12 16:23:09,849 [6232] DEBUG Law - select top 3 law_firm.* from law_firm where  FirmStatus =  '1' order by FirmOrder
+2018-08-12 16:23:13,246 [6248] DEBUG Servicemsg_class - 获取动态列表
+2018-08-12 16:23:13,246 [6248] DEBUG Law - select msg_class.* from msg_class where  IsEnable =  '1'
+2018-08-12 16:30:19,954 [6356] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:30:19,967 [6356] DEBUG Sys - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:30:19,980 [6356] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:30:19,980 [6356] DEBUG Mms - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:30:19,997 [6356] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:30:19,997 [6356] DEBUG Law - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:30:20,000 [6356] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:30:20,000 [6356] DEBUG CMS - select name from dbo.sysobjects where id = object_id(N'[dbo].[fun_getPY]') and xtype in (N'FN', N'IF', N'TF')
+2018-08-12 16:30:20,187 [4344] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-12 16:30:20,193 [4344] DEBUG Law - select top 20 A.*, C.ClassName from msg_advisory as A 
+        left outer join msg_class C on A.MsgClass=C.ClassCode
+     where  MsgStatus >= '5' order by A.AdvisoryCode desc
+2018-08-12 16:30:20,392 [4344] DEBUG Law - select count(*) from ( select A.*, C.ClassName from msg_advisory as A 
+        left outer join msg_class C on A.MsgClass=C.ClassCode
+     where  MsgStatus >= '5' ) tb_temp
+2018-08-12 16:30:56,466 [4344] DEBUG Servicelaw_firm - 获取动态列表
+2018-08-12 16:30:56,466 [4344] DEBUG Law - select top 20 * from law_firm order by FirmOrder,FirmCode desc
+2018-08-12 16:30:56,486 [4344] DEBUG Law - select count(*) from ( select * from law_firm ) tb_temp
+2018-08-12 16:31:02,456 [6916] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_firmClassMap B on B.FirmCode = '201511300015' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:02,545 [6916] DEBUG Law - 
+select A.*
+from law_lawyer A
+where A.FirmCode = '201511300015'  
+order by LawyerOrder
+2018-08-12 16:31:02,549 [6916] DEBUG Servicelaw_firm - 获取实体对象
+2018-08-12 16:31:02,551 [6916] DEBUG Law - select law_firm.* from law_firm where  FirmCode =  '201511300015'
+2018-08-12 16:31:18,581 [4344] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_firmClassMap B on B.FirmCode = '201511300003' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:18,607 [4344] DEBUG Law - 
+select A.*
+from law_lawyer A
+where A.FirmCode = '201511300003'  
+order by LawyerOrder
+2018-08-12 16:31:18,610 [4344] DEBUG Servicelaw_firm - 获取实体对象
+2018-08-12 16:31:18,610 [4344] DEBUG Law - select law_firm.* from law_firm where  FirmCode =  '201511300003'
+2018-08-12 16:31:43,901 [6248] DEBUG Servicelaw_lawyer - 获取动态列表
+2018-08-12 16:31:43,901 [6248] DEBUG Law - select top 20 * from v_lawyerScore order by TotalScore desc,LawyerOrder,LawyerCode desc
+2018-08-12 16:31:43,923 [6248] DEBUG Law - select count(*) from ( select * from v_lawyerScore ) tb_temp
+2018-08-12 16:31:43,936 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300026' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,021 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300023' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,035 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010015' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,040 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201508110001' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,042 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300024' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,045 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300033' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,052 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010012' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,056 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300017' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,060 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010003' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,064 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300019' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,067 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300034' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,070 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300014' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,075 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201511300006' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,080 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512020001' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,083 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010021' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,086 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010020' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,090 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010019' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,094 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010018' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,099 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010017' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:44,101 [6248] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201512010016' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:31:57,060 [6248] DEBUG Servicemsg_advisory - 获取实体对象
+2018-08-12 16:31:57,060 [6248] DEBUG Law - select msg_advisory.* from msg_advisory where  AdvisoryCode =  '-1'
+2018-08-12 16:31:57,062 [6248] DEBUG Servicemsg_advisory - 获取上一条下一条数据
+2018-08-12 16:31:57,075 [6248] DEBUG Servicemsg_advisory - 获取字段
+2018-08-12 16:31:57,076 [6248] DEBUG Law - select top 1 AdvisoryCode from msg_advisory order by AdvisoryCode
+2018-08-12 16:31:57,078 [6248] DEBUG Servicemsg_advisory - 获取字段
+2018-08-12 16:31:57,079 [6248] DEBUG Law - select top 1 AdvisoryCode from msg_advisory where  AdvisoryCode < '-1' order by AdvisoryCode desc
+2018-08-12 16:31:57,080 [6248] DEBUG Servicemsg_advisory - 获取字段
+2018-08-12 16:31:57,081 [6248] DEBUG Law - select top 1 AdvisoryCode from msg_advisory where  AdvisoryCode >  '-1' order by AdvisoryCode
+2018-08-12 16:31:57,083 [6248] DEBUG Servicemsg_advisory - 获取字段
+2018-08-12 16:31:57,083 [6248] DEBUG Law - select top 1 AdvisoryCode from msg_advisory order by AdvisoryCode desc
+2018-08-12 16:31:57,995 [3976] DEBUG Servicecom_region - 获取实体列表
+2018-08-12 16:31:57,998 [3976] DEBUG Law - select com_region.* from com_region where  ParentId =  '0' order by DisplaySequence
+2018-08-12 16:31:58,341 [6916] DEBUG Servicecom_region - 获取实体列表
+2018-08-12 16:31:58,342 [6916] DEBUG Law - select com_region.* from com_region where  ParentId =  '684' order by DisplaySequence
+2018-08-12 16:31:58,387 [3976] DEBUG Servicemsg_class - 获取动态列表
+2018-08-12 16:31:58,388 [3976] DEBUG Law - select 
+        ClassCode as value, ClassName as text 
+     from msg_class where  (ParentClassCode is Null or ParentClassCode='') order by ClassOrder, ClassCode
+2018-08-12 16:31:58,489 [6916] DEBUG Servicemsg_class - 获取动态列表
+2018-08-12 16:31:58,489 [6916] DEBUG Law - select 
+        ClassCode as value, ClassName as text 
+     from msg_class where  (ParentClassCode is Null or ParentClassCode='') order by ClassOrder, ClassCode
+2018-08-12 16:32:05,889 [3976] DEBUG Servicelaw_lawyer - 获取实体对象
+2018-08-12 16:32:05,890 [3976] DEBUG Law - select law_lawyer.* from law_lawyer where  LawyerCode =  '201508110001'
+2018-08-12 16:32:05,900 [3976] DEBUG Law - 
+select A.*
+from    v_lawyerScore A
+where   A.LawyerCode = '201508110001'
+2018-08-12 16:32:05,931 [3976] DEBUG Law - 
+select A.*
+from msg_class A
+    right join law_lawyerClassMap B on B.lawyerCode = '201508110001' and B.ClassCode = A.ClassCode
+where A.IsEnable = 1  
+order by ClassOrder
+2018-08-12 16:32:05,938 [3976] DEBUG Servicelaw_firm - 获取实体对象
+2018-08-12 16:32:05,938 [3976] DEBUG Law - select law_firm.* from law_firm where  FirmCode =  '201512100001'
+2018-08-12 16:32:05,940 [3976] DEBUG Law - 
+select top 20 AdvisoryCode,MsgTitle,MsgInDate
+    from msg_advisory
+where LawyerCode='201508110001'
+order by AdvisoryCode desc
+2018-08-12 18:00:51,515 [7808] DEBUG Servicenews_class - 获取实体对象
+2018-08-12 18:00:51,851 [7808] DEBUG CMS - select news_class.* from news_class where  ClassCode =  ''
+2018-08-12 18:00:58,111 [4680] DEBUG Servicenews_class - 获取动态列表
+2018-08-12 18:00:58,111 [960] DEBUG Servicenews - 获取动态列表
+2018-08-12 18:00:58,112 [4680] DEBUG CMS - select news_class.* from news_class where  IsEnable =  '1'and IsVisible =  '1'and (ParentClassCode is Null or ParentClassCode='') order by ClassOrder
+2018-08-12 18:00:58,222 [960] DEBUG CMS - select top (8) *  from news where  Signed =  '1' order by OnClick Desc
+2018-08-12 18:00:59,411 [1616] DEBUG Servicenews - 获取动态列表
+2018-08-12 18:00:59,411 [1616] DEBUG CMS - select top 20 Title,NewsCode,SignedTime from news where  Signed =  'true'and ApproveState =  'passed' order by SignedTime desc
+2018-08-12 18:00:59,536 [1616] DEBUG CMS - select count(*) from ( select Title,NewsCode,SignedTime from news where  Signed =  'true'and ApproveState =  'passed' ) tb_temp
+2018-08-12 18:01:06,196 [1616] DEBUG Servicemsg_advisory - 获取动态列表
+2018-08-12 18:01:06,228 [1616] DEBUG Law - select top 20 A.*, C.ClassName from msg_advisory as A 
+        left outer join msg_class C on A.MsgClass=C.ClassCode
+     where  MsgStatus >= '5' order by A.AdvisoryCode desc
+2018-08-12 18:01:06,578 [1616] DEBUG Law - select count(*) from ( select A.*, C.ClassName from msg_advisory as A 
+        left outer join msg_class C on A.MsgClass=C.ClassCode
+     where  MsgStatus >= '5' ) tb_temp
